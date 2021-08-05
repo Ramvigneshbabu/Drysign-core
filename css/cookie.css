@@ -1,0 +1,319 @@
+/* =======================================
+1. Basic & general
+======================================== */
+.model-header-background{
+background-color: #1d7ab4;
+}
+
+#PModal button.close{
+opacity:1;
+color: #fff;
+}
+#PModal { width:100% ;
+z-index:100000 !important;
+}
+#PModal .modal-dialog{ top:0; width:90%;margin: 0 auto} 
+.btnset .cookie-btn{  	
+    margin: 10px 10px 0 10px;   
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;  
+    background: transparent;
+    color: #A8DEFF;     
+    border-radius: 3px;   
+    border:2px solid #A8DEFF !important;
+}
+
+.cookie-btn {
+    display: inline-block;
+    padding: 6px 12px !important;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4285;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btnset .cookie-btn:focus, .cookie-btn:hover{
+    color: #000!important;
+    background:#A8DEFF!important;
+    text-decoration: none;
+}
+
+.myBtn {
+      text-transform: uppercase;
+}
+
+
+[_ngcontent-c0].myBtn {
+    font: 14px roboto-Regular;
+    color: #fff;
+    float: right;
+    padding: 8px 28px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.26);
+    background-color: #32a6a6;
+    border-color: #32a6a6;
+}
+.cookie-close{
+    font-size:20px;
+background-color: transparent;
+color: #fff;
+border: 0px;
+float: right;
+top: -5px;
+position: relative;
+right: 0;
+font-weight:700;
+}
+
+.coolies-labal{
+	color:#1277d9!important;
+	
+}
+
+#cookiesModal ul li {
+    list-style: none;
+    padding-left:2;
+}
+
+.model-body-custom li {
+    display: list-item;
+    text-align: -webkit-match-parent; list-style:none;
+}
+
+.sub-cat-id {
+    float: left;
+    margin-right: 10px;
+        box-sizing: inherit;
+}
+
+.boldtxt {
+    font-weight: bold;
+}
+
+.ul{
+	padding-left:2;
+}
+
+
+/* body {
+  margin: 0;
+  padding:0;
+    background-color: #f8f8f8;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  line-height:22px;
+ -webkit-user-select: none; Safari 3.1+
+ -moz-user-select: none; Firefox 2+
+ -ms-user-select: none; IE 10+
+ user-select: none; Standard syntax
+}
+.model-header-background{
+background-color: #1d7ab4;
+}
+
+#PModal button.close{
+opacity:1;
+}
+
+
+#PModal { width:100% ;}
+#PModal .modal-dialog{ top:-100px; width:80%;}
+
+.navbar-toggle{
+	top: 0px;
+    right: 70px;
+	background:#fff;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background-color:#297a69;
+}
+.beats-group .form-control, .beats-group .btn {
+	border-radius:0;
+}
+.beats-navbar{
+	background: url("../images/banner.png") no-repeat;
+	background-size:100% 100%;
+    border: 0;
+    box-shadow: none;
+	border-radius:0 !important;
+}
+.beats-logo{
+	position:relative;
+	top:10px;
+	overflow:hidden;	
+	font-size:130px;
+	color:#fff;
+	text-shadow:0px 0px 10px #4c4c4c;
+}
+.beats-logo-fixed{
+	font-size:150px;
+	color:#fff;
+	text-shadow:0px 0px 10px #4c4c4c;
+}
+.beats-menu{
+	margin-top:20px;
+}
+.breadcram-loc{
+	margin-top:50px;
+}
+.logo{
+	margin-top:-40px;
+}
+.logo a:hover, .logo a:focus {
+	text-decoration:none;
+}
+#topnav{
+	padding:20px 0;
+	padding-bottom:0;
+	transition: all .5s;
+} */
+.fixed {
+	position: fixed;
+	border:none;
+	top:0;
+	left: 0;
+	width: 100%;
+	padding:0 !important;
+	box-shadow: 0 0 40px #222;
+	-webkit-box-shadow: 0 0 40px #222;
+	-moz-box-shadow: 0 0 40px #222;
+	z-index:3;
+	transition: padding .5s;
+}
+.fixedClr{
+	background:#18191A;
+}
+.cookies_part, .cookies_part_confirmed{
+	position:fixed;
+	bottom:0;
+	padding:5px 17px;
+	display:block;
+	z-index:100000;
+	width: 100%;
+}
+
+/*.cookies_part a{
+	color:#30c0c4;
+}*/
+
+.cookies_part .cookie_txt, .cookies_part_confirmed  .cookie_txt{
+	color:#fff;
+	margin:10px 0;
+	font-size:14px;
+}
+.cookies_part .btnset{
+	margin-top:8px;
+}
+.cookies_part_confirmed .btnset{
+	margin-top:-5px;
+}
+.cookies_part .cookie_txt, .cookies_part_confirmed  .cookie_txt{
+	color:#fff;
+	margin:10px 0;    
+}
+.cookies_part_confirmed .cookie_txt {
+    text-align:right;
+}
+@media(max-width:991px) {
+    .cookies_part_confirmed .cookie_txt {
+        text-align:center;
+    }
+}
+@media(max-width:991px){
+	.cookies_part .btnset, .cookies_part_confirmed .btnset{
+		display:table;
+		margin:0 auto;
+	}
+}
+@media(min-width:991px) and (max-width:1199px)  {
+	.cookies_part .btnset{
+		margin-top:18px;
+	}
+	.cookies_part_confirmed .btnset{
+		margin-top:8px;
+	}
+}
+.cookies_part .btn-footer-cookies, .cookies_part_confirmed .btn-beats-cookies{
+	margin:10px 10px 0 10px;
+	-moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background: -moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color: #ededed;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+	font-weight:bold;
+	color:#000;
+	text-shadow: 1px 1px 0px #ffffff;
+}
+/*.fixed .logo{
+	margin-top:0;
+}
+.fixed .beats-logo{
+	font-size: 120px;
+}
+.fixed .beats-menu{
+	margin-top:40px;
+}*/
+
+.cookies-modal-body {
+    position: relative;
+    padding: 15px;
+}
+
+/* 14-12-2018 Sonali Patil */
+.bullet-intend li{
+	list-style: outside;
+    margin-left: 20px;
+}
+
+.model-body-custom{
+	margin: 20px;
+    border: 2px solid #9e9d9d;  
+    max-height: 335px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch !important;
+     z-index: 11;
+}
+#consentModal{
+	-webkit-overflow-scrolling: touch !important;
+}
+.label-heading{
+	font-weight: bold;
+    font-size: 17px;
+    padding: 10px 0px 0px 0px;
+}
+/*9/8/2019 Sarika Joshi*/
+/*.closeiconcss{
+	padding-top:18px;
+}*/
+.paddforprint{
+	padding:0 !important;
+}
+.planfooter_close{
+	padding-top:25px !important;
+}
+.cookie_txt a{
+	color:#A8DEFF !important;
+}
+.pmmodalclss{
+	margin-left:5px;
+}

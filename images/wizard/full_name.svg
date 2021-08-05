@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_4138" data-name="Group 4138" transform="translate(-93 -214)">
+    <circle id="Ellipse_36" data-name="Ellipse 36" cx="12" cy="12" r="12" transform="translate(93 214)" fill="#bcdbf9"/>
+    <g id="Group_4065" data-name="Group 4065" transform="translate(98 221)">
+      <path id="Path_1218" data-name="Path 1218" d="M98.471,179.2H93.516a.58.58,0,0,0,0,1.16h4.961a.58.58,0,0,0-.006-1.16Z" transform="translate(-84.194 -173.596)" fill="#1277d9"/>
+      <path id="Path_1219" data-name="Path 1219" d="M93.291,169.736a.58.58,0,1,0,0,1.159h3.275a.58.58,0,1,0,0-1.159Z" transform="translate(-84.039 -167.124)" fill="#1277d9"/>
+      <g id="Group_4017" data-name="Group 4017">
+        <g id="Group_1226" data-name="Group 1226">
+          <g id="Group_1223" data-name="Group 1223" transform="translate(1.601)">
+            <g id="Group_1222" data-name="Group 1222">
+              <path id="Path_1220" data-name="Path 1220" d="M72.764,161.481a2.4,2.4,0,1,0,2.4,2.4A2.4,2.4,0,0,0,72.764,161.481Z" transform="translate(-70.362 -161.481)" fill="#1277d9"/>
+            </g>
+          </g>
+          <g id="Group_1225" data-name="Group 1225" transform="translate(0 5.337)">
+            <g id="Group_1224" data-name="Group 1224">
+              <path id="Path_1221" data-name="Path 1221" d="M72.292,179.388a3.425,3.425,0,0,0-2.455-1.035H68.769a3.424,3.424,0,0,0-2.455,1.035,3.5,3.5,0,0,0-1.015,2.47.267.267,0,0,0,.267.267h7.472a.267.267,0,0,0,.267-.267A3.5,3.5,0,0,0,72.292,179.388Z" transform="translate(-65.3 -178.353)" fill="#1277d9"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

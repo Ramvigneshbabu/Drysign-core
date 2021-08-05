@@ -1,0 +1,2383 @@
+/**************** i-pad CSS ****************/ 
+
+	.path-smart-office ul, .path-smart-office li {
+		    list-style: disc;
+		}
+
+	 
+
+    .contact-message-contact-us-form .fa-times-thin  { display: block !important; }
+
+ .path-events .active {
+        display: inline-block;
+    }
+ 
+
+
+
+
+
+/* custom ipad css */
+
+@media (min-width:768px) and (max-width: 1023px) and (orientation: portrait) { 
+
+
+       #Slider .slider-content { z-index: 99;}
+
+	.path-smart-office ul, li {
+	    list-style: disc;
+	}
+
+	* { border:0px solid red; }
+ 
+     .page-node-type-department .Department-inner-content h2 {
+        margin-top: 9%;
+        font-size: 33px !important;
+        color: #fff;
+        line-height: initial;
+        font-weight: 500;
+        letter-spacing: .9px;
+    }
+
+   .page-node-type-department .Department-inner-content {
+       
+        top: 3.6% !important;
+        
+    }
+
+
+    .mobile_image_nopadding { padding: 0 }
+
+    .Department-header-title {   margin-bottom: 12%; }
+    .Department-inner-desc {  margin-top: 10%;}
+    .Department-middle {  padding: 0 10%; } 
+    .view-department-child img, .view-solution-child img {
+        margin: 0;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        margin-bottom: 10px;
+        margin-top: 17px;
+    }
+    .caselist, .bloglist {  padding-left: 10px; }
+    .bloglist, #block-viewsexposedfilterblock, .caselist, #block-viewsexposedfilterblock-2 {
+            padding: 0px 10px;
+            margin-top: 0px;
+                text-align: left;
+    }
+    .bloglist .bloglist-header, .caselist .view-header { 
+            float: none;
+            margin-top: 25px; 
+    }
+    .view-department-child img, .view-solution-child img {
+        margin: auto; 
+    }
+    .page-node-type-department #block-views-block-department-block-1 {
+        margin-top: 140px;
+    }
+	.page-node-type-department .overview-desc {
+	    padding: 0;
+	    margin-bottom: 40px;
+	}	
+    .page-node-type-department #quicktabs-explore_by_industry ul.quicktabs-tabs { 
+        margin-top: 24%;
+    }
+
+    .index-blog .view-content, .index-casestudy .view-content { 
+        padding-left: 0;  
+    }
+    .index-blog .view-header, .index-casestudy .view-header { 
+            padding-left: 0; 
+    }
+    #block-viewsexposedfilterblock form, #block-viewsexposedfilterblock-2 form{
+        margin-top: 10px;
+    }
+    .index-blog, .index-casestudy {
+            min-height: auto; overflow-y: auto;
+        }
+    #Blog .featured-content .featured-title, #Case-Study .featured-content .featured-title { 
+        margin-top: 113px;
+    }
+
+   svg { 
+        bottom: -1px !important; 
+    }
+
+    .page-node-type-case-studies #case-study-page .bs-region--main .block-region-main { 
+        top: -365px;  
+    }
+    .page-node-type-case-studies #case-study-page .field--name-field-tag a { 
+        top: 200px;
+         
+    }
+    .page-node-type-case-studies #case-study-page .bs-region--main .block-social-media { 
+        top: 212px;
+    } 
+
+    .page-node-type-case-studies #Case-Study .featured-casestudy .case-header-title { 
+        text-align: center;
+    }
+
+    #case-study-page .bs-region--main .block-region-main span {
+        font-size: 40px;  
+        line-height: 38px;
+    }
+    #case-study-page .bs-region--main .block-region-main p {
+        margin-top: 40px;
+        line-height: 19px;
+    }
+    .more-blog .more-link, .more-casestudy .more-link { 
+        clear: both;
+    }
+    .more-casestudy .more-link a {
+        position: relative;
+        color: #40505b;
+        top: -5px;
+    }
+    #blog-page section span {
+        top: 26%;
+        font-size: 30px;
+    }
+    .more-blog .more-link a { 
+        top: 3px;
+    }
+
+    .index-blog .view-header, .index-casestudy .view-header { 
+        text-align: left;
+    }
+    #Bloglist .featured-content, .caselist .featured-content { 
+        text-align: left;
+    }
+	   #blog-page .field--name-field-description {
+	    padding: 30px 15px;
+	}
+    #case-study-page .bs-region--bottom .block-region-bottom { 
+        padding: 0 10%; 
+    }
+    #blog-page .field--name-field-description h4 {
+	        font-size: 18px;
+   			 margin: 30px 0px 10px 0px;
+	}
+    .more-blog .col-1, .more-blog .col-2, .more-casestudy .col-1, .more-casestudy .col-2 {
+        width: 100% !important; 
+        margin-top: 10px;
+    }
+    .more-blog .more-link, .more-casestudy .more-link {
+	       background: #fdf9fb;
+        margin: 10px 41px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        position: relative;
+        top: -30px;
+        left: auto;
+        width: 90%;
+        margin: 0px auto !important;
+	}
+
+	.path-case-studies #Case-Study .featured-casestudy .case-header-title { 
+	    text-align: center;
+	        margin-bottom: 15%;
+	}
+	.path-case-studies #Case-Study .featured-casestudy .featured-content {
+	    position: absolute;
+	        top: 38%;
+	    z-index: 8888;
+	    margin-left: 0;
+	    width: 100%;
+	    text-align: center;
+	}
+
+	.path-case-studies .pager {
+	    margin: 0px 0 15px 0;
+	}
+
+	.view-careers .odd_row .smart-office-content {
+	    padding-left: 15px;
+	    margin-top: -4px;
+	    padding-right: 2%;
+	}
+
+	.view-careers .about_Block-odd {
+	    padding: 2% 15px;
+	    text-align: left;
+	}
+	.view-careers .about_Block-even {
+	    padding: 0% 15px;
+	    z-index: 9;
+	    text-align: left;
+	}
+	.view-careers .even_row .smart_office_leader-img img {
+	    box-shadow: 2px 2px 20px #ccc;
+	    width: 82%;
+	    border-radius: 10px;
+	    margin-left: 45px;
+	}
+
+	.mbtm {
+	    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    padding: 30px 0px;
+	}
+	.company { 
+	    margin-top: 100px;
+	}
+
+	.eventbckwhite .featured-share {
+	    position: relative;
+	    top: 13px;
+	    font-size: 11px;
+	    color: #666;
+	    float: right;
+	    margin-right: 72px;
+	}
+
+	.path-press .view-display-id-page_1 .view-content {
+	    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    padding: 0px 15px;
+	    margin: 0 auto;
+	    margin-top: -2px;
+	}
+	.path-press .pager { 
+	    margin-top: -1px;
+	    padding: 0px 20px 60px 20px;
+	}
+	.path-press .pager li > a, .pager li > span {
+    	width: 96% !important;   
+	}
+
+	.path-about-us #about_us_exela h2.block-title { 
+	    width: 96%;     
+	}
+
+	.page-node-type-press-release #Press_realeases_inner {
+	    padding-top: 100px;
+	}
+
+	.page-node-type-press-release #Press_realeases_inner .Press_realeases_body {
+	    width: 90%;
+	    margin: 0px auto;
+	}
+	 
+	/*#block-views-block-solution-suite-block-1 .views-view-grid > .row-2 {
+	    margin-left: 100px;
+	}*/
+
+	.page-node-type-industry #Industry-inner .Industry-inner-content {
+	    position: absolute;
+	    margin: 0px auto;
+	    left: 0px;
+	    right: 0px;
+	    top: 3%;
+	    padding: 0 8%;
+	    text-align: center;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-inner-content h2.Industry-inner-title {
+	    margin-top: 5%;
+	    font-size: 40px;
+	    color: #fff;
+	    line-height: 42px;
+	    font-weight: 500;
+	    letter-spacing: .9px;
+	}
+
+	.page-node-type-industry #Industry-inner .field--name-field-overview {
+	    padding: 50px 15px 50px 15px;
+	}
+
+
+
+	iframe {
+	    width: 100% !important;
+	    margin: 0 auto !important;
+	}
+
+	.page-node-type-department #block-views-block-department-block-1 {
+	    margin-top: 20px;
+	}
+
+	#Digital-Office #paragraph-225 img {
+	    margin: 0px auto;
+	}
+
+	#Digital-Office #paragraph-226 img {
+	    margin: 0px auto;
+	}
+
+	.path-smart-office .odd_row, .path-smart-office .even_row {
+	    margin-bottom: 80px;
+	}
+	 .even_row .smart-office-content {
+	    padding-right: 5%;
+	    margin-top: 0px;
+	    text-align: left;
+	}
+
+	.odd_row .smart-office-content {
+	    padding-left: 15px;
+	    text-align: left;
+	    margin: 0px;
+	} 
+
+	.smart_office_leader-img img {
+	    box-shadow: 2px 2px 20px #ccc;
+	    width: 100%;
+	    border-radius: 10px;
+	}
+
+	.smart-content {
+	    position: absolute;
+	    text-align: center;
+	    width: 97%;
+	    color: #fff;
+	    margin-top: 121px;
+	}
+
+	.smart-title {
+        margin-top: 3%;
+        color: #fff;
+        font-size: 33px;
+    }
+
+	.smart-subtitle {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+	.smart-header-title {
+	    text-transform: uppercase;
+	    font-size: 13px;
+	    letter-spacing: 2px;
+	    width: 80%;
+	    display: inline-block;
+	}
+
+	.page-node-type-solutions .overview-desc {
+	    padding: 5% 5% 0% 5%;
+	}
+
+	 
+
+	.smart-paragraph {
+	    margin-bottom: 80px;
+	}
+    .smart-key-value p {
+        margin-bottom: 0;
+        border-bottom: 1px solid #455762;
+        margin: 0 15%;
+        line-height: 23px;
+    }
+
+   .path-smart-office  .page-node-type-solutions .path-smart-office ul, li {
+            list-style: initial !important;
+    }
+
+    
+
+    #blog-page section span {
+        top: 26%;
+        font-size: 30px;
+    }
+
+      #Blog .featured-content {
+        position: absolute;
+        top: 2%;
+        z-index: 9;
+        color: #fff;
+        padding: 0 20%;
+        width: auto;
+        margin: auto;
+        clear: both;
+    }
+
+
+    #Blog .featured-content .featured-title, #Case-Study .featured-content .featured-title {
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 10px;
+    margin-top: 170px;
+}
+
+    #Blog .featured-content .featured-title {
+        color: #fff;
+        font-size: 25px;
+        margin-bottom: 10px;
+        margin-top: 100px;
+    }
+
+
+    #Blog .blog-header-title {
+    text-transform: uppercase;
+    margin-bottom: 15%;
+    font-weight: 600;
+    font-size: 11px;
+    margin-top: 20%;
+}
+
+    .path-press-releases .view-display-id-page_1 .view-content, .path-insights .view-display-id-page_2 .view-content {
+        background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+        padding: 0% 15px 5% 15px;
+        margin: 0 auto;
+    }
+
+    .path-press-releases .view-display-id-page_1 .views-row,  .path-insights .view-display-id-page_2 .views-row {
+        background: white;
+        padding: 25px 20px;
+        width: 80%;
+       height: auto;
+        margin: 0 auto 12px auto;
+        text-align: left;
+    }
+
+    .path-press-releases .view-content h3, .path-insights .view-content h3 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 2.125em;
+        line-height: 1.15;
+        font-weight: 400;
+        color: #000039;
+        margin: 5% 0px 5% 72px;
+        text-align: left;
+    }
+
+     
+     .path-press-releases .pager li > a, .pager li > span,  .path-insights .pager li > a, .pager li > span {
+        width: 82% !important;
+        display: inline-block;
+        padding: 10px;
+        color: #40505b;
+        background-color: #f2f2f2;
+        border: 1px solid #dbdbdb;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    
+
+    .page-node-type-industry #explore_by_industry_solutions .field--name-field-overview-image img {
+        width: auto;
+    }
+
+    .path-frontpage .home-smart-office {
+    height: 351px;
+    }
+
+    #smart-office #Homepage-Solution {
+        height: 450px;
+        margin-bottom:100px;
+        margin-top:50px;
+    }
+
+    #Homepage-Solution .solution-title a {
+        font-size: 3rem;
+        color: #40505b;
+    }
+
+    .path-frontpage #Home-Slider svg {
+        bottom: 6px !important;
+        margin-left: 1px;
+    }
+
+    .exela_innovations-office-content .smart_office_leader-title {
+        font-size: 40px;
+        font-weight: 500;
+    }   
+    .exela_innovations-office-content {  
+         top: 6%; 
+    }
+
+    .path-innovation-centers .smart_office_leader-img { margin-top: 80px; }
+    
+       
+ 
+
+.path-innovation-centers .view-inno .about_content_odd {
+    margin-top: 0;
+    padding: 9% 0% 0 7%;
+    color: #333;
+}
+
+    .path-about-us .field--name-field-media-video-file video {
+        width: 760px !important;
+        overflow: hidden;
+    }
+
+    .path-about-us .headerAngle {
+        margin-left: -48%;
+        bottom: 6px !important;
+    }
+
+    #about_us_exela .aboutUs-cont {
+        position: absolute;
+        z-index: 9999;
+        top: 14%;
+        color: #fff !important;
+        text-align: center;
+    }
+
+     .path-about-us #about_us_exela .odd_row .smart-office-content {
+        margin-top: 0%;
+    }
+
+    .exela_innovations-office-content .smart_office_featured-content {
+    color: #fff;
+    width: 50%;
+    margin: 0px auto;
+    margin-top: 0;
+}
+
+
+.page-node-type-department .Department-inner-content {
+    padding: 0 16% !important;
+}
+
+
+.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter, .page-node-type-industry #Industry-inner .Industry-Credentials .field--type-string {
+    font-size: 35px;
+    font-weight: 500;
+    float: left;
+}
+
+#quicktabs-explore_by_industry ul.quicktabs-tabs {
+    margin-top: 26%!important;
+}
+
+.bloglist .bloglist-header, .caselist  .view-header {    margin-right: 0%; }
+
+.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-description {
+    display: inline-block;
+    margin-left: -32%;
+    width: 160px;
+}
+
+.page-node-type-industry .fa, .page-node-type-department .fa, .path-about-us .fa, .page-node-type-solutions .fa {
+    display: block;
+}
+.page-node-type-industry #block-views-block-home-solutions-block-4, .page-node-type-department #block-views-block-home-solutions-block-4, .path-about-us #block-views-block-home-solutions-block-4, .page-node-type-solutions #block-views-block-home-solutions-block-4 {
+    background: white;
+    padding: 35px 50px;
+    text-align: center;
+    border: 1px solid #a2ddf9;
+    margin: 35px 30px;
+    border-radius: 4px;
+}
+
+.exela_smart_office h2 {
+    margin-bottom: 6%;
+    color: #18191b;
+    font-size: 35px;
+}
+
+ .smart-key-value .field--name-field-key-value ul li { list-style: none !important; }
+
+ .page-node-type-industry #Industry-inner svg {
+    position: absolute;
+    /* top: 79.3%; */
+    width: 100%;
+    height: 12.2vw;
+    margin-left: 0px;
+    bottom: -1px !important;
+}
+
+.page-node-type-solutions svg.headerAngle {
+    bottom: -1px !important;
+}
+
+.path-innovation-centers svg.headerAngle {
+    position: absolute;
+    width: 100%;
+    height: 12.2vw;
+    bottom: 6px;
+    margin-left: 0;
+    bottom: 6px !important;
+    left:0;
+}
+
+.eu-cookie-compliance-content {
+    margin: 0 auto;
+    max-width: 95%;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+}
+
+.eu-cookie-compliance-message {
+    float: left;
+    margin: 5px 0 0;
+    max-width: 70%;
+}
+
+#open-positions > p {   
+    font-size:  22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.path-past-events  .active, .path-insights .active, .path-press-releases .active, .active-trail, .open {
+        display: inline-block !important;
+    }
+
+    .explore-wrapper { 
+        padding: 0px;
+    }
+
+    /* nav */
+    .we-mega-menu-ul>.we-mega-menu-li>a {
+        line-height: 50px;
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    .we-mega-menu-submenu li.we-mega-menu-li a, .we-mega-menu-submenu .we-mega-menu-submenu li a { 
+        font-size: 16px; 
+    }
+
+    .solution-inner .views-field.views-field-field-description { 
+        font-size: 16px;     
+    }
+
+    .type-of-block .solution-header .views-field .field-content a {
+        font-size: 18px;
+    }
+ 
+    .country-menu .more li ul li ul li a {
+        padding-left: 15px !important;
+        font-size: 14px !important; 
+            padding: 7px 0px !important;
+                font-weight: 400 !important;
+    }
+
+    .country-menu li a {
+        font-size: 16px !important;
+            font-weight: 500 !important;
+    }
+
+    li.we-mega-menu-li.the-company.we-mega-menu-li a, li.we-mega-menu-li.resources.we-mega-menu-li a {
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .solution-header .fa-angle-right:before {
+        margin-right: 4%;
+        float: left;
+        top: 5px;
+        position: relative;
+    }
+
+    /* end nav */
+
+    .path-past-events .pagination .active, .path-insights .pagination  .active, .path-press-releases  .pagination  .active, .active-trail, .open {
+        display: unset !important;
+    }
+
+
+}
+
+ 
+
+
+/* global ipad css */
+
+@media only screen and (max-width : 1024px) {
+body {
+	font-family: 'Work Sans', sans-serif!important;
+}
+
+.fa-search:before {
+    color: #666;
+    font-size: 14px;
+    top: 28px;
+    left: -22px;
+    position: relative;
+}
+
+
+
+li.footermap-item--depth-1.footermap-item--haschildren {
+	width: 153px;
+	float: left;
+}
+#edit-mail-0-value {
+	width: 100%;
+	margin-right: 0px;
+	float: left;
+	line-height: 38px;
+	padding: 4px 4px 4px 12px;
+	border-radius: 6px;
+	border: 1px solid #42545e;
+	background: #18191b;
+	text-align: left!important;
+	color: #80888f;
+	height: 38px;
+}
+.footer-links a {
+	text-decoration: none;
+	color: #78828D!important;
+	font-size: 12px;
+	list-style-type: none;
+	margin: 0 6px 0 0px;
+}
+.site-footer .top {
+	margin: 4% 0px 0px 0px;
+	padding: 0px 2%;
+	margin-left: 0;
+}
+.copyright {
+	margin: 0;
+	font-size: 12px;
+	color: #78828D;
+	margin-left: 0;
+	text-align: left;
+}
+
+ .page-node-type-case-studies .paragraph--view-mode-table-of-contents ul { padding:0; }
+ .page-node-type-case-studies .paragraph--view-mode-table-of-contents ul li {
+    border-bottom: 1px solid #666;
+    list-style: none !important;
+    padding: 0px;
+    margin: 8px;
+}
+
+ 
+
+   
+
+
+}
+
+@media only screen and (device-width: 768px) {
+
+
+ /*For iPad layouts*/
+/*solution css*/
+
+
+#digitalnow .digitalnow_globaltext { 
+    margin: 4% 0px 3% 0px;
+}
+
+#digitalnow .view-id-slider .view-content .views-field .field-content:nth-child(1) {
+    color: #18191b;
+    text-align: center;
+    font-size: 18pt;
+    line-height: normal;
+    margin: 1% 0 2% 0;
+    width: 100%;
+    float: left;
+    padding: 0 20%;
+    text-transform: inherit!important;
+    font-weight: 500;
+}
+ 
+#digitalnow .digitalnow_globaltext { 
+    margin: 15% 0px 3% 0px;
+}
+
+.quicktabs-wrapper .views-field.views-field-title {
+    width: 38%;
+    text-align: left;
+    padding-left: 30px;
+    top: unset;
+    margin-top: 35px;
+    position: absolute;
+}
+.quicktabs-wrapper .field-content p {
+    text-align: left;
+    position: absolute;
+    bottom: 18rem;
+    color: #ffffff;
+    padding: 0px;
+    line-height: 26px;
+    width: 30%;
+    left: 10.4%;
+    font-size: 13pt;
+}
+
+.quicktabs-wrapper .views-field-field-description .field-content p { 
+    bottom: 19%; 
+    width: 42%;
+    left: 8.8%;
+    /* MP Fix */
+}
+
+#quicktabs-container-explore_by_industry .industry-digital-now .view-header p {
+    width: 100%;
+    padding: 0 15%;
+    font-size: 13.5pt;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 27px;
+    color: #18191b;
+}
+#quicktabs-explore_by_industry ul.quicktabs-tabs {
+    position: absolute;
+    right: 0%;
+    width: 46.9%;
+    float: right;
+    top: unset;
+    padding-left: 0px;
+    line-height: 35px;
+    margin-top: 26%;
+}
+#quicktabs-explore_by_industry ul.quicktabs-tabs li a {
+    color: #50505b;
+    width: 80%;
+    height: 34px;
+    float: left;
+    padding-left: 100px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 16.5px;
+}
+.quicktabs-wrapper .view-content {
+    width: 85%;
+    margin: 0 4%;
+    float: none;
+}
+
+#quicktabs-explore_by_industry ul.quicktabs-tabs li a {
+    color: #50505b;
+    width: 93%;
+    height: 34px;
+    float: left;
+    padding-left: 50px;
+    text-align: left;
+    text-decoration: none;
+    font-size: 16.5px;
+}
+
+.quicktabs-wrapper img {
+    margin: 6% 0px 3% 0px;
+    width: 58%;
+}
+  
+#quicktabs-explore_by_industry ul.quicktabs-tabs li a:hover {
+    background: transparent;
+    font-weight: 600;
+    color: black;
+    background-image: url(../img/arrow-right.png)!important;
+    background-repeat: no-repeat;
+    background-position: 310px center;
+}
+#block-footercontactrepresentativeblock {
+    padding: 5% 6%;
+    margin-top: 0;
+    margin-right: -12px;
+}
+.contact-representative .pull-left .block-title {
+    font-size: 36px !important;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 10px !important;
+    line-height: initial;
+}
+#edit-mail-0-value {
+    width: 80%;
+    margin-right: 0px;
+    float: left;
+    line-height: 38px;
+    padding: 4px 4px 4px 12px;
+    border-radius: 6px;
+    border: 1px solid #42545e;
+    background: #18191b;
+    text-align: left!important;
+    color: #80888f;
+    height: 38px;
+}
+
+/*Footer css*/
+li.footermap-item--depth-1.footermap-item--haschildren {
+    float: left;
+    width: 25%!important;
+    margin: 0 0px 0 54px;
+}
+#edit-message {
+    color: #a2ddf9;
+    font-size: 11.9px;
+    padding: 0px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 5px;
+    margin-top: -8px;
+    text-align: left;
+}
+.copyright {
+    margin: 0;
+    font-size: 12px;
+    color: #78828D;
+    margin-left: 0;
+    text-align: center;
+}
+
+ .footer-links {
+    float: right;
+}
+
+/*contact us ipod css*/
+#contact-us .call-us, #contact-us .global-hq, #contact-us .inno-center {
+    background: #e1e2e3;
+    min-width: 341px;
+    min-height: 275px;
+    border-radius: 2px;
+    margin: 3% 10% 3% 24%;
+    padding: 4.6rem !important;
+    text-align: left;
+}
+ .path-contact-us .global-sites {
+    padding: 2px 2px;
+    font-size: 16px;
+    color: #40505b;
+    font-weight: 400;
+}
+
+
+/*leader-bio css*/
+.leader-img {
+    width: 100%;
+    margin-left: 12%;
+}
+.page-node-type-leadership-team #leadership-landing .leader-desc .field--name-field-description p {
+    color: #333;
+    width: 70%!important;
+    margin: 15% 0 10% 13%;
+}
+.page-node-type-leadership-team #leadership-details .related-category {
+    margin-left: 56%;
+}
+.leadership {
+    position: relative;
+    bottom: 13rem;
+    text-align: center;
+}
+.view-leadership-team {
+    margin-top: 10%;
+    display: block;
+    text-align: left;
+}
+
+
+/*leadership team*/
+.view-leadership-team {
+    margin-top: 0;
+    display: contents; 
+    text-align: left;
+}
+#leadership_middle .view-id-leadership_team  div:nth-child(2) {
+    float:left;
+}
+#leadership_middle .views-field-field-position .leadership-content {
+    color: #40505b;
+    font-weight: 500;
+    float: left;
+}
+ #block-simplenewssubscription {
+    display: contents;
+}
+.view-leadership-team .company_leadership {
+    color: #1f94e6;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 150px;
+}
+.view-leadership-team .view-header .header-title {
+    margin-top: 4%;
+    margin-bottom: 46px;
+    font-weight: 500;
+    color: #333;
+    font-size: 36px;
+    letter-spacing: 0.9px;
+    text-transform: inherit;
+}
+.path-leadership-team .leadership p.header-desc {
+    width: 60%;
+    margin: 0 auto;
+    color: #40505b;
+    line-height: inherit;
+}
+.site-footer .bottom {
+    margin: 0% 0 5% 0;
+    padding: 0px 2%;
+}
+#block-copyrightblock {
+    margin-top: 30px;
+}
+#block-copyrightblock {
+    margin-top: 30px;
+    width: 100%;
+}
+
+
+/*press release*/
+
+.path-press .view-display-id-page_1 .views-row {
+    background: white;
+    padding: 25px 20px 20px 20px;
+    width: 100%;
+    height: auto;
+    margin: 0px auto 12px auto;
+}
+.path-press .view-display-id-page_1 .view-content {
+    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+       padding: 0% 5% 1% 5%;
+    margin: 0 auto;
+}
+.path-press .view-content h3 {
+    font-size: 2.125em;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #000039;
+    margin: 5% 0px 5% 20px;
+}
+
+
+/*Industries css*/
+#Industry-inner .Industry-Credentials .field .field--items .field--item .paragraph .field:nth-child(1) {
+    margin-left: 0;
+}
+.page-node-type-industry #Industry-inner .Industry-Credentials .field--item .field--type-text-long > p:nth-child(1) {
+    font-size: 1.1em;
+    line-height: 21px;
+    margin-left: 0;
+}
+
+svg {
+    position: absolute;
+    width: 100%;
+    height: 12.2vw;
+    bottom: 0px !important;
+}
+
+	.home-digital-office .solution-content {
+		    margin: 0% 0 !important;
+	}
+
+	div#Home-Slider {
+	    height: auto;
+	    overflow: hidden;
+	    margin-top: 80px;
+	}
+	.path-contact-us .contact-info {
+	    width: auto;
+	    margin-top: 14%;
+	}
+
+  /* about us */
+	.aboutusbg {
+	    background: #e3f5fd;
+	    transform: skew(0deg, -8.4deg);
+	    position: absolute;
+	    height: 40px;
+	    padding: 200px;
+	    width: 100%;
+	    z-index: 1;
+	    top: 38%;
+	}
+	#about_us_exela .about_us_office_leader-title {
+	    font-size: 40px;
+	    font-weight: 500;
+	    padding: 0 10%;
+	    margin-bottom: 18px;
+	    margin-top: 0px;
+	    line-height: initial;
+	}
+
+	 
+	.anout_map { 
+	    clear: both;
+	}
+
+	
+
+	.path-about-us .aboutusbg { 
+	       top: 33.5%;
+	}
+
+	.about_Block-odd {
+	    padding: 5% 15px;
+	}
+
+	#about_us_exela .block-even .smart_office_leader-img img {
+	    margin-left: 15px;
+	}
+
+	.about_Block-even {
+	    padding: 8% 15px;
+	}
+
+	.path-bloglist .pager {
+	    margin: 0px 0 15px 0;
+	}
+
+ 
+
+	/* about us */
+
+
+	/* blog list */
+	.path-bloglist .pager {
+	    margin: 0px 0 15px 0;
+	}
+
+	.bloglist .bloglist-header, .caselist .view-header {
+	    margin-bottom: 25px;
+	  
+	}
+
+	/* end bloglist */
+
+	svg {
+	    position: absolute;
+	    width: 100%;
+	    height: 12.2vw;
+	    bottom: -1px !important;
+	}
+
+
+	.path-frontpage svg {
+	    position: absolute;
+	    width: 100%;
+	    height: 12.2vw;
+	    bottom: 6px !important;
+	}
+
+	.eventbckwhite .social-media-sharing {
+	    margin-top: -21px;
+	    position: relative;
+	    left: 89px;
+	}
+
+	.page-node-type-department .Department-inner-content { 
+	    top: 3%; 
+	}
+
+.more-blog .more-link {
+    background: #fdf9fb;
+    margin: 10px -19px !important;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3% !important;
+    height: 32px;
+    position: relative;
+    top: -30px;
+    left: -3%;
+    width: 100%;
+}
+
+    .more-blog .more-link a {
+        top: -4px;
+    }
+
+.path-frontpage .home-digital-now {
+    background: url(../img/exela_home_digital-now.png) no-repeat -94px 4px;
+    background-size: 90% 90%;
+    position: relative;
+    height: 300px !important;
+}
+
+   .path-about-us #about_us_exela p.infographic {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 500;
+    clear: both;
+    margin-top: 18px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 999;
+}
+
+
+
+    .exela_innovations-office-content .ici_ {
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-bottom: 8%;
+    }
+
+    .path-innovation-centers  video { width: 100% !important; }
+
+  .path-innovation-centers .view-inno .about_content_odd {
+        margin-top: 0;
+        padding: 0% 0% 0 7%;
+        color: #333;
+    }
+
+    .ic_image {
+    float: unset;
+    margin-right: 20px;
+}
+
+.path-innovation-centers  .smart-office-content_ici { margin-bottom: 40px; }
+     
+
+ 
+}
+
+ 
+
+
+@media (min-width:1000px) and (max-width: 1024px) and (orientation: landscape) { 
+
+	.path-case-studies #Case-Study .featured-casestudy .featured-content { 
+	    top: 14%; 
+	}
+	.path-case-studies #Case-Study .featured-casestudy .case-header-title { 
+	    margin-bottom: 0%; 
+	}
+	.path-case-studies #Case-Study .featured-content .featured-title { 
+	    margin-top: 84px;
+	}
+	.path-case-studies #Case-Study .featured-casestudy .featured-content {
+	    top: 34%;
+	}
+	#about_us_exela .about_us_office_leader-title {
+	    padding: 0 10%;
+	    margin-bottom: 45px;
+	    margin-top: 0px;
+	    line-height: initial;
+	    font-size: 40px;
+	}
+
+	.path-about-us .headerAngle {
+	    margin-left: 0%; 
+	}
+
+	.aboutusbg {
+	    background: #e3f5fd;
+	    transform: skew(0deg, -8.4deg);
+	    position: absolute;
+	    height: 40px;
+	    padding: 200px;
+	    width: 100%;
+	    z-index: 0;
+	        top: -1%;
+	}
+
+	.path-press .view-display-id-page_1 .view-content {
+    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    padding: 0% 5% 5% 5%;
+	    margin: 0 auto;
+	}
+
+	.path-press .view-content h3 {
+	    margin: 5% 0px 5% 0px;
+	}
+
+	.path-press .pager li > a, .pager li > span {
+    	width: 94%;   
+	}
+
+	#contact-us .call-us, #contact-us .global-hq, #contact-us .inno-center { 
+	    margin: 3% 10% 3% 30%;     
+	}
+
+	.page-node-type-industry #Industry-inner .field--name-field-overview {
+	    padding: 50px 5% 50px 5%;
+	}
+
+	.page-node-type-department .Department-inner-content {
+	    position: absolute;
+	    top: 3%;
+	    text-align: center;
+	    padding: 0 27%;
+	    color: #fff;
+	}
+	.Department-inner-content h2 {
+	    margin-top: 23%;
+	    font-size: 40px;
+	    color: #fff;
+	    line-height: 42px;
+	    font-weight: 500;
+	    letter-spacing: .9px;
+	}
+
+	.smart-content {
+	    position: absolute;
+	    text-align: center;
+	    width: 100%;
+	    color: #fff;
+	    margin-top: 104px;
+	}
+
+    .more-blog .more-link, .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 20px 47px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        clear: both;
+    }
+
+    .more-blog .col-1, .more-blog .col-2, .more-casestudy .col-1, .more-casestudy .col-2 {
+    width: 48% !important;
+    background: #fff;
+    margin-right: 2%;
+    padding: 30px 40px;
+}
+
+    .more-casestudy .more-link a {
+    position: relative;
+    color: #40505b;
+    top: -5px;
+}
+
+    .more-blog .more-link, .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 20px 47px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        clear: both;
+        position: relative;
+        top: -29px;
+    }
+
+     .more-blog .more-link {
+        background: #fdf9fb;
+        margin: 20px -8px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        clear: both;
+        position: relative;
+        top: -29px;
+        left: -3%;
+    }
+
+     #blog-page section span {
+        top: 26%;
+        font-size: 30px;
+    }
+
+    #edit-mail-0-value {
+    width:30%;
+    margin-right: 0px;
+    float: left;
+    line-height: 38px;
+    padding: 4px 4px 4px 12px;
+    border-radius: 6px;
+    border: 1px solid #42545e;
+    background: #18191b;
+    text-align: left!important;
+    color: #80888f;
+    height: 38px;
+}
+
+    #Blog .featured-content {
+        position: absolute;
+        top: 28%;
+        z-index: 8888;
+        color: #fff;
+        padding: 0 20%;
+        width: auto;
+        margin: auto;
+    }
+
+    #Blog .featured-content .featured-title, #Case-Study .featured-content .featured-title {
+        color: #fff;
+        font-size: 25px;
+        margin-bottom: 30px;
+        margin-top: 100px;
+    }
+
+
+    .more-blog .more-link {
+        background: #fdf9fb;
+        margin: 10px -10px!important;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3% !important;
+        height: 32px;
+        position: relative;
+        top: -30px;
+        left: -3%;
+    }
+
+
+
+.path-press-releases .view-content h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 2.125em;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #000039;
+    margin: 5% 0px 5% 0px !important;
+}
+
+.path-press-releases .pager li > a, .pager li > span {
+        width: 65%;
+        display: inline-block;
+        padding: 10px;
+        color: #40505b;
+        background-color: #f2f2f2;
+        border: 1px solid #dbdbdb;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+ 
+
+.path-press-releases .view-display-id-page_1 .views-row, .path-insights .view-display-id-page_2 .views-row  {
+    background: white;
+    padding: 25px 20px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 12px auto;
+}
+
+  .path-frontpage #Slider .slider-content h2.slider-title {
+        color: #fff;
+        letter-spacing: 0;
+        font-size: 40px;
+    }
+
+    .path-frontpage .home-digital-now {
+        background: url(../img/exela_home_digital-now.png) no-repeat -32px -80px;
+        background-size: cover;
+        position: relative;
+        height: 350px !important
+
+    }
+
+    #Blog .blog-header-title {
+    text-transform: uppercase;
+    margin-bottom: 20%;
+    font-weight: 600;
+    font-size: 11px;
+    margin-top: -10%;
+}
+
+.view-careers .aboutusbg {
+    z-index: auto;
+    margin-top: 600px;
+}
+
+.smart-title {
+        margin-top: 3%;
+        color: #fff;
+        font-size: 40px;
+    }
+
+    .smart-subtitle {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .path-leadership-team .overlay {
+        cursor: pointer;
+        position: unset;
+        left: unset;
+        top: 0;
+        z-index: 999;
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+    }
+ 
+    .page-node-type-leadership-team .leadership h2.header-title {
+        color: #1f94e6;
+        text-transform: uppercase;
+        margin: 0%;
+        margin-top: 20px;
+    }
+
+    .path-about-us .field--name-field-media-video-file video {
+        width: 1020px !important;
+        overflow: hidden;
+    }
+
+    .path-about-us .headerAngle { 
+        bottom: 7px !important;
+    }
+
+    .path-about-us .aboutusbg { 
+           top: 6%;
+    }
+
+
+
+    .more-blog .more-link, .more-casestudy .more-link {
+    background: #fdf9fb;
+    margin: 10px 41px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3%;
+    height: 32px;
+    position: relative;
+    top: -30px;
+    left: -1%;
+    width: 91%;
+    margin: 0px auto !important;
+}
+
+.more-blog .more-link {
+    background: #fdf9fb;
+    margin: 10px -19px !important;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3% !important;
+    height: 32px;
+    position: relative;
+    top: -30px;
+    left: -3%;
+    width: 98%;
+}
+
+.path-innovation-centers svg.headerAngle {
+    position: absolute;
+    width: 100%;
+    height: 12.2vw;
+    bottom: 6px !important;
+    left: 0;
+    margin-left: -2px;
+}
+
+#quicktabs-explore_by_industry ul.quicktabs-tabs {
+        margin-top:18%!important;
+    }
+
+    .path-press-releases .pager li > a, .pager li > span, .path-insights .pager li > a, .pager li > span  {
+         width: 65.5% !important;
+        display: inline-block;
+        padding: 10px;
+        color: #40505b;
+        background-color: #f2f2f2;
+        border: 1px solid #dbdbdb;
+        border-radius: 0;
+        font-weight: 500;
+        font-size: 16px;
+        margin-left: 0;
+    }
+
+	
+}
+/* custom ipad css */
+
+
+@media only screen 
+  and (min-device-width: 834px) 
+  and (max-device-width: 1023px) 
+  /*and (orientation: portrait) */
+  and (-webkit-min-device-pixel-ratio: 2) {
+  
+  	body { border:0px solid blue;   }
+
+ #Slider .slider-content { z-index: 99;}
+
+  	svg {
+    position: absolute;
+    width: 100%;
+    height: 12.2vw;
+	bottom: 0px !important; 
+	}
+ 	 
+  	/* Retina styles here */ 
+
+	#digitalnow .view-id-slider .view-content .views-field .field-content:nth-child(1) {
+	    color: #18191b;
+	    text-align: center;
+	    font-size: 18pt;
+	    line-height: normal;
+	    margin: 1% 0 2% 0;
+	    width: 100%;
+	    float: left;
+	    padding: 0 20%;
+	    text-transform: inherit!important;
+	    font-weight: 500;
+	}
+	 
+	#digitalnow .digitalnow_globaltext { 
+	    margin: 15% 0px 3% 0px;
+	}
+
+	.quicktabs-wrapper .views-field.views-field-title {
+	    width: 38%;
+	    text-align: left;
+	    padding-left: 30px;
+	    top: unset;
+	    margin-top: 35px;
+	    position: absolute;
+	}
+	.quicktabs-wrapper .field-content p {
+	    text-align: left;
+	    position: absolute;
+	    bottom: 18rem;
+	    color: #ffffff;
+	    padding: 0px;
+	    line-height: 26px;
+	    width: 30%;
+	    left: 10.4%;
+	    font-size: 13pt;
+	}
+
+	.quicktabs-wrapper .views-field-field-description .field-content p { 
+	    bottom: 19%; 
+	    width: 42%;
+	    left: 8.8%;
+	    /* MP Fix */
+	}
+
+	#quicktabs-container-explore_by_industry .industry-digital-now .view-header p {
+	    width: 100%;
+	    padding: 0 15%;
+	    font-size: 13.5pt;
+	    text-align: center;
+	    margin: 0 auto;
+	    line-height: 27px;
+	    color: #18191b;
+	}
+	#quicktabs-explore_by_industry ul.quicktabs-tabs {
+	    position: absolute;
+	    right: 0%;
+	    width: 46.9%;
+	    float: right;
+	    top: unset;
+	    padding-left: 0px;
+	    line-height: 35px;
+	    margin-top: 26%;
+	}
+	#quicktabs-explore_by_industry ul.quicktabs-tabs li a {
+	    color: #50505b;
+	    width: 80%;
+	    height: 34px;
+	    float: left;
+	    padding-left: 100px;
+	    text-align: left;
+	    text-decoration: none;
+	    font-size: 16.5px;
+	}
+	.quicktabs-wrapper .view-content {
+	    width: 85%;
+	    margin: 0 4%;
+	    float: none;
+	}
+	#quicktabs-explore_by_industry ul.quicktabs-tabs li a {
+	    color: #50505b;
+	    width: 90%;
+	    height: 34px;
+	    float: left;
+	    padding-left: 50px;
+	    text-align: left;
+	    text-decoration: none;
+	    font-size: 16.5px;
+	}
+	.quicktabs-wrapper img {
+	    margin: 6% 0px 3% 0px;
+	    width: 58%;
+	}
+	#quicktabs-explore_by_industry ul.quicktabs-tabs li a:hover {
+	    background: transparent;
+	    font-weight: 600;
+	    color: black;
+	    background-image: url(../img/arrow-right.png)!important;
+	    background-repeat: no-repeat;
+	    background-position: 98% center;
+	}
+
+	
+
+	.path-frontpage .home-digital-now {
+	    background: url(../img/exela_home_digital-now.png) no-repeat -158px -1px;
+	    background-size: cover;
+	    position: relative;
+	    height: 309px;
+	}
+
+	.home-digital-office .solution-content {
+	    margin: 0% 0 !important;
+	}
+
+	#block-simplenewssubscription {
+	    margin-top: 0;
+	    position: relative;
+	}
+	#edit-mail-0-value {
+	    width: 80%;
+	    margin-right: 0px;
+	    float: left;
+	    line-height: 38px;
+	    padding: 4px 4px 4px 12px;
+	    border-radius: 6px;
+	    border: 1px solid #42545e;
+	    background: #18191b;
+	    text-align: left!important;
+	    color: #80888f;
+	    height: 38px;
+	}
+	#block-copyrightblock {
+	    margin-top: 10px;
+	    width: 100%;
+	    margin-bottom: 35px;
+	}
+ 
+	div#Home-Slider {
+	    height: auto;
+	    overflow: hidden;
+	    margin-top: 80px;
+	}
+	#contact-us .call-us, #contact-us .global-hq, #contact-us .inno-center {
+	    background: #e1e2e3;
+	    min-width: 341px;
+	    min-height: 275px;
+	    border-radius: 2px;
+	    margin: 3% 10% 3% 24%;
+	    padding: 4.6rem !important;
+	    text-align: left;
+	}
+	.path-contact-us .global-sites {
+	    padding: 2px 2px;
+	    font-size: 16px;
+	    color: #40505b;
+	    font-weight: 400;
+	}
+	.path-contact-us .contact-info {
+	    width: auto;
+	    margin-top: 14%;
+	}
+
+	/* about us */
+	.aboutusbg {
+	    background: #e3f5fd;
+	    transform: skew(0deg, -8.4deg);
+	    position: absolute;
+	    height: 40px;
+	    padding: 200px;
+	    width: 100%;
+	    z-index: 1;
+	    top: 38%;
+	}
+	#about_us_exela .about_us_office_leader-title {
+	    font-size: 40px;
+	    font-weight: 500;
+	    padding: 0 10%;
+	    margin-bottom: 45px;
+	    margin-top: 0px;
+	    line-height: initial;
+	}
+
+	.anout_map { 
+	    clear: both;
+	}
+
+	.odd_row .smart-office-content {
+	    padding-left: 15px;
+	    text-align: left;
+	}
+	.aboutusbg { 
+	    top: 35%;
+	}
+
+ 
+
+	.about_Block-odd {
+	    padding: 5% 15px;
+	}
+
+	#about_us_exela .block-even .smart_office_leader-img img {
+	    margin-left: 15px;
+	}
+
+	.about_Block-even {
+	    padding: 8% 15px;
+	}
+ 
+	/* about us */
+
+
+	/* blog list */
+	.path-bloglist .pager {
+	    margin: 0px 0 15px 0;
+	}
+
+	.bloglist .bloglist-header, .caselist .view-header {
+	    margin-bottom: 25px;
+	  
+	}
+
+	/* end bloglist */
+
+
+	#about_us_exela .about_us_office_leader-title {
+	    font-size: 40px; 
+	}
+
+ 
+
+	.eventbckwhite .social-media-sharing {
+	    margin-top: -21px;
+	    position: relative;
+	    left: 89px;
+	}
+
+
+	svg {
+	    position: absolute;
+	    width: 100%;
+	    height: 12.2vw;
+	    bottom: -2px !important;
+	}
+
+	.path-frontpage svg {
+	    position: absolute;
+	    width: 100%;
+	    height: 12.2vw;
+	    bottom: 6px !important;
+	}
+
+
+	.path-press .pager {
+	    margin: 0;
+	    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    padding: 15px 10px 60px 10px;
+	    margin-top:-41px;
+	}
+
+	.path-press .view-display-id-page_1 .views-row {
+	    background: white;
+	    padding: 25px 20px 30px 20px;
+	    width: 100%;
+	    height: auto !important;
+	    margin: 0px auto 12px auto;
+	}	
+
+	.path-press .pager li > a, .pager li > span {
+    	width: 98% !important;   
+	}
+
+	iframe {
+	    width: 100% !important;
+	    margin: 0 auto !important;
+	}
+
+    .more-blog .more-link {
+        background: #fdf9fb;
+        margin: 10px -19px!important;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3% !important;
+        height: 32px;
+        position: relative;
+        top: -30px;
+        left: -3%;
+    }
+
+    .more-blog .more-link a {
+        top: -4px;
+    }
+
+
+    .path-press-releases .view-content h3 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 2.125em;
+        line-height: 1.15;
+        font-weight: 400;
+        color: #000039;
+        margin: 5% 0px 5% 85px;
+    }
+
+    .path-frontpage .home-digital-now {
+        background: url(../img/exela_home_digital-now.png) no-repeat -137px 4px;
+        background-size: 95% 95%;
+        position: relative;
+        height: 300px;
+    }
+
+
+    .view-leadership-team {
+        margin-top: 0%;
+        display: block;
+        text-align: left;
+        margin-left: 0%;
+    }
+    
+.path-about-us .aboutusbg {
+    top: 32.5%;
+}
+
+  .path-about-us #about_us_exela p.infographic {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 500;
+    clear: both;
+    margin-top: 18px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 999;
+}
+
+   .path-frontpage .home-smart-office {
+    height: 451px;
+    }
+
+    #smart-office #Homepage-Solution {
+        height: 450px;
+        margin-bottom: 200px;
+        margin-top:50px;
+    }
+
+    .path-about-us .aboutusbg {  
+        padding: 210px; 
+    }
+
+     .exela_innovations-office-content .ici_ {
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-bottom: 8%;
+    }
+
+    .path-innovation-centers  video { width: 100% !important; }
+
+  .path-innovation-centers .view-inno .about_content_odd {
+        margin-top: 0;
+        padding: 0% 0% 0 7%;
+        color: #333;
+    }
+
+    .ic_image {
+    float: unset;
+    margin-right: 20px;
+}
+
+.path-innovation-centers  .smart-office-content_ici { margin-bottom: 40px; }
+     
+ .path-leadership-team .overlay {
+    cursor: pointer;
+    position: unset;
+    left: unset;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+      .page-node-type-leadership-team .more-link {
+        float: right !important;
+        margin-right: 30.5%!important;
+        margin-top: 0;
+    }
+
+
+   .path-about-us .field--name-field-media-video-file video {
+        width: 830px !important;
+        overflow: hidden;
+    }
+
+    .path-about-us .headerAngle { 
+        bottom: 6px !important;
+    }
+
+    #about_us_exela .aboutUs-cont {
+        position: absolute;
+        z-index: 9999;
+        top: 14%;
+        color: #fff !important;
+        text-align: center;
+    }
+
+     .path-about-us #about_us_exela .odd_row .smart-office-content {
+        margin-top: 0%;
+    }
+
+    .more-blog .more-link, .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 10px 41px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        position: relative;
+        top: -30px;
+        left: auto;
+        width: 92%;
+        margin: 0px auto !important;
+    }
+  
+  .more-blog .more-link {
+    background: #fdf9fb;
+    margin: 10px -19px !important;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3% !important;
+    height: 32px;
+    position: relative;
+    top: -30px;
+    left: -3%;
+    width: 100%;
+}
+
+    .path-innovation-centers svg.headerAngle {
+        position: absolute;
+        width: 100%;
+        height: 12.2vw;
+        bottom: 6px !important;
+        left: 0;
+        margin-left: -2px;
+    }
+
+        .page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter, .page-node-type-industry #Industry-inner .Industry-Credentials .field--type-string {
+        font-size: 30px;
+        font-weight: 500;
+        float: left;
+    }
+
+    #quicktabs-explore_by_industry ul.quicktabs-tabs {
+        margin-top: 26%!important;
+    }
+
+    .path-frontpage .home-digital-now {
+        background: url(../img/exela_home_digital-now.png) no-repeat -94px 4px;
+        background-size: 90% 90%;
+        position: relative;
+        height: 300px !important;
+    }
+
+    .page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-description {
+        display: inline-block;
+        margin-left: -10%;
+        width: 200px;
+    }
+
+    .page-node-type-industry #Industry-inner svg {
+        position: absolute;
+        /* top: 79.3%; */
+        width: 100%;
+        height: 12.2vw;
+        margin-left: 0px;
+        bottom: -1px !important;
+    }
+
+.fa-search:before { 
+    top: 24px;      
+}
+
+
+ 
+  
+}
+
+
+@media only screen 
+  and (min-device-width: 834px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+body{ border:0px solid red; }
+
+
+
+
+
+.path-press .view-content h3 {
+	    margin: 5% 0px 5% 0px;
+	}
+
+  .path-about-us .headerAngle {
+	    margin-left: -2% !important;
+	    bottom: -2px;
+	}
+
+	.company { 
+	    margin-top: 100px;
+	}
+
+	.path-about-us .aboutusbg {
+	    background: #e3f5fd;
+	    transform: skew(0deg, -8.4deg);
+	    position: absolute;
+	    height: 40px;
+	    padding: 250px;
+	    width: 100%;
+	    z-index: 0;
+	    top: 2%;
+	}
+
+ 	
+	.path-press .pager li > a, .pager li > span {
+	    	width: 64%;
+	    	margin-left:0%;
+		}	
+
+	 
+	.path-press .view-display-id-page_1 .views-row {
+	    background: white;
+	    padding: 25px 20px 20px 20px;
+	    width: 100%;
+	    height: auto !important;
+	    margin: 0px auto 12px auto;
+	}	
+
+	#contact-us .call-us, #contact-us .global-hq, #contact-us .inno-center { 
+	    margin: 3% 10% 3% 30%;     
+	}
+	 	
+	.page-node-type-industry #Industry-inner .field--name-field-overview {
+	    padding: 50px 5% 50px 5%;
+	}
+
+	.page-node-type-department .Department-inner-content {
+	    position: absolute;
+	    top: 3%;
+	    text-align: center;
+	    padding: 0 30%;
+	    color: #fff;
+	}
+	.Department-inner-content h2 {
+	    margin-top: 23%;
+	    font-size: 40px;
+	    color: #fff;
+	    line-height: 42px;
+	    font-weight: 500;
+	    letter-spacing: .9px;
+	}
+
+	.smart-content {
+	    position: absolute;
+	    text-align: center;
+	    width: 100%;
+	    color: #fff;
+	    margin-top: 120px;
+	}
+
+        .more-blog .more-link, .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 20px 47px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        clear: both;
+    }
+
+    .more-blog .col-1, .more-blog .col-2, .more-casestudy .col-1, .more-casestudy .col-2 {
+    width: 48% !important;
+    background: #fff;
+    margin-right: 2%;
+    padding: 30px 40px;
+}
+
+    .more-casestudy .more-link a {
+    position: relative;
+    color: #40505b;
+    top: -5px;
+}
+
+    .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 20px 47px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        clear: both;
+        position: relative;
+        top: -29px;
+    }
+
+   .more-blog .more-link {
+    background: #fdf9fb;
+    margin: 20px -8px!important;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 3% !important;
+    height: 32px;
+    clear: both;
+    position: relative;
+    top: -29px;
+    left: -3%;
+}
+
+    #blog-page section span {
+    position: absolute;
+    top: 28%;
+    font-size: 40px;
+    color: #fff;
+    right: 0px;
+    left: 0px;
+    margin: 0px auto;
+    text-align: center;
+    padding: 0 17%;
+    line-height: initial;
+}
+    
+     .page-node-type-case-studies .paragraph--view-mode-table-of-contents ul { padding:0; }
+ .page-node-type-case-studies .paragraph--view-mode-table-of-contents ul li {
+    border-bottom: 1px solid #666;
+    list-style: none !important;
+    padding: 0px;
+    margin: 8px;
+}
+
+.path-press-releases .view-content h3 {
+        font-family: 'Work Sans', sans-serif;
+        font-size: 2.125em;
+        line-height: 1.15;
+        font-weight: 400;
+        color: #000039;
+        margin: 5% 0px 5% 5px !important;
+    }
+
+
+.path-press-releases .pager li > a, .pager li > span, .path-insights .pager li > a, .pager li > span {
+     width: 65.5% !important;
+    display: inline-block;
+    padding: 10px;
+    color: #40505b;
+    background-color: #f2f2f2;
+    border: 1px solid #dbdbdb;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 0;
+}
+
+.path-frontpage .home-digital-now {
+    background: url(../img/exela_home_digital-now.png) no-repeat -32px 5px;
+    background-size: cover;
+    position: relative;
+    height: 350px !important
+
+}
+
+.path-frontpage #Slider .slider-content h2.slider-title {
+        color: #fff;
+        letter-spacing: 0;
+        font-size: 40px;
+    }
+
+
+.page-node-type-case-studies .paragraph--view-mode-table-of-contents ul li:last-child {
+    border:0;
+}
+	
+        .view-leadership-team {
+    margin-top: 0%;
+    display: block;
+    text-align: left;
+    margin-left: 0%;
+}
+
+.view-careers .aboutusbg {
+    z-index: auto;
+    margin-top: 0px;
+}
+
+
+
+.path-leadership-team .overlay {
+    cursor: pointer;
+    position: unset;
+    left: unset;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+ 
+
+     .page-node-type-leadership-team .more-link {
+        float: none !important;
+        margin-right: 0%!important;
+        margin-top: 0px;
+   }
+
+   .smart-title {
+        margin-top: 2%;
+        color: #fff;
+        font-size: 40px;
+    }
+
+    .smart-key-value p {
+        margin-bottom: 0;
+        border-bottom: 1px solid #455762;
+        margin: 0 25%;
+        line-height: 32px;
+    }
+
+     .path-about-us .field--name-field-media-video-file video {
+        width: 1089px !important;
+        overflow: hidden;
+    }
+
+    .path-about-us .headerAngle { 
+        bottom: 6px !important;
+    }
+
+    #about_us_exela .aboutUs-cont {
+        position: absolute;
+        z-index: 9999;
+        top: 14%;
+        color: #fff !important;
+        text-align: center;
+    }
+
+     .path-about-us #about_us_exela .odd_row .smart-office-content {
+        margin-top: 0%;
+    }
+
+    .more-blog .more-link, .more-casestudy .more-link {
+        background: #fdf9fb;
+        margin: 10px 41px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        margin-left: 3%;
+        height: 32px;
+        position: relative;
+        top: -30px;
+        left: -1%;
+        width:98%;
+        margin: 0px auto !important;
+    }
+
+    #quicktabs-explore_by_industry ul.quicktabs-tabs {
+        margin-top:18%!important;
+    }
+
+    .path-press-releases .view-display-id-page_1 .views-row, .path-insights .view-display-id-page_2 .views-row {
+        background: white;
+        padding: 25px 20px;
+        width: 100% !important;
+        height: auto;
+        margin: 0 auto 12px auto;
+    }
+     
+
+
+  }
+
+ 
+
+ @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 264dpi),
+  only screen and (                min-resolution: 2dppx) { 
+ 
+}
+ 

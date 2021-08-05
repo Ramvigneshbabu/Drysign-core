@@ -1,0 +1,145 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>${dry_sign}</title>
+
+
+    <style type="text/css">
+    @font-face{
+    	font-family:calibri, Helvetica, sans-serif;
+    	font-style: normal;
+    }
+     body, table, td, p {font-family: calibri, Helvetica, sans-serif !important;}
+        body {
+            font-family:calibri, Helvetica, sans-serif !important;
+            text-align:center;
+            font-size: 15px !important;
+        }
+
+        .emailer_header {
+         
+            background-repeat: no-repeat;
+            height: 50px;
+            font-family: calibri, Helvetica, sans-serif;
+        }
+       .emaillogo{
+       margin:0;
+       }
+        .emailer_body {
+            width: 100%;
+            height: auto;
+            font-family: calibri, Helvetica, sans-serif;
+            font-size: 15px !important;
+            color: #2C3D4F;
+            text-align:left !important;
+   		margin-top:15px !important;
+        }
+        .emailer_body p{
+         color: #2C3D4F !important;
+        }       
+        a {
+            color: #1f94e6 !important;
+            font-size: 15px !important;
+            font-family: calibri, Helvetica, sans-serif !important;
+            text-decoration:none;
+        }
+        .bordertop{
+            border-top:1px solid #9ea7ac !important;
+  				padding-top:15px;
+        }
+        .blueheading{
+        	 padding:10px auto;
+            color:#4db4e1 !important;
+        }
+        .borderfooter{
+            border-top:1px solid #9ea7ac !important;
+           
+        }
+        .hedingtxt{
+            font-size:18px !important;
+        }
+        .btn_signdoc{
+        text-decoration:none !important;
+        color:#FFFFFF !important;
+        }	
+                .maintable{
+       	 border:1px solid #ccc;
+           text-align:center !important;
+  			 width:70% !important;
+         	font-family:calibri, Helvetica, sans-serif;
+         	font-size: 15px !important;
+         	padding:15px !important;
+         	margin:0 auto;
+        }
+        @media only screen and (max-width:676px) {
+  	.maintable{
+ 	    width:100% !important;
+ 		 }
+		}
+  
+        p{
+        font-family:calibri, Helvetica, sans-serif;
+        font-size:15px !important;
+        color: #2C3D4F;
+        margin:10px 0px !important;
+        }
+        .orangenote{
+        font-family:calibri, Helvetica, sans-serif;
+        font-size:14px !important;
+        color:#ff0000 !important;
+        margin:10px 0px !important;
+     }
+         
+    </style>
+</head>
+
+<body>
+        <table class="maintable">
+        <tbody>
+            <tr>
+                <td>
+                    <table border="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="left" height="50" ><img class="emaillogo" src="${drysignlogo}" alt="Logo">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="emailer_body" width="100%">
+                        <tr>
+                            <td class="bordertop">
+                                <b class="hedingtxt"><span class="blueheading" style="color:#4db4e1 !important;">${hi}</span> ${supp_team}</b>
+                                <p>${dry_acc_succ_del_1} ${fullName} ${dry_acc_succ_del_2} ${userId} ${dry_acc_succ_del_3}</p>
+                                <!-- <p>${reasons} ${msg1}</p>
+                                <p>${elaborates} ${msg2}</p> 
+                                <br/> -->
+                                <p class="plignhight">${thankYou}</p>
+                                <p>${teamDrysign}</p>
+                                <span class="orangenote" style="color:#ff0000 !important;">${note_noreply}</span>
+                                <br/>
+                            </td>
+                        </tr>
+					
+                        <tr>
+                            <td align="center" class="borderfooter">
+                                <p>${anyQueryToContact} <a href="mailto:drysign.support@exelatech.com">${drysign_emailId}</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

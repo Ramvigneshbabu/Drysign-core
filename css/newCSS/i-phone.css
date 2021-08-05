@@ -1,0 +1,1661 @@
+/**************** i-phone CSS ****************/ 
+
+.page-node-type-case-studies .paragraph--view-mode-table-of-contents ul li:last-child {
+	border:0;
+}
+
+.path-events .featured-calender {visibility: hidden;}
+
+#dept-overview-only, #sol-overview-only { 
+	text-align: center;
+    padding: 0 20%;
+    margin-bottom: 5%;   
+}
+
+#dept-overview-only h2, #sol-overview-only h2 {    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.ui-widget-header {
+    border: 0px; /*{borderColorHeader}*/;
+    background: transparent;
+    color: #fff;
+    font-weight: bold;
+}
+
+.ui-dialog { 
+    top: 198.734px!important;
+    left: 0px!important;
+    z-index: 101;
+    position: absolute;
+    margin: 0px auto;
+    text-align: center;
+    width: 400px !important;
+    right: 0px!important;
+    padding: 1% 2% 6% 2%;
+}
+.ui-dialog h5 {
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    font-size: 1.2em;
+}
+
+.ui-widget-overlay {
+    background: #000/*{bgColorOverlay}*/ /*{bgImgUrlOverlay}*/ /*{bgOverlayXPos}*/ /*{bgOverlayYPos}*/ /*{bgOverlayRepeat}*/;
+    opacity: .3/*{opacityOverlay}*/;
+    filter: Alpha(Opacity=30)/*{opacityFilterOverlay}*/;
+}
+
+.ui-dialog a {
+    color: #fff;
+    background:#D71996;
+    padding: 10px 50px!important;
+    border-radius: 4px; 
+    top: 45px;
+    position: relative;
+    text-decoration:none;
+
+}
+.ui-dialog a:focus {
+    outline: none;
+    outline-offset: unset;
+}
+
+.ui-dialog .ui-dialog-content { overflow: unset;      padding: 15% 4%;}
+
+.webform-confirmation-modal .ui-button .ui-icon {
+    background-image: url(../img/ui-icons_777777_256x240.png) !important;
+}
+
+.webform-confirmation-modal .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: 0px solid #c5c5c5/*{borderColorDefault}*/;
+    background: #fff;
+    font-weight: normal/*{fwDefault}*/;
+    color: #454545/*{fcDefault}*/;
+    color: #fff;
+}
+
+.language { display: block !important ; }
+
+ 
+
+
+@media(min-width:1900px) and (max-width:2200px){
+		#Case-Study .home-case-content h2.home-case-title {
+	    color: #fff;
+	    padding-top: 8%;
+	    position: relative;
+	    line-height: normal;
+	    font-size: 36px;
+	    margin-bottom: 0px;
+	    font-weight: 400;
+	}
+
+
+	_:-ms-lang(x), #Case-Study .home-case-content h2.home-case-title {
+	    color: #fff;
+	    padding-top: 8% !important;
+	    position: relative;
+	    line-height: normal;
+	    font-size: 36px;
+	    margin-bottom: 0px;
+	    font-weight: 400;
+	}
+
+	.site-footer .top {
+	    margin: 15px 0px;
+	    padding: 0px 2%;
+	}
+
+	.path-about-us svg, .path-innovation-centers svg {
+    position: absolute;
+	    bottom: 6px !important;
+	    width: 100%;
+	    height: 12.2vw;
+	    margin-left: 0px;
+	}
+
+	#block-views-block-solution-suite-block-1, #block-views-block-solution-suite-block-2, #block-views-block-solution-suite-block-3, #block-views-block-solution-suite-block-4, #block-views-block-solution-suite-block-5, #block-views-block-solution-suite-block-6, #block-views-block-solution-suite-block-7, #block-views-block-solution-suite-block-8, #block-views-block-solution-suite-block-9 {
+	    margin: 0% 3% 4% 3%;
+	    border: 1px solid #75bef9;
+	    padding: 1% 8% 0% 8%;
+	    text-align: center;
+	    border-radius: 5px;
+	    float: unset;
+	    clear: both;
+	}
+
+	.path-press-releases .view-content h3, .path-insights .view-content h3 { 
+	    margin: 5% 0px 5% 0%;
+	}
+
+	.path-press-releases .view-display-id-page_1 .views-row, .path-insights .view-display-id-page_2 .views-row { 
+	    width: 100%; 
+	}
+
+	.path-press-releases .pager, .path-insights .pager {
+	    padding: 0% 19% 2% 19%;
+	}
+
+	.path-frontpage #Home-Slider svg {
+	    bottom: 5px !important;
+	    width: 102%;
+	    position: absolute;
+	    right: -1px;
+	}
+
+}
+
+ 
+.menusearch { display: none; }
+
+@media (max-width:375px) { 
+
+	.we-mega-menu-submenu>.we-mega-menu-submenu-inner {
+	    width: 100%;
+	    margin: -12px auto 0 0;
+	    min-height: 280px;
+	    height: auto;
+	    display: inline-block;
+	    background: #fff;
+	    padding: 15px;
+	    overflow: scroll;
+	    height: 200px;
+	}
+
+}
+
+@media ( max-width: 767px)  {
+
+	body { border:0px solid red; }
+
+	 
+
+	.eu-cookie-compliance-content {
+	    max-width: 95%;
+	    text-align: center;
+	}
+
+	.view-department-child, .view-solution-child {
+	    padding: 0px 15px;
+	    margin-bottom: 0;
+	}
+
+	#dept-overview-only, #sol-overview-only { 
+		text-align: center;
+	    padding: 0 15px;
+	    margin-bottom: 15%;   
+	}
+
+	#dept-overview-only .overview-desc-only, #sol-overview-only .overview-desc-only { text-align: left; margin-bottom: 50px; }
+
+	.path-past-events  .active, .path-insights .active, .path-press-releases .active, .active-trail, .open {
+	    display: inline-block !important;
+	}
+
+	#Homepage-Solution .solution-title a {
+	    font-size: 3rem;
+	    color: #40505b;
+	}
+
+	.path-frontpage .site-featured-first .view-blogs .horizontal, .path-frontpage .site-featured-first .view-whitepaper .view-content {
+	    padding: 10px 15px !important;
+	    margin: 0px 0px;
+	    line-height: 18px;
+	}
+
+	#Homepage .block-block-content .home-header-title, .home-header-title {
+	    margin-bottom: 0;
+	}
+
+	.path-solutions #digitalnow .block-views-blockdepartment-block-1, #smart-office .block-views-blockdepartment-block-1, .page-node-type-department #block-views-block-department-block-1 {
+	    background: repeating-linear-gradient( -7deg, #FFFEFE, #ffffff 8px, #dcdcdc 9px, #efefef63 10px );
+	    margin-top: 182px;
+	}
+
+	#quicktabs-explore_by_industry ul.quicktabs-tabs li a {
+	    color: #50505b;
+	    width: 99%;
+	    height: 42px;
+	    float: left;
+	    padding-left: 20%;
+	    text-align: left;
+	    text-decoration: none;
+	    font-size: 16.5px;
+	    background-image: url(../img/arrow-right.png)!important;
+	    background-repeat: no-repeat;
+	    background-position: right 12px;
+	}
+
+	#Case-Study .featured-casestudy .featured-content {
+	    position: absolute;
+	    top: 36px;
+	    z-index: 8;
+	    width: 98%;
+	    text-align: left;
+	    margin: 0;
+	    padding: 0 10px;
+	    left: 15px;
+	}
+
+	#Case-Study .featured-content .featured-title {
+	    margin-top: 149px;
+	    margin-bottom: 15px;
+	    font-size: 25px;
+	}
+
+	#Case-Study .featured-casestudy .featured-link {
+	    margin-top: 15px;
+	    top: 50px;
+	    position: relative;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-inner-content h2.Industry-inner-title {
+	    margin-top: 10%;
+	    font-size: 25px;
+	    color: #fff;
+	    line-height: initial;
+	    font-weight: 500;
+	    letter-spacing: 0;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-inner-content .Industry-inner-desc .field--name-field-description p {
+	    padding: 0 5%;
+	    margin-top: 7%;
+	}
+	#case-study-page .bs-region--bottom .block-region-bottom .field--name-field-title {
+	    font-size: 16px;
+	    letter-spacing: 2px;
+	    color: #313131;
+	    margin: 30px 0px;
+	    text-transform: capitalize;
+	    font-weight: 500;
+	    font-size: 17px;
+	}
+
+	.more-blog .more-link, .more-casestudy .more-link {
+	    background: #fdf9fb;
+	    margin: 0px 23px 30px 23px;
+	    text-align: center;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-left: 9%;
+	    height: 32px;
+	    clear: both;
+	    padding: 0;
+	}
+
+	 .page-node-type-blog .site-featured-first .view-blogs .horizontal, .site-featured-first .view-whitepaper .view-content {
+	    min-height: 330px;
+	    margin: 0;
+	    text-align: center;
+	    padding: 0!important;
+	    line-height: 25px;
+	    max-height: 0;
+	    height: auto;
+	}
+
+
+
+
+	#Blog .featured-content .featured-title, #Case-Study .featured-content .featured-title {
+	    color: #fff;
+	    font-size: 25px;
+	}
+
+	.index-blog, .index-casestudy {
+	    margin-top: 0px;
+	    min-height: auto !important;
+	}
+
+	#blog-page section span {
+	    font-size: 24px;
+	    line-height: 19px;
+	    top: 45%;
+	}
+
+	#blog-page .field--name-body .blog-header-title {
+	    top: 146px;
+	}
+
+	  
+	 
+
+	.more-blog .more-link {
+	    background: #fdf9fb;
+	    margin: 0px 23px 30px 23px;
+	    text-align: center;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-left: 9%;
+	    height: 32px;
+	    clear: both;
+	    padding: 10px;
+	}
+
+	.path-whitepapers #whitepaper-listing {
+	    background: #fff;
+	    text-align: center;
+	    padding: 10% 0px;
+	    margin: 0% 0px 4% 0px;
+	    height: auto;
+	}
+
+	.path-whitepapers .site-featured-first {
+	    margin-right: 0; 
+	}
+
+	.eventbckwhite {
+	    padding: 20px 0px;
+	    text-align: left;
+	}
+
+	.mbtm {
+	    padding: 30px 15px;
+	}
+
+	.eventbckwhite .social-media-sharing {
+	    left: 4px;
+	    margin-top: 6px;
+	}
+
+	#contact-us .inno-center {
+	    background: #e1e2e3;
+	    min-width: 100%;
+	    text-align: left;
+	    min-height: 275px;
+	    border-radius: 2px;
+	    margin-left: 0;
+	    padding: 3.8rem !important;
+	    margin-top: 20px;
+	    width: 100%;
+	    float: left;
+	}
+
+	.even_row .smart-office-content {
+	    padding-right: 0%;
+	    margin-top: 25px;
+	}
+
+	.smart-content {
+	    margin-top: -400px;
+	    width: 92%;
+	}
+
+	.smart-title {
+	    margin-top: 15%;
+	    color: #fff;
+	    font-size: 24px;
+	    margin-bottom: 15%;
+	}
+
+	.smart-features-bg {
+	    background: #e3f5fd;
+	    transform: skew(0deg, -8.4deg);
+	    position: absolute;
+	    height: 40px;
+	    padding: 221px 0px;
+	    width: 100%;
+	    z-index: 1;
+	}
+
+	.smart-features-header-title {
+	    text-align: center;
+	    font-size: 20px;
+	    text-transform: uppercase;
+	    letter-spacing: 2px;
+	    font-weight: 500;
+	    margin-bottom: 50px;
+	    z-index: 2;
+	    position: relative;
+	    top: 30px;
+	    color: #555;
+	}
+
+	#Smart-Solution .field--name-field-title {
+	    font-weight: 700;
+	    margin-bottom: 20px;
+	}
+
+	.smart_office_leader-img img {
+	    width: 100%;
+	    margin-bottom: 0;
+	    margin-top: 20px;
+	}
+
+	.page-node-type-solutions .digital-now-depatment { 
+		position: relative;
+	        top: 180px;
+	    margin-bottom: 200px;  
+	}
+
+/*
+	.page-node-type-solutions .digital-now-depatment {
+    position: relative;
+    top: 0;
+    margin-bottom: 200px;
+}
+
+
+#block-views-block-department-block-1 {
+    background: repeating-linear-gradient( -7deg, #FFFEFE, #ffffff 8px, #dcdcdc 9px, #efefef63 10px );
+    padding: 2% 0px 0% 0px;
+    position: relative;
+    top: 189px;
+}
+
+.page-node-type-industry #block-views-block-home-solutions-block-4, .page-node-type-department #block-views-block-home-solutions-block-4, .path-about-us #block-views-block-home-solutions-block-4, .page-node-type-solutions #block-views-block-home-solutions-block-4 {
+    background: white;
+    padding: 5px 0px;
+    text-align: center;
+    border: none;
+    margin: 10px;
+    margin-top: 221px;
+}*/
+
+
+.field--name-field-key-value {
+    font-size: 14px;
+    margin-top: -20px;
+}
+ 
+
+	.page-node-type-solutions ul li { list-style: none }
+
+	.page-node-type-solutions .smart-title {
+	    margin-top: 5%;
+	    color: #fff;
+	    font-size: 26px;
+	    margin-bottom: 5%;
+	}
+
+	#careers .careers_titles { 
+	    margin-top: 60px;
+	}
+
+	.path-about-us .smart_office_leader-pos {
+	    padding: 0 15px;
+	}
+
+	.about_Block-odd .smart_office_leader-title, .about_Block-even .smart_office_leader-title {
+	    padding: 0px 0px;
+	}
+
+	.path-about-us .smart_office_leader-pos {
+	    padding: 0 0px;
+	}
+
+	.about_Block-odd .smart_office_leader-title, .about_Block-even .smart_office_leader-title {
+	    padding: 0px 0px;
+	}
+
+	.page-node-type-department .Department-inner-content h2 {
+	    margin: 10% 0px 10% 0px!important;
+	    font-size: 25px !important;
+	    color: #fff;
+	    line-height: 42px;
+	    font-weight: 600;
+	    letter-spacing: .9px;
+	}
+
+	.Department-header-title {
+	    margin-bottom: 2%;
+	    margin-top: 18%;
+	}
+
+	.js-pager__items {
+	    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    margin: 15px 0 0px 0;
+	    padding: 0 0 20px 0;
+	}
+
+	.bloglist, #block-viewsexposedfilterblock, .caselist, #block-viewsexposedfilterblock-2 {
+	    padding: 0px 0px 0px 0;
+	    margin: 20px 0;
+	}
+
+	.home-digital-office .solution-content .left { 
+	    padding-top: 58%; 
+	}
+
+	.path-frontpage .resource-container {
+	    margin-bottom: 0%;
+	    background-color: #40505b;
+	}
+
+	.path-frontpage .region-featured-second #block-footercontactrepresentativeblock {
+	    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+	    margin: 0px -0px 0px 0px;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: 100% 160%;
+	}
+	#Case-Study .home-case-content {
+	    padding: 20% 4%;
+	    width: 100%;
+	    text-align: left;
+	}
+
+	.path-frontpage .home-digital-now {
+	    height: 211px;
+	    background-position: center right -50px !important;
+	}
+
+	#smart-office #Homepage-Solution {
+	    height: 450px;
+	    margin-bottom: 15px;
+	    margin-top: 60px;
+	}
+
+	.region-featured-second #block-footercontactrepresentativeblock {
+    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+    margin: 0px -0px 0px 0px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    background-position: top -162px right -151px;
+}
+
+	.path-case-studies .region-featured-second #block-footercontactrepresentativeblock {
+	    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+	    margin: 0px -0px 0px 0px;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: 100% 149%;
+	}
+
+
+	.path-case-studies .resource-container {
+	    margin-bottom: 0%;
+	    background-color: #40505b;
+	}
+
+	.path-whitepapers .region-featured-second #block-footercontactrepresentativeblock {
+	    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+	    margin: 0px -0px 0px 0px;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: 100% 149%;
+	}
+
+	.path-whitepapers .resource-container {
+	    margin-bottom: 0%;
+	    background-color: #40505b;
+	}
+
+	.more-casestudy .more-link {
+	    clear: both;
+	    position: relative;
+	    top: -44px;
+	    margin: 20px 30px;
+	    margin-left: 3%;
+	    height: 32px;
+	    top: -30px;
+	    left: auto;
+	    width: 84%;
+	    margin: 0px auto !important;
+	}
+
+	.more-casestudy .more-link a {
+    position: relative;
+    color: #40505b;
+    top: -4px;
+}
+
+	#Blog .featured-content .featured-title {
+	    margin-top: 160px;
+	}
+
+	.bloglist .bloglist-header, .caselist .view-header {
+	    margin: 20px;
+	}
+
+	#blog-page section span {
+	    font-size: 19px;
+	    line-height: 26px;
+	    top: 37%;
+	    padding: 0 3%;
+	}
+
+	.more-blog .more-link {
+	    background: #fdf9fb;
+	    margin: 0px 4px -10px 0px;
+	    text-align: center;
+	    font-weight: 600;
+	    font-size: 13px;
+	    margin-left: 9%;
+	    height: 32px;
+	    clear: both;
+	    padding: 10px;
+	    position: relative;
+	    top: -37px;
+	    left: -16px;
+	}
+
+	.path-press-releases .bef-exposed-form .form--inline .form-item {
+	    margin-bottom: 40px;
+	}
+
+	.page-node-type-press-release #Press_realeases_inner {
+	    padding-top: 100px;
+	}
+
+	.eventbckwhite .featured-share {
+	    position: relative;
+	    top: 0px;
+	    font-size: 14px;
+	    color: #666;
+	    float: left;
+	    left: 43% !important;
+	}
+
+	.path-events  .js-pager__items {
+	    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+	    margin: 0;
+	    padding: 0 0 20px 0;
+	}
+
+	#contact-us .call-us .call-no {
+	    font-size: 19pt;
+	    font-weight: 400!important;
+	    margin-bottom: 4rem;
+	    letter-spacing: 1px;
+	    color: black !important;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 {
+        margin: 0px 40px 0px 18px !important;
+            clear: both;
+    }
+
+    .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-57 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-59 .field--name-field-pre-counter {
+	    margin: 0 0 0 37%;
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	    padding: 0px 1px;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter {
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	}
+
+#block-views-block-solution-suite-block-1 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-2 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-3 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-4 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-5 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-6 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-7 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-8 .view-id-solution_suite .views-view-grid .views-col, #block-views-block-solution-suite-block-9 .view-id-solution_suite .views-view-grid .views-col {
+    float: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100% !important;
+}
+
+	.page-node-type-department #block-views-block-solution-suite-block-6 .horizontal .row-2 {
+	    margin-left: 0;
+	}
+
+
+	.page-node-type-industry .explore-solutions span.fa-angle-right:before, .page-node-type-department .explore-solutions span.fa-angle-right:before, .path-about-us .explore-solutions span.fa-angle-right:before, .page-node-type-solutions .explore-solutions span.fa-angle-right:before {
+	       color: #e80c7a;
+    margin-right: 0;
+    font-weight: 700;
+    font-size: 18px!important;
+    margin-left: 0;
+    margin-top: 0px;
+    position: relative;
+        left: -9%;
+	}
+
+	.page-node-type-industry span.fa-angle-right:before, .page-node-type-department span.fa-angle-right:before, .path-about-us span.fa-angle-right:before, .page-node-type-solutions span.fa-angle-right:before {
+		color: #e80c7a;
+	  	margin-right: 4px !important;
+	    font-weight: 700;
+	    font-size: 11px!important;
+	    margin-left: 0 !important;
+	    margin-top: -2px !important;
+	}
+
+
+	   
+
+	.page-node-type-industry #Case-Study .home-case-img {
+	    height: auto;
+	    padding-top: 20px;
+	}
+
+	.path-about-us .resource-container {
+   		 margin-bottom: 0%;
+	     background-color: #40505b;
+	}
+
+	.path-about-us .region-featured-second #block-footercontactrepresentativeblock {
+	    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+	    margin: 0px -0px 0px 0px;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: 100% 350px;
+	    background-position: right;
+	}
+
+	.path-about-us #about_us_exela .aboutUs-cont {
+	    top: 14%;
+	    margin: 0px auto;
+	    position: absolute;
+	    left: 0;
+	}
+
+	.path-about-us #about_us_exela .about_us_office_leader-title {
+	    font-size: 2rem;
+	    font-weight: 500;
+	    padding: 0 0px;
+	    line-height: initial;
+	    margin: 35px 0px;
+	    width: 100%;
+	}
+
+	.path-about-us .aboutusbg {
+	    height: 680px;
+	}
+
+	 .path-about-us svg.sevenDegLine { 
+	    display: none;
+	}
+
+	.path-careers .about_Block-odd .smart_office_leader-title, .about_Block-even .smart_office_leader-title {
+	    padding: 0px 15px;
+	}
+
+	
+	.view-careers .about_Block-even {
+	      padding: 0;  
+	}
+
+
+	.smart_office_leader-img {
+	    z-index: 9999;
+	    position: relative;
+	    padding: 0 15px;
+	}
+
+	.path-about-us .smart_office_leader-img {
+
+	    z-index: 9999;
+	    position: relative;
+	    padding: 0 0px;
+
+	}
+ 
+	.career-position-title {
+		text-align: center;
+	    position: relative;
+	    top: -19px;
+	    text-transform: uppercase;
+	    font-size: 18px;
+	    letter-spacing: 2px;
+	}
+
+	.view-careers .odd_row .smart-office-content {
+	    padding-left: 0;
+	    margin-top: 25px;
+	    padding-right: 0;
+	}
+
+	#careers_ {
+	    margin-right: 0;
+	    margin-left: 0;
+	}
+
+	#careers {
+	    margin-top: 40px;
+	    padding: 0;
+	}
+
+	.view-careers .about_Block-odd {
+	    padding: 2% 0px;
+	}
+
+	.view-careers .odd_row, .even_row {
+	    margin-bottom: 50px;
+	    text-align: left;
+	    padding: 0 0;
+	}
+
+	.path-careers .view-display-id-block_1 .smart_office_leader-pos p {
+		 padding: 0 15px;
+	}
+
+	.path-careers .smart_office_leader-pos p {
+	    padding: 0 0px;
+	}
+
+	.path-careers .smart_office_leader-title {
+	    padding: 0px 0px;
+	}
+
+	.path-careers .about_Block-odd .smart_office_leader-title, .about_Block-even .smart_office_leader-title {
+	    padding: 0px 0px;
+	}
+
+	 .view-careers .aboutusbg {
+	    z-index: auto;
+	        margin-top: 550px;
+	    right: -15px;
+	    width: 110%;
+	    overflow: hidden;
+	}
+
+	.view-careers .smart_office_leader-img {
+	    z-index: 9999;
+	    position: relative;
+	    padding: 0!important;
+	    margin: 0 -15px !important;
+	}
+
+	 
+
+	.view-careers .EEO_Statement {
+	    width: 100%;
+	    text-align: left;
+	    padding: 0 0px;
+	}
+
+	.path-careers .btn-blue {
+	    color: #fff;
+	    background: #2192f3;
+	    padding: 9px 15px!important;
+	    border-radius: 4px;
+	    font-size: 16.5px;
+	    border: none;
+	}
+
+
+.path-frontpage .home-digital-now {
+    height: 211px;
+    background-position: center right -28px !important;
+    height: 237px !important;
+}
+
+
+	.path-about-us #about_us_exela p.infographic {
+	    z-index: 9999;
+	    position: relative;
+	    top: -5px;
+	}
+
+	#smart-office #Homepage-Solution {
+	    height: 450px;
+	    margin-bottom: 15px;
+	    margin-top: 0px!important;
+	}
+
+	.path-frontpage .home-smart-office {
+	    background: url(../img/exela_home_smart_office.png) no-repeat center center;
+	    background-size: cover;
+	    position: relative;
+	    height: 289px !important;
+	        background-position: left;
+	}
+
+	#smart-office #Homepage-Solution {
+	    height: 450px;
+	    margin-bottom: 15px;
+	    margin-top: 0px!important;
+	    margin-bottom: 100px;
+	}
+
+	 
+	.path-about-us .smart-office-content {
+
+	    margin-top: 6%;
+	    padding: 0 30px;
+
+	}
+
+	.path-smart-office .smart_office-img img {
+	    height: 550px;
+	    margin-top: 96px;
+	}
+
+	.path-events .active {
+	    display: inline-block;
+	}
+
+	.page-node-type-industry #block-views-block-department-block-1 .views-view-grid .row-3 {
+	    text-align: center;
+	    display: block;
+	    justify-content: center;
+	    margin: 0px;
+	}
+
+	.path-smart-office .odd_row  { 
+	    padding-left: 0%;
+	    margin-top: 25px;  
+	    padding: 0;
+	}
+
+	.path-smart-office .smart_office_leader-img {
+
+	    z-index: 9999;
+	    position: relative;
+	    padding: 0 0px;
+
+	}
+
+	#Smart-Solution .img-bg { padding: auto; }
+
+	#Blog, #Case-Study { 
+	    position: relative;
+	    clear: both; 
+	}
+
+	#Smart-Solution #sol-overview  { padding: 0; }
+
+ 	.exela_innovations-office-content { 
+	    top: 9%; 
+	}
+
+	.path-press-releases .view-content h3 { 
+	    padding: 0px 4px;
+	}
+
+	.path-press-releases .views-field .field-content a {
+    font-weight: 500 !important;
+    text-transform: capitalize;
+    line-height: 1.75em;
+    font-size: 13px;
+    letter-spacing: normal;
+}
+
+	.smart-key-value p {
+	    margin-bottom: 0;
+	    border-bottom: 1px solid #455762;
+	    margin: 0 3%;
+	    line-height: 23px;
+	}
+
+	.overview-desc {
+	    padding: 20% 0% 7% 0%;
+	}
+
+	.Smart-Solution .embed-responsive-16by9 {
+	    padding-bottom: 56.25%;
+	    margin-bottom: 20px !important;
+	}
+
+	.path-about-us svg.headerAngle {
+	    position: absolute;
+	    width: 100%;
+	    height: 12.2vw;
+	    bottom: 6px;
+	    margin-left: -48%;
+	    bottom: 7px !important;
+	}
+
+	.path-innovation-centers svg.headerAngle {
+	    position: absolute;
+	    width: 100%;
+	    height: 25vw;
+	    bottom: 6px;
+	    margin-left: -48%;
+	    bottom: 7px !important;
+	}
+
+ 
+
+	.page-node-type-department .site-featured-first {
+	    margin-bottom: 0% !important;
+	    margin: 0 -15px;
+	}
+
+	 
+ 
+
+	 .path-innovation-centers .headerAngle {
+        margin-left: -48%;
+        bottom: 6px !important;
+    }
+
+    .more-blog .col-1, .more-blog .col-2, .more-casestudy .col-1, .more-casestudy .col-2 {
+	    width: 100% !important;
+	    background: #fff;
+	    margin-right: 2%;
+	    padding: 30px 15px;
+	    margin-bottom: 15px;
+	}
+
+	.more-blog .more-link {
+    background: #fdf9fb;
+    margin: 0px 4px -10px 0px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 9%;
+    height: 32px;
+    clear: both;
+    padding: 10px;
+    position: relative;
+    top: -37px;
+    left: 15px;
+    width: 91%;
+}
+
+.more-blog .more-link a {
+    color: #40505b;
+    position: relative;
+    top: -14px;
+}
+	 
+	 .path-innovation-centers .headerAngle {
+    margin-left: -48%;
+    bottom: 7px;
+    position: absolute;
+}
+
+.exela_innovations-office-content {
+    top: 9%;
+    padding: 0 15px;
+}
+
+.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-description {
+    font-weight: 500;
+    float: none;
+    display: inline-block;
+    width: 100%;
+}
+
+#about_us_exela .page-node-type-industry #block-views-block-home-solutions-block-4, .page-node-type-department #block-views-block-home-solutions-block-4, .path-about-us #block-views-block-home-solutions-block-4 {
+    margin: 60px 16px !important;
+}
+
+.path-about-us .smart_office_leader-img img {
+    box-shadow: 2px 2px 20px #ccc;
+    width: 100%;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.page-node-type-industry .fa, .page-node-type-department .fa, .path-about-us .fa, .page-node-type-solutions .fa {
+    display: block; 
+        display: inline-block;
+}
+
+.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter, .page-node-type-industry #Industry-inner .Industry-Credentials .field--type-string {
+    font-size: 25px;
+    font-weight: 500;
+    float: left;
+}
+
+	.exela-video  .btn-blue {
+	    color: #fff;
+	    background: #2192f3;
+	    padding: 9px 5px!important;
+	    border-radius: 4px;
+	    font-size: 16.5px;
+	    border: none;
+	}
+
+	#quicktabs-explore_by_industry ul.quicktabs-tabs li.active a {
+    background: transparent;
+    color: #50505b;
+    background-image: url(../img/arrow-right.png)!important;
+    background-repeat: no-repeat;
+    background-position: 99.5% center;
+}
+
+	.page-node-type-solutions svg.headerAngle {
+	    position: absolute;
+	    width: 108%;
+	    height: 12.2vw;
+	    bottom: 0;
+	}
+
+	#careers .careers_titles {
+	    margin-top: 60px;
+	    font-size: 14px;
+	}
+
+	#case-study-page .bs-region--main .block-region-main p {
+	    line-height: 17px;
+	    margin-top: 119px;
+	}
+
+	#case-study-page .bs-region--main .block-region-main {
+	    position: absolute;
+	    top: -555px;
+	    text-align: center;
+	    color: #fff;
+	    width: auto;
+	}
+
+	/* whitepaper all pages*/
+
+.site-featured-first .horizontal .field-content, .site-featured-first .view-whitepaper .field-content {
+    color: #80888f;
+    padding: 20px 0 10px 0;
+    font-weight: 500;
+}
+
+	.site-featured-first .view-blogs .horizontal img, .view-id-whitepaper .views-field-field-image .field-content img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.site-featured-first .horizontal .field-content, .site-featured-first .view-whitepaper .field-content {
+    color: #80888f;
+    padding: 20px 0 10px 0;
+    font-weight: 500;
+}
+
+ .path-frontpage #block-views-block-whitepaper-block-1 .views-field-title .field-content {
+        padding: 10px 0px;
+}
+
+.path-frontpage .site-featured-first .view-whitepaper .views-field-field-description {
+    line-height: 18px;
+    margin: 0;
+}
+
+#block-views-block-whitepaper-block-1 .views-field-field-description .field-content {
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.views-field-view-node {
+    margin-top: 10px;
+}
+
+.site-featured-first .horizontal .views-field span.field-content a, .path-frontpage .site-featured-first .view-whitepaper .views-field span.field-content, .site-featured-first .view-whitepaper .views-field span.field-content a {
+    padding: 0;
+}
+
+.site-featured-first, .page-node-type-blog .site-featured-first, .page-node-type-case-studies .site-featured-first {
+    background: repeating-linear-gradient( -10deg, #e9e9e9, #e9e9e9 6px, #e2e2e2 8px, #e2e2e2 9px );
+}
+
+#digitalnow .horizontal .views-field span.field-content a, #smart-office .horizontal .views-field span.field-content a, .view-whitepaper .views-field span.field-content, .view-whitepaper .views-field span.field-content a, #block-views-block-department-block-1 .horizontal .views-field span.field-content {
+    color: #50505b;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 10px 0;
+    clear: both;
+    display: initial;
+    margin: 0px 0px;
+}
+
+/* end whitepaper all pages*/
+
+ .industry-digital-now .views-field-title span.field-content {
+    color: #ffffff; 
+    margin-left: 0 !important;
+}
+
+.page-node-type-industry #explore_by_industry_solutions .field--name-field-overview-image img {
+    width: auto;
+}
+
+.page-node-type-solutions  .site-featured-first .view-blogs .horizontal,  .page-node-type-solutions .site-featured-first .view-whitepaper .view-content {
+	    min-height: 370px;
+	        margin: 0 !important;
+	    text-align: center;
+	    padding: 0!important;
+	    line-height: 25px;
+	    max-height: 0;
+	    height: auto;
+	    
+	}
+
+.page-node-type-industry  .site-featured-first .view-blogs .horizontal,  .page-node-type-industry  .site-featured-first .view-whitepaper .view-content {
+    background: #fff;
+    min-height: 431px;
+       margin: 9px 15px !important;
+    text-align: center;
+    padding: 2% 17% 10% 17% !important;
+    line-height: 25px;
+    max-height: 600px;
+    height: auto;
+}
+
+.page-node-type-industry .site-featured-first .more-link {
+    margin: 20px 15px 15px 15px !important;
+}
+
+.contact-message-contact-us-form .field--type-string, .contact-message-contact-us-form .field--type-telephone, .contact-message-contact-us-form .field--type-email, .contact-message-contact-us-form .field--widget-options-select {
+    padding: 0 0%;
+    margin: 10px 0;
+}
+
+#block-views-block-solution-suite-block-1, #block-views-block-solution-suite-block-2, #block-views-block-solution-suite-block-3, #block-views-block-solution-suite-block-4, #block-views-block-solution-suite-block-5, #block-views-block-solution-suite-block-6, #block-views-block-solution-suite-block-7, #block-views-block-solution-suite-block-8, #block-views-block-solution-suite-block-9 {
+    margin: 0 -18px;
+    border: 1px solid #75bef9;
+    padding: 0;
+    text-align: center;
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 40px;
+
+}
+
+#block-views-block-solution-suite-block-1 .views-view-grid > .row-2, #block-views-block-solution-suite-block-2 .views-view-grid > .row-2 {
+    margin-left: 0;
+}
+
+ .path-careers .europe, .path-careers .north-america   {     margin-top: 35px;     padding: 0; }
+	.path-careers .global-sites .child.inner-parent {
+	    margin-top: 5%;
+	}
+
+	/* nav */
+	.we-mega-menu-ul>.we-mega-menu-li>a {
+	    line-height: 50px;
+	    font-weight: 400;
+	    font-size: 18px;
+	}
+
+	.we-mega-menu-submenu li.we-mega-menu-li a, .we-mega-menu-submenu .we-mega-menu-submenu li a { 
+	    font-size: 16px; 
+	}
+
+	.solution-inner .views-field.views-field-field-description { 
+	    font-size: 16px;     
+	}
+
+	.type-of-block .solution-header .views-field .field-content a {
+	    font-size: 18px;
+	}
+ 
+	.country-menu .more li ul li ul li a {
+	    padding-left: 15px !important;
+	    font-size: 14px !important; 
+	        padding: 7px 0px !important;
+	            font-weight: 400 !important;
+	}
+
+	.country-menu li a {
+	    font-size: 16px !important;
+	        font-weight: 500 !important;
+	}
+
+	li.we-mega-menu-li.the-company.we-mega-menu-li a, li.we-mega-menu-li.resources.we-mega-menu-li a {
+	    font-weight: 600;
+	    font-size: 18px;
+	}
+
+	.solution-header .fa-angle-right:before {
+	    margin-right: 4%;
+	    float: left;
+	    top: 11px;
+	    position: relative;
+	}
+
+	/* end nav */
+
+	.country-menu {
+	    height: 300px;
+		overflow-y: scroll;
+	}
+
+	.explore-wrapper { 
+	    display: unset;
+	    background: transparent;
+	}
+
+	#block-views-block-solution-suite-block-8 .views-view-grid > .row-3, #block-views-block-solution-suite-block-3 .views-view-grid > .row-1, #block-views-block-solution-suite-block-4 .views-view-grid > .row-2, #block-views-block-solution-suite-block-5 .views-view-grid > .row-2, #block-views-block-solution-suite-block-6 .views-view-grid > .row-2, #block-views-block-solution-suite-block-7 .views-view-grid > .row-2 {
+	    margin-left: 10px;
+    	 
+	}
+	.page-node-type-department .Department-inner-content {
+	    position: absolute;
+	    top: 4%;
+	    text-align: center;
+	    padding: 0 23%;
+	    color: #fff;
+	    width: auto;
+	}
+
+	.path-past-events .pagination .active, .path-insights .pagination  .active, .path-press-releases  .pagination  .active, .active-trail, .open {
+	    display: unset !important;
+	}
+
+	.contact-form .field--type-string, .contact-form .field--type-telephone, .contact-form .field--type-email, .contact-form .field--widget-options-select, .contact-form .captcha {
+	    padding: 0 0;
+	    margin: 10px 0;
+	}
+
+	.ui-dialog {  
+	    width: 80% !important;  
+	}
+
+	.nav-search .fa {
+	    display: inline-block !important;
+	    position: relative;
+	    top: -4px;
+	}
+
+}
+
+
+
+
+/*iPhone XR*/
+/* 1792x828px at 326ppi */
+
+
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 2) { 
+
+
+    body { border:0px solid blue; }
+
+    .path-past-events  .active, .active-trail, .open {
+	    display: inline-block;
+	}
+
+	#Homepage-Solution .solution-title a {
+	    font-size: 3rem;
+	    color: #40505b;
+	}
+
+	.path-frontpage .home-digital-office .solution-content {
+	    margin: 20% 0;
+	}
+
+	#Case-Study .home-case-img {
+	    height: 480px;
+	}
+
+	.region-featured-second #block-footercontactrepresentativeblock {
+	    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+	    margin: 0px -0px 0px 0px;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: 100% 300px;
+	    background-position: top -110px right -170px;
+	}
+
+	.more-casestudy .more-link {
+	    clear: both;
+	    position: relative;
+	    top: -44px;
+	    margin: 20px 30px; 
+	}
+
+	.path-press-releases .pager { 
+	    margin-top: -80px;
+	}
+
+	.solution-header .fa-angle-right:before {
+	    margin-right: 4%;
+	    float: left;
+	    top: 4px;
+	    position: relative;
+	}
+
+  .eventbckwhite .featured-share {
+	    position: relative;
+	    top: 0px;
+	    font-size: 14px;
+	    color: #666;
+	    float: left;
+	    left: 40px !important;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 {
+        margin: 0px 40px 22px 18px !important;
+            clear: both;
+    }
+
+
+     .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-57 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-59 .field--name-field-pre-counter {
+	    margin: 0 0 0 37%;
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	    padding: 0px 1px;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter {
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	}
+
+	.path-about-us #about_us_exela .aboutUs-cont {
+	    top: 14%;
+	    margin: 0px auto;
+	    position: absolute;
+	    left: 0;
+	    right: 0px;
+	}
+
+	.path-about-us .aboutusbg {
+	    height: 660px !important;
+	}
+
+
+
+	.path-frontpage .home-digital-now {
+	    height: 211px;
+	    background-position: center right 21px !important;
+	}
+
+
+	.more-casestudy .more-link {
+	    clear: both;
+	    position: relative;
+	    top: -44px;
+	    margin: 20px 30px;
+	    margin-left: 3%;
+	    height: 32px;
+	    top: -30px;
+	    left: auto;
+	    width: 84%;
+	    margin: 0px auto !important;
+	}
+
+	.more-casestudy .more-link a {
+    position: relative;
+    color: #40505b;
+    top: -4px;
+}
+
+
+	.more-blog .more-link {
+    background: #fdf9fb;
+    margin: 0px 4px -10px 0px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 9%;
+    height: 32px;
+    clear: both;
+    padding: 10px;
+    position: relative;
+    top: -37px;
+    left: 15px;
+    width: 91%;
+}
+
+.more-blog .more-link a {
+    color: #40505b;
+    position: relative;
+    top: -14px;
+}
+	
+
+	 .path-innovation-centers .headerAngle {
+    margin-left: -48%;
+    bottom: 7px;
+    position: absolute;
+}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 {
+        margin: 0px 40px 22px 18px !important;
+            clear: both;
+    }
+
+
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-counter {
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	}
+
+	  .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-56 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-57 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-58 .field--name-field-pre-counter, .page-node-type-industry #Industry-inner .Industry-Credentials #paragraph-59 .field--name-field-pre-counter {
+	    margin: 0 0 0 40% !important;
+	    font-size: 25px;
+	    font-weight: 500;
+	    float: left;
+	    padding: 0px 1px;
+	}
+
+	.page-node-type-industry #Industry-inner .Industry-Credentials .field--name-field-description { 
+	    font-weight: 500;
+	    float: none;
+	}
+
+	.eventbckwhite .featured-share {
+	    position: relative;
+	    top: 0px;
+	    font-size: 14px;
+	    color: #666;
+	    float: left;
+	    left: 43% !important;
+	}
+
+	.path-events .view-events .pager li > a {
+	    width: 88%;
+	    border-radius: 0;
+	    color: #4e5d67;
+	    padding: 10px 0;
+	}
+
+	.page-node-type-industry .explore-solutions span.fa-angle-right:before, .page-node-type-department .explore-solutions span.fa-angle-right:before, .path-about-us .explore-solutions span.fa-angle-right:before, .page-node-type-solutions .explore-solutions span.fa-angle-right:before {
+	       color: #e80c7a;
+	    margin-right: 0;
+	    font-weight: 700;
+	    font-size: 18px!important;
+	    margin-left: 0;
+	    margin-top: 0px;
+	    position: relative;
+	    left:auto;
+
+	}
+
+	.page-node-type-industry span.fa-angle-right:before, .page-node-type-department span.fa-angle-right:before, .path-about-us span.fa-angle-right:before, .page-node-type-solutions span.fa-angle-right:before {
+		color: #e80c7a;
+	  	margin-right: 4px !important;
+	    font-weight: 700;
+	    font-size: 11px!important;
+	    margin-left: 0 !important;
+	    margin-top: -2px !important;
+	}
+
+#case-study-page .bs-region--main .block-region-main {
+	    position: absolute;
+	    top: -555px;
+	    text-align: center;
+	    color: #fff;
+	    width: auto;
+	}
+
+
+	#block-views-block-department-block-1 {
+    background: repeating-linear-gradient( -7deg, #FFFEFE, #ffffff 8px, #dcdcdc 9px, #efefef63 10px );
+    padding: 2% 0px 0% 0px;
+    clear: both;
+    margin-top: 195px;
+}
+
+.page-node-type-solutions .digital-now-depatment {
+    position: relative;
+    top: 10px;
+    margin-bottom: 100px;
+}
+
+ .industry-digital-now .views-field-title span.field-content {
+    color: #ffffff; 
+    margin-left: 0 !important;
+}
+
+.page-node-type-industry #explore_by_industry_solutions .field--name-field-overview-image img {
+    width: auto;
+}
+
+.page-node-type-blog .site-featured-first .view-blogs .horizontal, .site-featured-first .view-whitepaper .view-content {
+	    min-height: 330px;
+	    margin: 0;
+	    text-align: center;
+	    padding: 0!important;
+	    line-height: 25px;
+	    max-height: 0;
+	    height: auto;
+	    margin: 0 15px;
+	}
+
+		.region-featured-second #block-footercontactrepresentativeblock {
+    background-image: url(../img/prefooter-desktop_Ellipses.png)!important;
+    margin: 0px -0px 0px 0px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    background-position: top -152px right -151px;
+}
+
+
+
+
+
+}
+
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 4) 
+  and (orientation: portrait) {
+
+
+  	.path-about-us .aboutusbg {
+	    height: 680px;
+	}
+
+	 
+
+}
+
+
+/* Portrait */
+@media screen and (device-width: 411px) and (device-height: 823px){
+
+
+	 
+}
+ 
+
+
+/*iPhone XS*/
+/* 2436x1125px at 458ppi */
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3) {
+
+
+}
+
+
+/*iPhone XS Max*/
+/* 2688x1242px at 458ppi */
+@media only screen 
+    and (device-width : 414px) 
+    and (device-height : 896px) 
+    and (-webkit-device-pixel-ratio : 3) { 
+
+}

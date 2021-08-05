@@ -1,0 +1,5213 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+<entry key="updateRegistrationStatus">
+    <![CDATA[
+      	update users set status = 0 where email = ?
+    ]]>
+	</entry>
+	
+	<entry key="updateUsersCreditedDocumnts">
+    <![CDATA[
+      	 update sb_subscription set credited_documents = ? where user_id = ? and status = 1
+    ]]>
+
+	</entry>
+	
+	<entry key="updateMobileNumber">
+    <![CDATA[
+      	 update users set phone = ? where id = ?
+    ]]>
+	</entry>
+	
+	<entry key="updateUsersCreditedTemplats">
+    <![CDATA[
+      	 update sb_subscription set credited_template = ? where user_id = ? and status = 1
+    ]]>
+
+	</entry>
+	<entry key="updateUsersUsedDocumnts">
+    <![CDATA[
+      	 update sb_subscription set used_documents = ? where user_id = ? and status = 1
+    ]]>
+
+	</entry>
+	
+	<entry key="updateUsersUsedTemplats">
+    <![CDATA[
+      	 update sb_subscription set used_template = ? where user_id = ? and status = 1
+    ]]>
+
+	</entry>
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="deleteIncompleteRegistration">
+    <![CDATA[
+      	delete from users where id = ? 
+    ]]>
+
+	</entry>
+	
+	<entry key="updateRegistrationStatus">
+    <![CDATA[
+      	update users set status = 0 where email = ?
+    ]]>
+	</entry>
+	
+	<entry key="saveOrUpdateDocumentSelfSign">
+    <![CDATA[
+      	 UPDATE document
+			SET sign_type = ?,
+		    subject = ?,
+		    message = ?,
+		    complete_date = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+	
+	
+	<entry key="getListofDocument">
+    <![CDATA[
+      	select id from document
+		WHERE user_id = ?
+    ]]>
+	</entry>
+	
+
+<entry key="updateTokenId">
+    <![CDATA[
+      	 update users set cardtoken=?,subscription_status=1 where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="saveOrUpdateDocument">
+    <![CDATA[
+      	 UPDATE document
+		SET 
+			status=?,
+			doc_status=?,
+			upload_date=?,
+		    complete_date = ?,
+		    subject=?,
+		    message=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+	<entry key="saveOrUpdateDocument1">
+    <![CDATA[
+      	 UPDATE document
+		SET 
+			status=?,
+			doc_status=?,
+			complete_date = ?,
+		    subject=?,
+		    message=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="saveDocumentFieldsSelfSign">
+    <![CDATA[
+        INSERT INTO document_sign_field (signer_id, document_id, page_number, priority, position_left, position_top, height, width, field_value, field_name, field_type,created_date,fontSize)
+  		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="saveDocumentEmailDataSelfSign">
+    <![CDATA[
+	       INSERT INTO document_sign_email (signer_id, document_id, priority, status)
+	  VALUES (?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="documentsHistory">
+    <![CDATA[
+	    SELECT
+		  doc.id AS docId,
+		  doc.envelopeid AS envelopeId,
+		  doc.sign_type AS signType,
+		  doc.name AS documentName,
+		  doc.subject AS subject,
+		  doc.message AS message,
+		  cl.email AS signerEmail,
+		  isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		  CASE doc.status 
+		  WHEN '1' THEN CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11))
+		  ELSE CONVERT(VARCHAR(10), isnull(doc.upload_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.upload_date,''), 22), 11))
+		  END AS 'completedDate',
+		  CASE doc.status 
+		  WHEN '1' THEN 'Completed Documents'
+		  WHEN '0' THEN 'Out For Signature'
+		  ELSE 'Documents' 
+		END AS 'status'
+		FROM document AS doc
+		INNER JOIN users AS cl
+		ON cl.id = doc.user_id
+		ORDER BY completedDate DESC
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="documentsHistoryPriority">
+    <![CDATA[
+	    SELECT
+		  cl.email AS signerEmailId,
+		  signEmail.status AS signerStatus,
+		  cl.name AS signerName,
+		  signEmail.priority AS priority,
+		  signEmail.sent_email_count AS emailCount
+		FROM document AS doc
+		INNER JOIN document_sign_email AS signEmail
+		  ON signEmail.document_id = doc.id
+		INNER JOIN signer AS cl
+		  ON cl.id = signEmail.signer_id
+		WHERE doc.id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="newCompletedDocuments">
+		
+     <![CDATA[
+		SELECT doc.id AS docId,
+		doc.envelopeid AS envelopeId,
+		doc.sign_type AS signType,
+		doc.name AS documentName,
+		CASE 
+		WHEN doc.subject is null or doc.subject = '' 
+        THEN doc.name 
+		ELSE doc.subject 
+    	END AS subject,
+		isnull(doc.message,'') AS message,
+		cl.email AS signerEmail,
+		isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) AS completedDate,
+		'Completed Document' AS status,
+		s.email AS signerEmailId,
+		s.status AS signerStatus,
+		s.name AS signerName,
+		priority=(Select top 1 f.priority from document_sign_field(nolock) AS f Where s.id =f.signer_id Order by f.priority asc)
+		FROM document(nolock) AS doc
+		INNER JOIN users(nolock) AS cl
+		ON cl.id = doc.user_id
+		LEFT OUTER JOIN signer(nolock) AS s on doc.id=s.doc_id and s.status=1
+		WHERE doc.status = 1
+		AND doc.doc_status='103'
+		AND cl.id = ?
+		ORDER BY doc.complete_date DESC
+
+	]]>
+
+	</entry>
+	
+	
+	
+	
+	<entry key="completedDocuments">
+		<!-- <![CDATA[ SELECT doc.id AS docId, doc.envelopeid AS envelopeId, doc.sign_type 
+			AS signType, doc.name AS documentName, CASE WHEN doc.subject is null or doc.subject 
+			= '' THEN doc.name ELSE doc.subject END AS subject, isnull(doc.message,'') 
+			AS message, cl.email AS signerEmail, isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') 
+			AS requestedBy, CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + 
+			' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) 
+			AS completedDate, 'Completed Document' AS status FROM document AS doc INNER 
+			JOIN users AS cl ON cl.id = doc.user_id WHERE doc.status = 1 AND doc.doc_status='103' 
+			AND cl.id = ? ORDER BY doc.id DESC ]]> -->
+    
+     <![CDATA[
+	    SELECT doc.id AS docId,
+		  doc.envelopeid AS envelopeId,
+		  doc.sign_type AS signType,
+		  doc.name AS documentName,
+		   CASE 
+			 WHEN doc.subject is null or doc.subject = '' 
+             THEN doc.name 
+			ELSE doc.subject 
+          END AS subject,
+		  isnull(doc.message,'') AS message,
+		  cl.email AS signerEmail,
+		  isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		   CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) AS completedDate,
+		  'Completed Document' AS status
+		FROM document AS doc
+		INNER JOIN users AS cl
+		  ON cl.id = doc.user_id
+		WHERE doc.status = 1
+		AND doc.doc_status='103'
+		AND cl.id = ?
+		ORDER BY doc.complete_date DESC
+	]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="completedDocumentsPriority">
+    <![CDATA[
+      		 select 
+		DISTINCT s.email AS signerEmailId,
+		s.status AS signerStatus,
+		s.name AS signerName,
+		f.priority AS priority
+		from signer AS s
+		INNER JOIN document_sign_field AS f
+		ON s.id =f.signer_id
+		where f.document_id=? and s.status=1
+		order by f.priority asc
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java <entry key="outForSignature"> -->
+	
+	<entry key="outForSignature">
+    <![CDATA[
+    
+		SELECT  docId, 
+		envelopeId, 
+		documentName, 
+		signType, 
+		subject, 
+		message, 
+		requestedEmail, 
+		requestedBy,
+		FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+		status,
+		signerEmailId,
+		signerId,
+		signerStatus,
+		signerName,
+		priority,
+		ROW_NUMBER() OVER(ORDER BY Assigned_date desc , priority asc) AS RNO 
+		FROM 
+		(SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+			doc.id AS docId,
+  			doc.envelopeid AS envelopeId,
+  			doc.name AS documentName,
+  			doc.sign_type AS signType,
+  			doc.subject AS subject,
+  			doc.message AS message,
+  			cl.email AS requestedEmail,
+  			ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+   			CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+				 WHEN h.created_date>doc.upload_date THEN h.created_date
+				 WHEN h.created_date IS NULL THEN doc.upload_date
+				 WHEN doc.upload_date IS NULL THEN h.created_date 
+			END AS Assigned_date, 
+			'Out For Signature' AS status,
+			s.email AS signerEmailId,
+			s.id As signerId,
+			s.status AS signerStatus,
+			s.name AS signerName,
+			priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+		FROM document AS doc(NOLOCK)
+		INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id		
+		LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+		WHERE doc.status = 0 
+		AND doc.doc_status=102
+		AND doc.subject IS NOT NULL 
+		AND doc.message IS NOT NULL 
+		AND doc.digital IS NULL
+		AND cl.id = ?
+		) A WHERE rnk =1
+		ORDER BY RNO
+    ]]>
+
+<!-- <![CDATA[	
+		  SELECT docId,envelopeId, documentName,subject, 
+ROW_NUMBER() OVER(ORDER BY Assigned_date desc
+) AS RNO 
+FROM 
+(SELECT  RANK() OVER(PARTITION BY doc.Id
+ORDER BY h.created_date DESC) AS rnk,
+			doc.id AS docId,
+  			doc.envelopeid AS envelopeId,
+  			doc.name AS documentName,
+  			doc.subject AS subject,		
+   			CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+				 WHEN h.created_date>doc.upload_date THEN h.created_date
+				 WHEN h.created_date IS NULL THEN doc.upload_date
+				 WHEN doc.upload_date IS NULL THEN h.created_date 
+			END AS Assigned_date
+		FROM document AS doc(NOLOCK)
+		INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id		
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+		WHERE doc.status = 0 
+		AND doc.doc_status=102	--> 
+		<!-- AND doc.subject IS NOT NULL --> 
+		<!-- AND doc.message IS NOT NULL  -->
+	<!--	AND doc.digital IS NULL
+		AND cl.id = ?
+		)A WHERE rnk =1
+		ORDER BY RNO
+		
+    ]]> -->
+    
+	</entry>
+ <entry key="newSignedDoc">
+    <!-- <![CDATA[
+SELECT	
+subject,
+documentName, 
+docId,
+envelopeId, 
+signType,
+message, 
+requestedBy,
+status,
+FORMAT(Signed_date,'MM/dd/yyyy hh:mm:ss tt') AS Signed_date,
+FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+signerEmailId,
+signerId,
+signerStatus,
+signerName,
+priority,
+ROW_NUMBER() OVER(ORDER BY signed_date desc, priority asc) AS RNO 
+FROM (
+	SELECT  ROW_Number() OVER(PARTITION BY d.Id, s.id ORDER BY tpc.tpc_date DESC) AS rnk,
+	d.subject AS subject,
+	d.name AS documentName,
+	CASE 
+	WHEN h.created_date IS NULL THEN d.upload_date
+	WHEN d.upload_date IS NULL THEN h.created_date 
+	ELSE d.upload_date
+	END AS Assigned_date, 
+	d.id AS docId,
+	d.envelopeid AS envelopeId,
+	d.sign_type AS signType,
+	d.message AS message,
+	s.status AS status,
+	tpc.tpc_date AS signed_date,
+	ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy,
+	s.email AS signerEmailId,
+	s.id As signerId,
+	s.status AS signerStatus,
+	s.name AS signerName,
+	priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+	FROM signer s(NOLOCK)  
+	INNER JOIN  document d(NOLOCK) ON  s.doc_id=d.id
+	INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+	LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+	LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id 
+	Where EXISTS( Select 1 From signer s2(NOLOCK) Where  s2.doc_id=s.doc_id and s2.email=? and s2.status=1)
+	AND d.doc_status IN (102, 103)
+	AND d.file_type <> 'R'
+) A WHERE rnk =1
+ORDER BY RNO
+	]]> -->
+	
+	 <![CDATA[
+	 
+    declare @EmailId varchar(250)=?
+	declare @startRange INT=?
+	declare @endRange INT = ?
+
+    declare @subjectFilter varchar(255) =?
+	declare @docNameFilter varchar(255) =?
+	declare @assignedDateFilter Varchar(30)=?
+	declare @SignedDateFilter Varchar(30)=?
+	declare @requestedBy Varchar(100)=?
+	
+	declare @SearchText varchar(100)=?
+	declare @SortByColumn varchar(100)=?
+	declare @SortDir varchar(20)= ? --ASC/DESC
+;WITh CTE_SignedDocs
+	AS
+	(
+		Select  d.id as DocId, 
+				d.subject,
+				d.name,
+				ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy,
+				MAX(tpc.tpc_date) AS SignedDate 
+		FROM signer s(NOLOCK)  
+		INNER JOIN document d(NOLOCK) ON  s.doc_id=d.id
+		INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id 
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		Where s.email=@EmailId
+		AND s.status=1
+		AND d.doc_status IN (102, 103, 108)
+		AND d.file_type <> 'R'
+		AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+		AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+		AND (@SignedDateFilter='' or FORMAT(tpc.tpc_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SignedDateFilter+'%')
+		AND (@requestedBy='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@requestedBy+'%')
+		AND (@assignedDateFilter='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%')
+		AND (
+				(@SearchText='' or d.name like  '%'+@SearchText + '%')
+				or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+				or (@SearchText='' or FORMAT(tpc.tpc_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+				or (@SearchText='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@SearchText+'%')
+				or (@SearchText='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+						 WHEN d.upload_date IS NULL THEN h.created_date 
+						 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+		   )
+		Group By d.id,
+				 d.subject,
+				 d.name,
+				 ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')
+		--Order by SignedDate Desc
+		ORDER BY 
+			case When @SortByColumn='subject' AND @SortDir = 'ASC' Then d.subject End ASC,
+			case When @SortByColumn='subject' AND @SortDir = 'DESC' Then d.subject End DESC,
+			case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then d.name End ASC,
+			case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then d.Name End DESC,
+			case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then MAX(CASE WHEN h.created_date IS NULL THEN d.upload_date
+					 WHEN d.upload_date IS NULL THEN h.created_date 
+					 ELSE d.upload_date END) End ASC,
+			case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then MAX(CASE WHEN h.created_date IS NULL THEN d.upload_date
+					 WHEN d.upload_date IS NULL THEN h.created_date 
+					 ELSE d.upload_date END) End DESC,
+			case When @SortByColumn='signed_date' AND @SortDir = 'ASC' Then MAX(tpc.tpc_date) End ASC,
+			case When @SortByColumn='signed_date' AND @SortDir = 'DESC' Then MAX(tpc.tpc_date) End DESC,
+			case When @SortByColumn='requestedBy' AND @SortDir = 'ASC' Then (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) End ASC,
+			case When @SortByColumn='requestedBy' AND @SortDir = 'DESC' Then (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) End DESC,
+			case When @SortByColumn='' Then MAX(tpc.tpc_date) END DESC
+
+		OFFSET @startRange Rows  
+		Fetch NEXT @endRange ROWS ONLY 
+	)
+
+	SELECT     
+	subject,
+	documentName, 
+	docId,
+	envelopeId, 
+	signType,
+	message, 
+	requestedBy,
+	status,
+	FORMAT(Signed_date,'MM/dd/yyyy hh:mm:ss tt') AS Signed_date,
+	FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+	signerEmailId,
+	signerId,
+	signerStatus,
+	signerName,
+	priority,
+	ROW_NUMBER() OVER(ORDER BY signed_date desc, priority asc) AS RNO 
+	FROM (
+		 SELECT  ROW_Number() OVER(PARTITION BY d.Id, s.id ORDER BY tpc.tpc_date DESC) AS rnk,
+				 d.subject AS subject,
+				 d.name AS documentName,
+				 CASE 
+				 WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date
+				 END AS Assigned_date, 
+				 d.id AS docId,
+				 d.envelopeid AS envelopeId,
+				 d.sign_type AS signType,
+				 d.message AS message,
+				 s.status AS status,
+				 tpc.tpc_date AS signed_date,
+				 ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy,
+				 s.email AS signerEmailId,
+				 s.id As signerId,
+				 s.status AS signerStatus,
+				 s.name AS signerName,
+		 priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+		 FROM signer s(NOLOCK)  
+		 INNER JOIN  document d(NOLOCK) ON  s.doc_id=d.id
+		 INNER JOIN CTE_SignedDocs c ON c.DocId=d.id
+		 INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		 LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		 LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id --AND s.email=tpc.email 
+		 --Where 
+		 --EXISTS( Select 1 From signer s2(NOLOCK) Where  s2.doc_id=s.doc_id and s2.email=? and s2.status=1)
+		 --AND 
+		 --d.doc_status IN (102, 103)
+		 --AND d.file_type <> 'R'
+	) A WHERE rnk =1
+	--ORDER BY RNO
+	ORDER BY case When @SortByColumn='subject' AND @SortDir = 'ASC' Then [Subject] End ASC,
+		case When @SortByColumn='subject' AND @SortDir = 'DESC' Then [Subject] End DESC,
+		case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then [documentName] End ASC,
+		case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then [documentName] End DESC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then [Assigned_date] End ASC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then [Assigned_date] End DESC,
+		case When @SortByColumn='signed_date' AND @SortDir = 'ASC' Then [signed_date] End ASC,
+		case When @SortByColumn='signed_date' AND @SortDir = 'DESC' Then [signed_date] End DESC,
+		case When @SortByColumn='requestedBy' AND @SortDir = 'ASC' Then [requestedBy] End ASC,
+		case When @SortByColumn='requestedBy' AND @SortDir = 'DESC' Then [requestedBy] End DESC,
+		case When @SortByColumn='' Then [signed_date] END DESC
+]]>
+	</entry>
+	
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="getDocumentSelfSign">
+    <![CDATA[
+        SELECT
+		  *
+		FROM document
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getStatusUserJersey">
+    <![CDATA[
+        SELECT TOP 1
+		  status
+		FROM client
+		WHERE id = ?
+		AND email = ?
+		AND password = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getIdUserJersey">
+    <![CDATA[
+        SELECT
+		  id
+		FROM tb_client_user
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="addUserJersey">
+    <![CDATA[
+        INSERT INTO tb_client_user (client_id, email, password, token, status, date)
+  VALUES (?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getAllClientUser">
+    <![CDATA[
+        SELECT TOP 1
+		  status
+		FROM client
+		WHERE id = ?
+		AND email = ?
+		AND password = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getStatusDocumentWebservice">
+    <![CDATA[
+        SELECT TOP 1
+		  status
+		FROM client
+		WHERE id = ?
+		AND email = ?
+		AND password = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getIdDocumentWebservice">
+    <![CDATA[
+        SELECT
+		  id
+		FROM tb_client_user
+		WHERE id = ?
+		AND id = ?
+		AND client_id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="insertDocumentFieldsWebservice">
+    <![CDATA[
+        INSERT INTO documents_fields (document_id, form_field_type, pageno, x_position, y_position, height, width, form_field_name)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<entry key="addAccountHistory">
+    <![CDATA[
+        INSERT INTO deleteAccountHistory (firstName, lastName, email, creationDate, deleteDate, creditedDocumentCount, usedDocumentCount, userType, creditedDayCount, usedDayCount, user_Id, plan_name, subscriptionStartDate, subscriptionEndDate, user_delete_reason)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="insertDocumentSignWebservice">
+    <![CDATA[
+        INSERT INTO tb_signing_details (client_id, originator_id, signer_id, document_id, signing_order, token, status, created_on, updated_on)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="saveDocumentWebservice">
+    <![CDATA[
+        INSERT INTO tb_document_details (client_id, user_id, document_name, document_original_name, status, created_on, updated_on)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getClientUserWebservice">
+    <![CDATA[
+        SELECT TOP 1
+		  *
+		FROM tb_client_user
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getFieldDataWebservice">
+    <![CDATA[
+        SELECT
+		  f.id,
+		  f.form_field_name,
+		  f.form_field_type,
+		  f.pageno,
+		  f.y_position,
+		  f.x_position,
+		  f.height,
+		  f.width
+		FROM tb_document_details AS doc
+		INNER JOIN documents_fields AS f
+		  ON doc.id = f.document_id
+		WHERE document_name = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="saveDocumentFieldsWebservice">
+    <![CDATA[
+        UPDATE documents_fields
+		SET form_field_value = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="updateDocumentIdWebservice">
+    <![CDATA[
+        SELECT
+		  tsd.id
+		FROM tb_document_details tdd
+		JOIN tb_signing_details tsd
+		  ON tdd.id = tsd.document_id
+		WHERE tdd.document_name = ?
+		AND tsd.status = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="updateDocumentAllWebservice">
+    <![CDATA[
+        SELECT
+		  tsd.id,
+		  tdd.document_name,
+		  tcu1.email AS originator,
+		  tcu2.email AS signer,
+		  tsd.token
+		FROM tb_signing_details tsd
+		JOIN tb_client_user tcu1
+		  ON tcu1.id = tsd.originator_id
+		JOIN tb_client_user tcu2
+		  ON tcu2.id = tsd.signer_id
+		JOIN tb_document_details tdd
+		  ON tdd.id = tsd.document_id
+		WHERE tsd.id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="updateDocumentSignWebservice">
+    <![CDATA[
+        UPDATE tb_signing_details
+		SET status = 1
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="readValidFileFromOriginator">
+    <![CDATA[
+        SELECT
+		  tsd.id
+		FROM tb_signing_details tsd
+		JOIN tb_client_user tcu1
+		  ON tcu1.id = tsd.originator_id
+		JOIN tb_client_user tcu2
+		  ON tcu2.id = tsd.signer_id
+		JOIN tb_document_details tdd
+		  ON tdd.id = tsd.document_id
+		WHERE tdd.document_name = ?
+		AND tcu1.email = ?
+		AND tcu2.email = ?
+		AND tsd.token = ?
+		AND tsd.status = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getDcoumentWebservice">
+    <![CDATA[
+        SELECT
+		  original,
+		  digital
+		FROM document
+		WHERE envelopeid = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="createDocumentWebservice">
+    <![CDATA[
+        INSERT INTO document (user_id, envelopeid, name, original, status, file_type, subject, message, sign_type, upload_date)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getUserAllDetails">
+    <![CDATA[
+        SELECT
+		  id,
+		  firstname,
+		  lastname,
+		  photo,
+		  email,
+		  phone,
+		  country,
+		  state,
+		  pincode,
+		  password,
+		  company_name,
+		  job_title,
+		  client_id,
+		  client_secret,
+		  email_verification_token,
+		  user_type,
+		  status,
+		  role,
+		  is_company,
+		  created_on,
+		  updated_on,
+		  project_name,
+		  theme,
+		  drysignlink,
+		  deviceversion
+		FROM users
+		WHERE email = ? 
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="modifyDocumentIdWebservice">
+    <![CDATA[
+       SELECT TOP 1
+		  id
+		FROM signer
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="modifyDocumentInsertWebservice">
+    <![CDATA[
+	       INSERT INTO signer (name, email, user_type, status, created_on)
+	  VALUES (?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="modifyDocumentSignFieldWebservice">
+    <![CDATA[
+        INSERT INTO document_sign_field (signer_id, document_id, page_number, priority, position_left, position_top, height, width, field_value, field_name, field_type, created_date)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="modifyDocumentSignEmailWebservice">
+    <![CDATA[
+        INSERT INTO document_sign_email (signer_id, document_id, priority, sent_email_count, token, status, created_date)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="getDocumentIdWebservice">
+    <![CDATA[
+        SELECT
+		  id
+		FROM document
+		WHERE envelopeid = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="isValidEnvelopeId">
+    <![CDATA[
+        SELECT TOP 1
+		  d.id
+		FROM document d
+		JOIN users u
+		  ON u.id = d.user_id
+		WHERE u.email = ?
+		AND d.envelopeid = ?
+		AND d.status = 0
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="deleteisValidEnvelopeId">
+    <![CDATA[
+        delete dse
+		FROM document d
+		LEFT JOIN document_sign_email dse
+		  ON d.id = dse.document_id
+		LEFT JOIN document_sign_field dsf
+		  ON d.id = dsf.document_id
+		WHERE d.envelopeid = ?
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="addRegistrationUser">
+    <![CDATA[
+        INSERT INTO users (firstname, lastname,company_name,phone,email, password, email_verification_token, 
+        		user_type, status, role, created_on, emailalert, cardtoken,subscription_status,countryCode, clientDetailsId,googleRegFlag,mfaOtpMailFlag,mfaSecureCodeFlag)
+  		VALUES (?, ?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="addRegistrationOther">
+    <![CDATA[
+        INSERT INTO users (firstname, lastname, email, phone, country, state, company_name, client_secret, password, email_verification_token, user_type, status, role, created_on, project_name,emailalert,subscription_status,countryCode,mfaOtpMailFlag,mfaSecureCodeFlag)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="addRegistrationCount">
+    <![CDATA[
+        SELECT
+		  COUNT(*)
+		FROM users
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="getVerifyRegistration">
+    <![CDATA[
+        SELECT TOP 1
+		  id
+		FROM users
+		WHERE email = ?
+		AND email_verification_token = ?
+		AND status = 0
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="updateVerifyStatusRegistration">
+    <![CDATA[
+       UPDATE users
+		SET status = 1
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="updateVerifyRegistrationToken">
+    <![CDATA[
+        INSERT INTO token_details (user_id, token, status, valid_from, valid_to)
+  VALUES (?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="loginCall">
+    <![CDATA[
+        SELECT
+		  id,
+		  firstname,
+		  lastname,
+		  photo,
+		  email,
+		  phone,
+		  country,
+		  state,
+		  pincode,
+		  password,
+		  company_name,
+		  job_title,
+		  client_id,
+		  client_secret,
+		  email_verification_token,
+		  user_type,
+		  status,
+		  role,
+		  is_company,
+		  created_on,
+		  updated_on,
+		  project_name,
+		  theme,
+		  drysignlink,
+		  deviceversion,
+		  mobile,
+		  address,
+		  city,
+		  emailalert,
+		  subscription_status,
+		  free_trail_count,
+		  countryCode,
+		  clientDetailsId,
+		  planid,
+		  paymentCycle,
+		  googleRegFlag,
+		  mfaSecureCodeFlag,
+		  mfaOtpMailFlag
+		FROM users
+		WHERE email = ?
+    ]]>
+	</entry>
+	
+	<entry key="loginCallProfileDetails">
+	<![CDATA[
+        SELECT
+		  u.id,
+		  u.firstname,
+		  u.lastname,
+		  u.photo,
+		  u.email,
+		  u.phone,
+		  u.country,
+		  u.state,
+		  u.pincode,
+		  u.password,
+		  u.company_name,
+		  u.job_title,
+		  u.client_id,
+		  u.client_secret,
+		  u.email_verification_token,
+		  u.user_type,
+		  u.status,
+		  u.role,
+		  u.is_company,
+		  u.created_on,
+		  u.updated_on,
+		  u.project_name,
+		  u.theme,
+		  u.drysignlink,
+		  u.deviceversion,
+		  u.mobile,
+		  u.address,
+		  u.city,
+		  u.emailalert,
+		  u.subscription_status,
+		  u.free_trail_count,
+		  u.countryCode,
+		  u.clientdetailsId,
+		  s.plan_id,
+		  sp.name
+		FROM users as u
+		inner join sb_subscription as s ON u.id = s.user_id
+		inner join sb_plans as sp ON s.plan_id = sp.id
+		WHERE u.email = ? AND s.status = 1;
+    ]]>
+	</entry>
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="checkValidFile">
+    <![CDATA[
+        SELECT
+		  tdd.id
+		FROM tb_document_details tdd
+		JOIN tb_signing_details tsd
+		  ON tdd.id = tsd.document_id
+		WHERE tdd.document_name = ?
+		AND tsd.status = ? 
+    ]]>
+
+	</entry>
+<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="getUserDetailsForSaveDoc">
+    <![CDATA[
+        SELECT
+		  id,
+		  role,
+		  emailalert
+		FROM users
+		WHERE email = ? 
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="getUserAll_Details">
+    <![CDATA[
+        SELECT
+		  id,
+		  firstname,
+		  lastname,
+		  photo,
+		  email,
+		  phone,
+		  country,
+		  state,
+		  pincode,
+		  password,
+		  company_name,
+		  job_title,
+		  client_id,
+		  client_secret,
+		  email_verification_token,
+		  user_type,
+		  status,
+		  role,
+		  is_company,
+		  created_on,
+		  updated_on,
+		  project_name,
+		  theme,
+		  drysignlink,
+		  deviceversion,
+		  emailalert,
+		  user_delete_reason,
+		  clientDetailsId,paymentCycle,
+		  countryCode
+		FROM users
+		WHERE email = ? 
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="insertDocumentApp">
+    <![CDATA[
+        INSERT INTO document (user_id, envelopeid, name, original_doc_id, status, file_type, sign_type,upload_date,client_ip_address,doc_status)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+</entry>
+<entry key="insertUploadDocumentApp">
+    <![CDATA[
+        INSERT INTO document (user_id, envelopeid, name, original_doc_id, status, file_type, sign_type,upload_date,client_ip_address,doc_status,docPath)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
+    ]]>
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="insertTemplate">
+    <![CDATA[
+        INSERT INTO tbtrn_template (number_of_signer,doc_name, blob_id,upload_date, user_id, envlp_id, status,sign_type)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="templatenosigner">
+    <![CDATA[
+        select scount from document where id=?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getReadDocumentApp">
+    <![CDATA[
+        SELECT
+		  *
+		FROM document
+		WHERE id = ? and user_id=?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="documentSignInsert-SqlCreateGroupSign">
+    <![CDATA[
+       UPDATE document
+		SET subject = ?,
+		    message = ?,
+		    cc=?,
+		    doc_status=?,
+		    mailalert=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="userSelectSql-SqlCreateGroupSign">
+    <![CDATA[
+        SELECT TOP 1
+		  id
+		FROM signer
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="userInsertSql-SqlCreateGroupSign">
+    <![CDATA[
+        INSERT INTO signer (name, email, user_type, status, created_on)
+  VALUES (?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="documentSignFieldInsertSql-SqlCreateGroupSign">
+    <![CDATA[
+       INSERT INTO document_sign_field (signer_id, document_id, page_number, priority, position_left, position_top, height, width, field_value, field_name, field_type, created_date)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="documentSignEmailInsertSql-SqlCreateGroupSign">
+    <![CDATA[
+        INSERT INTO document_sign_email (signer_id, document_id, priority, sent_email_count, token, status, created_date)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getTokenOfDocumentSignEmail">
+    <![CDATA[
+        SELECT
+		  dse.token
+		FROM document_sign_email dse
+		JOIN signer c
+		  ON c.id = dse.signer_id
+		WHERE dse.document_id = ?
+		AND c.email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getApplicationApp">
+    <![CDATA[
+        SELECT
+		  dsf.*
+		FROM document_sign_field dsf
+		JOIN signer c
+		  ON dsf.signer_id = c.id
+		WHERE c.email = ?
+		AND dsf.document_id = ? order by page_number asc, Convert(float,position_top) asc
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="checkValidFileApp">
+    <![CDATA[
+       SELECT
+		  COUNT(dse.document_id)
+		FROM document_sign_email dse
+		JOIN signer c
+		  ON dse.signer_id = c.id
+		WHERE c.email = ?
+		AND dse.document_id = ?
+		AND dse.token = ?
+		AND dse.status = 0
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="checkValidSql-saveAppDocumentFields">
+    <![CDATA[
+        SELECT
+		  dse.priority
+		FROM document_sign_email dse
+		INNER JOIN signer c
+		  ON c.id = dse.signer_id
+		WHERE c.email = ?
+		AND dse.document_id = ?
+		AND dse.token = ?
+		AND dse.status = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateDocumentSignEmailSql-saveAppDocumentFields">
+    <![CDATA[
+        UPDATE document_sign_email
+		SET status = ?
+		WHERE token = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="OriginatorSql-saveAppDocumentFields">
+    <![CDATA[
+       SELECT
+		  c.email
+		FROM users c
+		INNER JOIN document d
+		  ON d.user_id = c.id
+		WHERE d.id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="nextSignerSql-saveAppDocumentFields">
+    <![CDATA[
+        SELECT
+		  c.email
+		FROM signer c
+		INNER JOIN document_sign_email dse
+		  ON dse.signer_id = c.id
+		  AND dse.document_id = ?
+		  AND dse.priority = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="documentSignSql-saveAppDocumentFields">
+    <![CDATA[
+        SELECT
+		  subject,
+		  message
+		FROM document
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="batchupdate-saveAppDocumentFields">
+    <![CDATA[
+        UPDATE document_sign_field
+		SET field_value = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="saveModifiedDocumentElectronicApp">
+    <![CDATA[
+        UPDATE document
+		SET electronic = ?,
+		    complete_date = GETDATE()
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="saveModifiedDocumentDigitalApp">
+    <![CDATA[
+        UPDATE document
+		SET status = 1,
+		    digital = ?,
+		    complete_date = GETDATE()
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getUserApp">
+    <![CDATA[
+       SELECT
+		  id,
+		  firstname,
+		  lastname,
+		  photo,
+		  email,
+		  phone,
+		  country,
+		  state,
+		  pincode,
+		  password,
+		  company_name,
+		  job_title,
+		  client_id,
+		  client_secret,
+		  email_verification_token,
+		  user_type,
+		  status,
+		  role,
+		  is_company,
+		  created_on,
+		  updated_on,
+		  project_name,
+		  theme,
+		  drysignlink,
+		  deviceversion
+		FROM users
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getSignerApp">
+    <![CDATA[
+       SELECT
+		  id,
+		  name,
+		  email,
+		  user_type,
+		  status,
+		  created_on,
+		  updated_on
+		FROM signer
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteDocumentApp">
+    <![CDATA[
+        DELETE FROM document
+WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteDocument">
+    <![CDATA[
+        update document set doc_status=?
+WHERE id = ?
+    ]]>
+
+	</entry>
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="changePasswordApp">
+    <![CDATA[
+        SELECT
+		  id
+		FROM users
+		WHERE email = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateChangePasswordApp">
+    <![CDATA[
+        UPDATE users
+		SET password = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="changePhotoApp">
+    <![CDATA[
+        UPDATE users
+		SET photo = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="forgotPasswordApp">
+    <![CDATA[
+        SELECT
+		  id
+		FROM users
+		WHERE email = ?
+    ]]>
+
+	</entry>
+	
+	<entry key="getUserIdEmailIdByToken">
+    <![CDATA[
+          select u.id , u.email from users u 
+  inner join user_forgot_password ufp on u.id = ufp.user_id
+  where ufp.token= ?;
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="addForgotPasswordApp">
+    <![CDATA[
+        INSERT INTO user_forgot_password (user_id, token, status, date)
+  VALUES (?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="resetPasswordUserApp">
+    <![CDATA[
+        UPDATE c
+		SET c.password = ?,
+		    c.status = 1   
+		FROM users c
+		JOIN user_forgot_password ufp
+		  ON c.id = ufp.user_id
+		WHERE ufp.user_id = ?
+		AND ufp.token = ?
+		AND ufp.status = 1
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="resetPasswordUserForgotApp">
+    <![CDATA[
+        UPDATE ufp
+		SET ufp.status = 1
+		FROM users c
+		JOIN user_forgot_password ufp
+		  ON c.id = ufp.user_id
+		WHERE ufp.user_id = ?
+		AND ufp.token = ?
+		AND ufp.status = 1
+    ]]>
+
+	</entry>
+<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="resetPasswordLink">
+    <![CDATA[
+        UPDATE ufp
+		SET ufp.status = 1
+		FROM users c
+		JOIN user_forgot_password ufp
+		  ON c.id = ufp.user_id
+		WHERE ufp.user_id = ?
+		AND ufp.token = ?
+		AND ufp.status = 0
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="documentCountApp">
+    <![CDATA[
+       select Distinct
+	  (SELECT COUNT(doc_status) FROM document d inner join users u on d.user_id = u.id where d.doc_status='103' and u.email=? ) completed ,
+	  (SELECT COUNT(doc_status) FROM document d inner join users u on d.user_id = u.id where d.doc_status='101' and sign_type <> 'T' and u.email=? ) draft,
+	  (SELECT COUNT(doc_status) from(SELECT ROW_NUMBER() over(partition by doc.Id order by h.created_date desc) as rnk, doc.status  as doc_status FROM document AS doc	INNER JOIN users AS cl	ON cl.id = doc.user_id	left join tbtrn_action_history h  on h.document_id = doc.id	WHERE doc.status = 0 AND doc.doc_status=102	AND doc.subject is not null AND doc.message is not null AND doc.digital IS NULL and cl.email=?) A where rnk=1 ) outForSignature,
+	  (SELECT COUNT(doc_status) FROM document  d inner join users u on d.user_id = u.id where d.doc_status='104' and u.email=? ) deleted,
+	  (select  count(countnum) from (select s.status as countnum, ROW_NUMBER() over(partition by d.Id order by h.created_date desc) as rnk from signer s  inner join  document d on  s.doc_id=d.id inner join users u on d.user_id=u.id left join tbtrn_action_history h  on h.document_id = d.id	where s.email=? and s.status=0 and  d.doc_status in('102') and d.file_type <> 'R') A where rnk=1 ) pending,
+	  (select  count(countnum) from (select s.status as countnum, ROW_NUMBER() over(partition by d.Id order by h.created_date desc) as rnk from signer s inner join  document d on  s.doc_id=d.id inner join users u on d.user_id=u.id left join tbtrn_action_history h  on h.document_id = d.id inner join tbmst_user_tpc_document tpc on tpc.doc_id=d.id where s.email=? and s.status=1 and d.doc_status in (102, 103) and d.file_type <> 'R') A  where rnk =1) signed, 
+	  (SELECT COUNT(doc_status) FROM document d inner join users u on d.user_id = u.id where d.doc_status in('101','102','103') and sign_type <> 'T' and u.email=?) totalDocument
+  	 from users u where u.email=?
+    ]]>
+
+	</entry>
+
+    
+
+     <entry key="documentCountApp1">
+    <![CDATA[
+		SELECT  'Completed' as Status, COUNT(1) as COUNT FROM document  d (NOLOCK) inner join users u (NOLOCK) on d.user_id = u.id where d.doc_status='103' and u.email=?
+		  UNION
+		SELECT 'Draft' as Status, COUNT(1) as COUNT FROM document d (NOLOCK) inner join users u (NOLOCK) on d.user_id = u.id where d.doc_status='101' and d.sign_type <> 'T' and u.email=?
+		  UNION
+		SELECT 'Out For Signature' as Status, COUNT(1) as COUNT FROM document AS doc (NOLOCK) INNER JOIN users AS cl (NOLOCK) ON cl.id = doc.user_id WHERE doc.status = 0 AND doc.doc_status=102 AND doc.subject is not null AND doc.message is not null AND doc.digital IS NULL and cl.email=?
+		  UNION
+	    SELECT 'Deleted' as Status, COUNT(1) as COUNT FROM document d (NOLOCK) inner join users u (NOLOCK) on d.user_id = u.id where d.doc_status='104' and u.email=?
+		  UNION
+		SELECT 'Pending' as Status, COUNT(Distinct Doc_Id) as COUNT From(SELECT d.id as Doc_Id, S.id AS Signer_Id,(	SELECT TOP 1 s2.id FROM signer s2(NOLOCK) INNER JOIN document_sign_field dsf2(NOLOCK) ON dsf2.document_id = s2.doc_id AND dsf2.signer_id=s2.id WHERE s2.doc_id=d.id AND s2.status=0 ORDER BY dsf2.priority ASC) AS Min_Signer_by_Priority,dsf.priority AS signer_priority FROM  signer s (NOLOCK) inner join  document d (NOLOCK) on  s.doc_id=d.id inner join users u (NOLOCK) on d.user_id=u.id INNER JOIN document_sign_field dsf(NOLOCK) ON dsf.document_id = d.id AND dsf.signer_id=s.id where s.email=? and s.status=0 and d.doc_status in('102') and d.file_type <> 'R') AS Pending Where signer_priority IN (0,1) OR Min_Signer_by_Priority = Signer_Id
+		  UNION
+		SELECT 'Signed' as Status, COUNT(distinct(d.id)) as COUNT FROM signer s (NOLOCK) inner join  document d (NOLOCK) on  s.doc_id=d.id inner join users u (NOLOCK) on d.user_id=u.id where s.email=? and s.status=1 and d.doc_status in (102, 103,108) and d.file_type <> 'R'
+		  UNION
+		SELECT 'ReceivedReject' as Status, COUNT(distinct s.doc_id) Count from signer s(Nolock) where status=2 and email=?
+		  UNION
+		select 'SentReject' as Status, COUNT (distinct d.id) Count from document d(nolock)inner join users u(nolock) on d.user_id=u.id where d.status=2 and d.doc_status=108 and u.email=?
+  ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateProfileApp">
+    <![CDATA[
+        UPDATE users
+		SET firstname = ?,
+		    lastname = ?,
+		    phone = ?,
+		    country = ?,
+		    state = ?,
+		    pincode = ?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getDocumentByEnvelopeId">
+    <![CDATA[
+      SELECT TOP 1
+		  id,
+		  name
+		FROM document
+		WHERE envelopeId = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteSignatureApp">
+    <![CDATA[
+      DELETE FROM signature
+	  WHERE id = ?
+    ]]>
+    </entry>
+
+	<entry key="deletebyUserId">
+    	<![CDATA[
+      	Delete FROM audit where userid=?;
+		Delete from document where user_id=?;
+		Delete  from users_limit where user_id=?;
+		Delete from document_sign_email  where signer_id=?;
+		Delete from document_sign_field where signer_id=?;
+		Delete from email_notification where user_id=?;
+		Delete from photo where user_id=?;
+		Delete from tbmst_user_tpc_document where user_id=?;
+		Delete from tbtrn_action_history where signer_id=?;
+		Delete from sb_subscription where user_id=?;
+		Delete from  signature where user_id=?;
+		Delete from user_forgot_password where user_id=?;
+	    ]]>
+	    </entry>
+
+		<entry key="deletebyUserEmailId">
+    	<![CDATA[
+     	 Delete from tbmst_signer_sign where email=?;
+		 Delete from temp_user where email=?;
+		 Delete from users where email=?;
+    	]]>
+		</entry>
+
+		<entry key="deletebyDocId">
+    	<![CDATA[
+      	Delete from draft where doc_id=?;
+		Delete from signer where doc_id=?;
+		Delete from tempSigner where doc_id=?;
+    	]]>
+
+	</entry>
+
+	<entry key="deletebySubscriptionId">
+    	<![CDATA[
+      	Delete from sb_purchase where subscription_id=?;
+    	]]>
+
+	</entry>
+	
+	
+	<entry key="getSubscriptionID">
+    	<![CDATA[
+      	select id from sb_subscription where user_id=?
+    	]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateInsertSignApp">
+    <![CDATA[
+ 		update signature set flag=? 
+ 		where id = ? 
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateInsertPhotoApp">
+    <![CDATA[
+ 		update photo set flag=? 
+ 		where id = ? 
+    ]]>
+
+	</entry>
+
+<entry key="removeUserProfilePhoto">
+    <![CDATA[
+ 		update photo set flag=0 where user_id=? and flag=1
+    ]]>
+	</entry>
+	
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getInsertSignApp">
+    <![CDATA[
+ 		select
+ 		 id 
+ 		from signature 
+ 		where user_id = ? 
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getInsertPhotoApp">
+    <![CDATA[
+ 		select
+ 		 id 
+ 		from photo 
+ 		where user_id = ? 
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="addInsertSignApp">
+    <![CDATA[
+        INSERT INTO signature (user_id, signature_data, created_date,flag,sign_type)
+  VALUES (?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="addInsertPhotoApp">
+    <![CDATA[
+        INSERT INTO photo (user_id, photo_data, created_date,flag)
+  VALUES (?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteProfilePicApp">
+    <![CDATA[
+        UPDATE users
+		SET photo = NULL
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="increaseReminderEmailCount">
+    <![CDATA[
+       	UPDATE dse
+		SET dse.sent_email_count = ?
+		FROM document_sign_email
+		dse
+		INNER JOIN signer s
+		  ON dse.signer_id = s.id
+		
+		WHERE dse.document_id = ?
+		AND s.email = ? 
+    ]]>
+
+	</entry>
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="checkValidResetPassword">
+    <![CDATA[
+ 		  select
+ 			 f.id 
+ 		  from user_forgot_password  f
+ 		  INNER JOIN users u on u.id=f.user_id
+ 		  where f.user_id = ? and 
+ 		  f.token = ? and
+ 		  u.email=? and
+ 		  f.status = 0
+ 		  
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="checkUserIsExist">
+    <![CDATA[
+ 		select email from users where email=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getPasswordApp">
+    <![CDATA[
+ 		select id,password,status from users where email=?
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getUnRegisteredUsers">
+    <![CDATA[
+ 		select name,email from signer where email not in(select email from users)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getUserList">
+    <![CDATA[
+ 		SELECT
+			isnull(u.firstname,'') 'firstName',
+			isnull(u.lastname,'') 'lastName',
+			isnull(u.email,'') 'email',
+			isnull(u.role,'') 'role',
+			u.status 'status',
+			convert(nvarchar(10), u.created_on, 103) + right(convert(nvarchar(30), u.created_on, 0), 8) AS createdOn
+		FROM Users as u
+		ORDER BY u.created_on desc
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="webserviceLogs">
+    <![CDATA[
+ 		SELECT 
+			isnull(u.firstname,'')+ ' '+isnull(u.lastname,'') 'name',
+			isnull(u.email,'') 'email',
+			CASE a.method_name
+		      WHEN 'createDocument' THEN 'Created Document'
+		      WHEN 'updatedocument' THEN 'Updated Document'
+		      WHEN 'downloadDocument' THEN 'Download Document'
+		      WHEN 'getDocumentHistory' THEN 'Document History'
+			END 'methodName',
+			isnull(a.ip_address,'') 'ip_address',
+			a.status 'status',
+			CONVERT(VARCHAR(10), isnull(a.created_on,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(a.created_on,''), 22), 11)) AS 'created_on',
+			a.web_request 'webRequest',
+			a.web_response 'webResponse'
+		FROM Audit As a
+		INNER JOIN users u on u.id=a.userid
+		ORDER BY a.created_on desc
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getSubscriptionPlans">
+    <![CDATA[
+ 		select plan_id,currency,amount,plan_name,no_of_days,no_of_documents,status,content from subscription_plan where status=1
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getSubscriptionPlan">
+    <![CDATA[
+ 		select plan_id,currency,amount,plan_name,no_of_days,no_of_documents,status,content from subscription_plan where status=1 and plan_id=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updateRegistration">
+    <![CDATA[
+ 		update users 
+		set 
+			firstname=?,
+			lastname=?,
+			mobile=?,
+			phone=?,
+			country=?,
+			state=?,
+			city=?,
+			address=?,
+			pincode=?,
+			countryCode=?
+		where 
+			id=? and 
+			email=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="updatePassword">
+    <![CDATA[
+ 		update users 
+		set 
+			password=?
+		where 
+			email=?
+			and id=? 
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="insertDraftApp">
+    <![CDATA[
+		insert into draft(doc_id,step,url) values(?,?,?)
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="saveOrUpdateDraft">
+    <![CDATA[
+		update draft set step=?,url=?,increment=? where id=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="saveOrUpdateDraft1">
+    <![CDATA[
+		update draft set step=?,url=? where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updateDraftStepEmudhra">
+    <![CDATA[
+		update draft set step=? where doc_id=?
+    ]]>
+
+	</entry>
+	
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteDocumentFields">
+    <![CDATA[
+		Delete from document_sign_field where document_id= ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="deleteDraft">
+    <![CDATA[
+        DELETE FROM draft
+WHERE doc_id = ?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="saveNotification">
+    <![CDATA[
+        INSERT INTO email_notification (doc_id, user_id, subject, messgae,from_email,to_email,cc,status, reason, created_on) values(?,?,?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+<entry key="getDraft">
+  <!--OLD QUERY
+     <![CDATA[
+       	
+	    SELECT
+		  doc.id AS docId,
+		  doc.envelopeid AS envelopeId,
+		  doc.sign_type AS signType,
+		  doc.name AS documentName,
+		   CONVERT(VARCHAR(10), isnull(doc.upload_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.upload_date,''), 22), 11)) AS completedDate,
+		  'Draft' AS status
+		FROM document AS doc
+		INNER JOIN users AS cl
+		  ON cl.id = doc.user_id
+		WHERE doc.status = 0
+		and doc.sign_type <> 'T'
+		and doc.doc_status='101'
+		AND cl.id = ?
+		AND doc.file_type='A'
+		ORDER BY doc.upload_date DESC
+    ]]> -->
+    
+    
+<![CDATA[
+
+declare @userid INT=?
+declare @startRange INT=?
+declare @endRange INT =?         
+declare @title varchar(255) =?
+declare @signTypeFilter varchar(255) =?
+declare @completedDateFilter varchar(30)=?             
+declare @SearchText varchar(100)=?
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)=?
+
+SELECT
+	doc.id AS docId,
+	doc.envelopeid AS envelopeId,
+	doc.name AS documentName,
+	doc.sign_type AS signType,
+	FORMAT(doc.upload_date,'MM/dd/yyyy hh:mm:ss tt') AS completedDate,
+	'Draft' AS status
+FROM document AS doc(NOLOCK)
+INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+WHERE doc.status = 0
+    and doc.sign_type <> 'T'
+    and doc.doc_status='101'
+	AND doc.file_type='A'
+    AND cl.id = @userid
+    AND (@title='' or doc.name  like  '%'+@title + '%')
+    AND (@signTypeFilter='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@signTypeFilter + '%')
+    AND (@completedDateFilter='' or FORMAT(doc.upload_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@completedDateFilter + '%')
+    AND ((@SearchText='' or doc.name like  '%'+@SearchText + '%')
+            OR (@SearchText='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@SearchText + '%')
+            OR (@SearchText='' or FORMAT(doc.upload_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@SearchText + '%')
+    )
+ORDER BY             
+        case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then doc.name End ASC,
+        case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then doc.name End DESC,
+        case When @SortByColumn='sign_Type' AND @SortDir = 'ASC' Then doc.sign_type End ASC,
+        case When @SortByColumn='sign_Type' AND @SortDir = 'DESC' Then doc.sign_type End DESC,
+        case When @SortByColumn='completed_date' AND @SortDir = 'ASC' Then doc.upload_date End ASC,
+        case When @SortByColumn='completed_date' AND @SortDir = 'DESC' Then doc.upload_date End DESC,
+        case When @SortByColumn='' Then doc.upload_date END DESC
+OFFSET @startRange Rows  
+Fetch NEXT @endRange ROWS ONLY
+    
+    
+]]>
+
+</entry>
+
+<entry key="getDraftCount">
+
+<![CDATA[
+
+declare @userid INT=?       
+declare @title varchar(255) =?
+declare @signTypeFilter varchar(255) =?
+declare @completedDateFilter varchar(30)=?    
+declare @SearchText varchar(100)=? 
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)=?
+
+SELECT
+count (distinct doc.id)
+FROM document AS doc(NOLOCK)
+INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+WHERE doc.status = 0
+    and doc.sign_type <> 'T'
+    and doc.doc_status='101'
+	AND doc.file_type='A'
+    AND cl.id = @userid
+    AND (@title='' or doc.name  like  '%'+@title + '%')
+    AND (@signTypeFilter='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@signTypeFilter + '%')
+    AND (@completedDateFilter='' or FORMAT(doc.upload_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@completedDateFilter + '%')
+    AND ((@SearchText='' or doc.name like  '%'+@SearchText + '%')
+            OR (@SearchText='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@SearchText + '%')
+            OR (@SearchText='' or FORMAT(doc.upload_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@SearchText + '%')
+    )
+    
+]]>
+
+</entry>
+	
+	<entry key="getPending">
+    <![CDATA[
+		SELECT  signer_id,
+		doc_id,
+		signer_priority,  
+		subject,
+		documentName, 
+		requestedBy, 
+		sign_Url, 
+		FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+		ROW_NUMBER () OVER(ORDER BY Assigned_date) AS RNO		
+		FROM (SELECT  ROW_NUMBER() OVER(PARTITION BY d.Id ORDER BY h.created_date DESC) AS rnk,
+				d.subject AS subject,
+				d.name AS documentName, 
+				d.Id AS doc_id, 
+				dsf.priority AS signer_priority,
+				s.id AS signer_id, 
+				CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+					 WHEN h.created_date>d.upload_date THEN h.created_date
+					 WHEN h.created_date is NULL THEN d.upload_date
+					 WHEN d.upload_date is NULL THEN h.created_date 
+				END AS Assigned_date,
+				ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy, 
+				s.sign_url AS sign_Url,
+				(	SELECT TOP 1 s2.id FROM signer s2(NOLOCK) 
+					INNER JOIN document_sign_field dsf2(NOLOCK) ON dsf2.document_id = s2.doc_id AND dsf2.signer_id=s2.id
+					WHERE s2.doc_id=d.id AND s2.status=0
+					ORDER BY dsf2.priority ASC 
+				) AS Min_Signer_by_Priority
+		FROM signer s(NOLOCK)  
+		INNER JOIN document d(NOLOCK) ON s.doc_id=d.id 
+		INNER JOIN users u(NOLOCK) ON d.user_id=u.id 
+		INNER JOIN document_sign_field dsf(NOLOCK) ON dsf.document_id = d.id AND dsf.signer_id=s.id
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = d.id AND h.signer_id=s.id 
+		WHERE s.email=?
+		AND s.status=0  AND d.doc_status IN (102)
+		AND d.file_type <> 'R' 
+	) A WHERE rnk=1 and (signer_priority IN (0,1) OR Min_Signer_by_Priority = signer_id)
+	ORDER BY RNO DESC
+
+    ]]>
+
+	</entry>
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getDocumentDraft">
+    <![CDATA[
+       	
+	    SELECT
+		 *
+		FROM draft where doc_id=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with JerseyDaoImpl.java -->
+	<entry key="savesettings">
+    <![CDATA[
+        UPDATE users
+		SET project_name = ?,theme = ?
+		
+    ]]>
+
+	</entry>
+
+	<entry key="getSignature">
+    <![CDATA[
+       	
+	   select signature_data As signature_data,
+	   sign_type As sign_type
+	    from signature where user_id=? and flag=?
+    ]]>
+
+	</entry>
+
+	<entry key="getPic">
+    <![CDATA[
+       	
+	  select photo_data from photo(nolock) where user_id=? and flag=?
+    ]]>
+
+	</entry>
+
+	<!-- start subscription plans queries -->
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getSubscriptionPlans">
+    <![CDATA[
+ 		
+ 		select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.planicon planicon, p.price price, cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		, p.template from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.status = 1 and c.status = 1 and p.status = 1 and cur.status = 1 and dur.status = 1
+		and u.email = ? and u.password = ? and c.category_id = ? and c.name = ?
+ 		
+    ]]>
+
+	</entry>
+
+
+
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="getCategories">
+    <![CDATA[
+ 		select c.* from sb_category c INNER JOIN sb_users u ON u.id = c.user_id where u.email=? and u.password=? and c.status = 1
+    ]]>
+
+	</entry>
+
+	<entry key="validSubscribingModel">
+    <![CDATA[
+ 		select id from sb_users where email=? and password = ?
+    ]]>
+
+	</entry>
+
+	<entry key="getSubscriptionPlan">
+    <![CDATA[
+ 		
+select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.template template,p.planicon planicon, p.price price, cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.status = 1 and c.status = 1 and p.status = 1 and cur.status = 1 and dur.status = 1
+		and u.email = ? and u.password = ? and p.token=?
+
+    ]]>
+
+	</entry>
+	
+	<entry key="getSubscriptionPlanforIndiaUser">
+    <![CDATA[
+ 		
+select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.template template,p.planicon planicon, p.price price, cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.status = 1 and c.status = 1 and p.status = 3 and cur.status = 1 and dur.status = 1
+		and u.email = ? and u.password = ? and p.token=?
+
+    ]]>
+
+	</entry>
+
+	<entry key="getTrialPlan">
+    <![CDATA[
+ 		
+select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.planicon planicon, p.price price, p.template template,cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.email = ? and u.password = ? and p.name=?
+
+    ]]>
+
+	</entry>
+	<entry key="createSubscription">
+    <![CDATA[
+	insert into sb_subscription(user_id,plan_id,credited_documents,used_documents,status,subscription_start_date,subscription_end_date,updated_date,credited_template,used_template) values(?,?,?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+	<entry key="updateSubscriptionStatus">
+    <![CDATA[
+update sb_subscription set status =? where id=?
+
+ ]]>
+
+	</entry>
+
+	<entry key="createPurchase">
+    <![CDATA[
+	insert into sb_purchase(subscription_id,plan_name,category_name,plan_price,currency,noofdays,noofdocs,noofusers,
+	features,duration_name,duration_time,duration_unit,transaction_id,payment_method,payment_method_response,status,date,client_referid,template)
+	values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+	<!-- <entry key="checkValidSubscription"> <![CDATA[ select TOP 1 * from 
+		sb_subscription where user_id=? and status = 1 ORDER BY subscription_start_date 
+		DESC ]]> </entry> -->
+	<entry key="checkValidSubscription">
+    <![CDATA[
+    
+		DECLARE @id INT = ?
+    
+		select TOP 1 * from sb_subscription 
+		where status = 1 
+		 AND user_id = @id  
+		ORDER BY updated_date DESC
+    ]]>
+
+	</entry>
+
+	<entry key="activePurchase">
+    <![CDATA[
+		
+  
+DECLARE @id INT = ?
+
+SELECT TOP 1
+		  s.id id,
+		  s.user_id user_id,
+		  s.plan_id plan_id,
+		  s.credited_documents credited_documents,
+		  s.used_documents used_documents,
+		  s.status status,
+		  s.credited_template credited_template,
+		  s.used_template used_template,
+		  s.subscription_start_date subscription_start_date,
+		  s.subscription_end_date subscription_end_date,
+		  p.plan_name plan_name,
+		  p.plan_price plan_price,
+		  p.transaction_id transaction_id,
+		  p.refund_status refund_status,
+		  p.noofdays,
+		  p.currency currency,
+		  p.category_name category_name,
+		  p.duration_name duration_name,
+		  p.duration_unit duration_unit,
+		  pl.features features,
+		  pl.noofusers noofusers
+		FROM sb_subscription(nolock) s
+		JOIN sb_purchase(nolock) p
+		  ON s.id = p.subscription_id
+		   JOIN sb_plans pl
+		  ON pl.id = s.plan_id
+		WHERE s.status = 1
+		AND (s.user_id = @id) 
+		ORDER BY s.updated_date DESC
+    ]]>
+
+	</entry>
+
+<entry key="clienttActiveSubscription">
+    <![CDATA[
+	DECLARE @id INT = ?
+		SELECT TOP 1
+		  s.id id,
+		  s.user_id user_id,
+		  u.firstname firstname,
+		  u.lastname lastname,
+		  u.email email,
+		  u.phone phone,
+		  u.company_name company_name,
+		  s.credited_documents credited_documents,
+		  s.used_documents used_documents,
+		  s.status status,
+		  s.credited_template credited_template,
+		  s.used_template used_template
+		FROM sb_subscription(nolock) s
+		JOIN sb_purchase(nolock) p
+		  ON s.id = p.subscription_id
+		   JOIN sb_plans pl
+		  ON pl.id = s.plan_id
+		  JOIN users u
+		  ON u.id = s.user_id
+		WHERE s.status = 1
+		AND (s.user_id = @id) 
+		ORDER BY s.updated_date DESC
+    ]]>
+
+	</entry>
+	
+	<!-- end subscription plans queries -->
+	<entry key="saveTempSigner">
+    <![CDATA[
+		insert into tempSigner(doc_id,draft_id,priority,name,email,flag,docKeyFlag, docKey,mailflag) values(?,?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+	<entry key="getTempSigner">
+    <![CDATA[
+		SELECT DISTINCT  doc_id AS docId,
+		 draft_id AS draftId,
+		 priority AS priority,
+		 name As signerName,
+		 email As signerEmail,
+		 flag As flag,
+		 docKeyFlag as docKeyFlag,
+		 docKey as docKey,
+		 mailflag as mailFlag
+  FROM tempSigner where doc_id=?
+    ]]>
+
+	</entry>
+
+
+	<entry key="deleteTempSigner">
+    <![CDATA[
+		Delete from tempSigner where doc_id=?
+    ]]>
+
+	</entry>
+
+
+	<entry key="updatePurchase">
+    <![CDATA[
+		update sb_purchase set transaction_id = ?, payment_method=?,payment_method_response=? ,status = ? where subscription_id = ?
+    ]]>
+
+	</entry>
+
+	<entry key="getDocumentId">
+	    <![CDATA[
+		select id from document where  envelopeid=? and user_id=? and (doc_status=101 or doc_status=102)
+	    ]]>
+    </entry>
+    
+	<entry key="updateCardToken">
+	    <![CDATA[
+			update users set cardtoken = ? where id = ?
+		]]>
+	</entry>
+	
+	<entry key="getSubsriptionID">
+	    <![CDATA[
+			select id from sb_subscription where user_id = ? AND status = 1
+		]]>
+	</entry>
+
+	<entry key="incrementDocumentUsedCount">
+    <![CDATA[
+		DECLARE @id INT = ?
+		UPDATE sb_subscription
+		SET used_documents = used_documents+1
+		WHERE status = 1
+		AND user_id=@id
+    ]]>
+
+	</entry>
+
+	<entry key="incrementTemplateUsedCount">
+    <![CDATA[
+		DECLARE @id INT = ?
+		
+		UPDATE sb_subscription
+		SET used_template = used_template+1
+		 WHERE status = 1
+		AND user_id = @id 
+    ]]>
+
+	</entry>
+
+	<entry key="decrementDocumentUsedCount">
+    <![CDATA[
+    DECLARE @id INT = ?
+	
+	UPDATE sb_subscription
+	SET used_documents = used_documents-1
+	WHERE user_id=@id AND status = 1
+    ]]>
+
+	</entry>
+
+	<entry key="decrementTemplateUsedCountSQL">
+    <![CDATA[
+    DECLARE @id INT = ?
+	
+		UPDATE sb_subscription
+		SET used_template = used_template-1
+		WHERE user_id=@id AND status = 1
+    ]]>
+
+	</entry>
+
+	<entry key="sendEmailToSubscribers">
+    <![CDATA[
+		
+		WITH CTE AS
+           (
+SELECT S.ID, S.USER_ID, PLAN_ID, P.NAME as PLANNAME, CREDITED_DOCUMENTS, USED_DOCUMENTS, S.STATUS, SUBSCRIPTION_START_DATE, SUBSCRIPTION_END_DATE,--(CAST (USED_DOCUMENTS AS NUMERIC(6,2)) /CAST (CREDITED_DOCUMENTS AS NUMERIC(6,2))) *100 AS DOCPERC , 
+case when CREDITED_DOCUMENTS=0 then 0.00 else ((USED_DOCUMENTS*1.00)/(CREDITED_DOCUMENTS*1.00))*100 end as DOCPERC
+,U.FIRSTNAME,U.LASTNAME,U.EMAIL,DATEDIFF(DD,CAST(CONVERT(VARCHAR(10),[SUBSCRIPTION_END_DATE],101) AS DATETIME) , CAST(CONVERT(VARCHAR(10),GETDATE()+ ?,101) AS DATETIME)) SUBSCRIPTION_END_DAYS
+FROM [DBO].[SB_SUBSCRIPTION]S 
+INNER JOIN (SELECT USER_ID,MAX([SUBSCRIPTION_END_DATE]) SUBDATE  FROM [DBO].[SB_SUBSCRIPTION]  where user_id NOT IN (272,1287)
+GROUP BY USER_ID)  MD ON MD.USER_ID=S.USER_ID AND MD.SUBDATE=S.SUBSCRIPTION_END_DATE
+INNER JOIN [dbo].[users] U ON (S.USER_ID=U.ID)
+INNER JOIN SB_PLANS P ON P.ID = PLAN_ID where s.user_id NOT IN (272,1287)
+)
+SELECT PLANNAME , ID, USER_ID, PLAN_ID, CREDITED_DOCUMENTS, USED_DOCUMENTS, STATUS, SUBSCRIPTION_START_DATE, SUBSCRIPTION_END_DATE,FIRSTNAME,LASTNAME,EMAIL,
+DOCPERC ,SUBSCRIPTION_END_DAYS
+FROM CTE 
+WHERE (DOCPERC > 90.00
+OR (SUBSCRIPTION_END_DAYS>=1 AND SUBSCRIPTION_END_DAYS <=?)) AND STATUS=1	
+		
+    ]]>
+
+	</entry>
+
+	<!-- end subscription plans queries -->
+	<entry key="saveGroupSigner">
+    <![CDATA[
+		insert into signer(name,email,user_type,status,user_id,sign_url,created_on,doc_id,authorised_signer) values(?,?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+
+	<entry key="getSignerToken">
+    <![CDATA[
+		select sign_url from signer where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="checkValidSigneKey">
+    <![CDATA[
+		select 
+			DISTINCT s.id 'signerId',
+			d.id 'docId',
+			s.status 'status',
+			d.sign_type 'signType',
+			d.user_id 'requestedBy',
+			s.email 'signerEmail',
+			f.priority 'priority',
+			isnull(u.firstname,'')+' '+isnull(u.lastname,'') 'requestName',
+			isnull(u.email,'') 'requestEmail',
+			u.project_name 'projectName',
+			s.name 'signerName',
+			d.doc_status 'docStatus'
+			from signer s 
+			INNER JOIN document_sign_field f on s.id=f.signer_id
+			INNER JOIN document d on f.document_id=d.id
+			INNER JOIN users u on u.id=d.user_id
+		where s.sign_url=?
+    ]]>
+</entry>
+<entry key="fetchDocSignDetails">
+    <![CDATA[
+		select 
+			DISTINCT s.id 'signerId',
+			d.id 'docId',
+			s.status 'status',
+			d.sign_type 'signType',
+			d.user_id 'requestedBy',
+			s.email 'signerEmail',
+			f.priority 'priority',
+			d.name,
+			d.subject,
+			u.emailalert,
+			d.envelopeid 'envelopeid',
+			d.doc_url 'doc_url',	
+			d.name 'docname',		
+			isnull(u.firstname,'')+' '+isnull(u.lastname,'') 'requestName',
+			isnull(u.email,'') 'requestEmail',
+			u.project_name 'projectName',
+			s.name 'signerName',
+			d.doc_status 'docStatus',
+			s.authorised_signer 'authSignEmudhra',
+			s.user_id 'userId',
+			u.countryCode 'signerCountryCode'
+			from signer s(nolock) 
+			INNER JOIN document_sign_field f(nolock)on s.id=f.signer_id
+			INNER JOIN document d (nolock) on f.document_id=d.id
+			INNER JOIN users u (nolock) on u.id=d.user_id			
+		where s.sign_url=?
+    ]]>
+	</entry>
+
+	<entry key="getAllSignerStatus">
+    <![CDATA[
+	select 
+		DISTINCT s.email 'signerEmail', 
+		s.status 'signerStatus'
+	from  signer s
+	INNER JOIN document_sign_field f(nolock)
+	ON s.id=f.signer_id
+	where document_id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updateSignerStatus">
+    <![CDATA[
+		update signer set signer_doc_id=?,status=? where id=?
+    ]]>
+    
+    </entry>
+    
+    <entry key="updateSignerAuthStatus">
+    <![CDATA[
+		update signer set authorised_signer=? where doc_id=? and id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updateSignerFields">
+    <![CDATA[
+		update document_sign_field set field_value=? where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="nextSignerData">
+    <![CDATA[
+		select 
+		DISTINCT s.email 'signerEmail', 
+		s.name 'signerName',
+		s.status 'signStatus',
+		s.sign_url 'signerUrl'
+	from  signer s
+	INNER JOIN document_sign_field f
+	ON s.id=f.signer_id
+	where f.document_id=? and f.priority=? and s.status=0
+    ]]>
+
+	</entry>
+
+	<entry key="checkValidPrepareKey">
+    <![CDATA[
+		select d.doc_status 'docStatus',d.id 'docId',d.user_id 'userId',d.prepare_return_url 'prepareReturnURL' from document As d where prepare_doc_url=?
+    ]]>
+
+	</entry>
+
+	<entry key="getSignerList">
+    <![CDATA[
+			select 
+			Distinct s.id As 'signerId',
+			f.priority As 'priority',
+			s.name As 'signerName',
+			s.email As 'signerEmail',
+			s.status As 'signerStatus',
+			s.sign_url As 'signUrl',
+			s.authorised_signer As 'authorisedSigner'
+		from signer s INNER JOIN document_sign_field f
+		ON s.id=f.signer_id
+		where s.doc_id =? order by f.priority asc
+ 
+    ]]>
+
+	</entry>
+
+	<entry key="getSignerList1">
+    <![CDATA[
+		select 
+		id As 'signerId',
+		name As 'signerName',
+		email As 'signerEmail'
+		from signer
+		 where doc_id =?
+ 
+    ]]>
+
+	</entry>
+
+	<entry key="getDocumentByEnvelopeId">
+    <![CDATA[
+		select id, 
+		user_id,
+		sign_type,
+		envelopeid,
+		name,
+		original_doc_id,
+		electronic_doc_id,
+		digital_doc_id,
+		original,
+		electronic,
+		digital,
+		doc_status,
+		subject,
+		message,
+		cc,
+		doc_url,docPath
+		from document where envelopeId = ?
+ 
+    ]]>
+
+	</entry>
+	<entry key="getUserSignatureByToken">
+    <![CDATA[
+		select 
+		id As 'id',
+		firstname As 'firstName',
+		lastname As 'lastName',
+		email As 'email',
+		signature As 'signature',
+		status As 'status',
+		sign_type As 'signType'
+		from tbmst_signer_sign
+		where token =?
+ 
+    ]]>
+
+	</entry>
+	<entry key="getUserSignatureByEmail">
+    <![CDATA[
+		select 
+		id As 'id',
+		firstname As 'firstName',
+		lastname As 'lastName',
+		email As 'email',
+		signature As 'signature',
+		status As 'status',
+		sign_type As 'signType'
+		from tbmst_signer_sign(nolock)
+		where email =?
+ 
+    ]]>
+
+	</entry>
+	<entry key="updateUserSignature">
+    <![CDATA[
+		update tbmst_signer_sign set signature=?,status=?,sign_type=?,updated_date=? where email=?
+    ]]>
+
+	</entry>
+	<entry key="saveUserSignature">
+    <![CDATA[
+		insert into tbmst_signer_sign(firstname,lastname,email,signature,token,status,created_date,sign_type) values(?,?,?,?,?,?,?,?)
+    ]]>
+
+	</entry>
+	<entry key="updateSignerEmail">
+    <![CDATA[
+         
+		update signer set name=?,sign_url=?, email=? where id=?
+    ]]>
+
+	</entry>
+	
+	<entry key="updateSignerName">
+    <![CDATA[
+      update document_sign_field set field_value=? where field_name='name' and signer_id=?;
+    ]]>
+
+	</entry>
+
+	<entry key="removeSigner">
+    <![CDATA[
+		delete from signer where id=? and doc_id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updateSignerPriority">
+    <![CDATA[
+		update document_sign_field set priority=? where signer_id=? and document_id=?
+    ]]>
+
+	</entry>
+
+	<entry key="getAssociatedUsers">
+    <![CDATA[
+	DECLARE @id INT = ?
+	
+	SELECT TOP 1 s.id AS subscription_id, 
+       u.id AS user_id, 
+       u.email 
+		FROM   sb_subscription s 
+       	INNER JOIN users u ON s.user_id=u.id 
+       	INNER JOIN sb_purchase p ON s.id=p.subscription_id WHERE s.status=1 AND s.user_id=@id
+       	ORDER BY s.updated_date DESC
+    ]]>
+
+	</entry>
+
+	<entry key="actionOnAssociateUser">
+    <![CDATA[
+    	DECLARE @updateid INT =?
+		DECLARE @id INT = (SELECT id  FROM   users   WHERE  email = ?) 
+		
+		IF @id<>0 
+		  UPDATE sb_subscription 
+		  SET    user_id = user_id,  updated_date= GETDATE()
+		  WHERE  user_id  AND id = @updateid 
+    ]]>
+
+	</entry>
+
+	<entry key="deleteAssociatedUsers">
+    <![CDATA[
+    	DECLARE @sub_user_id INT = ?
+		update sb_subscription set user_id = @id where id=?
+    ]]>
+
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="saveActionHistory">
+    <![CDATA[
+	       INSERT INTO tbtrn_action_history ( document_id,signer_id, type, details,created_date)
+	  VALUES (?, ?, ?, ?, ?)
+    ]]>
+
+	</entry>
+
+	<entry key="getActionHistory">
+    <![CDATA[
+	select
+	h.id as 'actionId',
+	h.document_id as 'docId',
+	h.signer_id as 'signerId',
+	h.type as 'type',
+	h.details as 'details',
+	h.created_date as 'createdOn'
+	from tbtrn_action_history h
+	where h.document_id=? and h.signer_id=?
+ 
+    ]]>
+
+	</entry>
+
+	<entry key="listFeatures">
+    <![CDATA[
+	select id,name,message,created_date from tbmst_sb_features
+ 
+    ]]>
+
+	</entry>
+
+
+	<entry key="gettemplatelist">
+    <![CDATA[
+  select doc.id As docId, 
+  doc.name As documentName,
+  CONVERT(VARCHAR(10), isnull(doc.upload_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.upload_date,''), 22), 11)) AS uploadDate 
+  from document As doc
+  where doc.user_id =? And doc.sign_type='T' And doc_status='105' And status=1
+  
+      ]]>
+
+	</entry>
+
+
+	<entry key="updatetempstatus">
+    <![CDATA[
+      	 UPDATE document
+		SET 
+		    status=?,
+			doc_status=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<entry key="deleteTemplateFields">
+    <![CDATA[
+      	 UPDATE document
+		SET 
+		    status=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<entry key="getSignerIdforTemplate">
+    <![CDATA[
+      	select id from signer where doc_id=?
+    ]]>
+
+	</entry>
+
+	<entry key="getSignerIdforTemplateField">
+    <![CDATA[
+      	select id from document_sign_field where document_id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updatesignId">
+    <![CDATA[
+      	update document_sign_field set signer_id=? where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updatesignname">
+    <![CDATA[
+      	update signer set name=?,email=?, sign_url=?,authorised_signer=? where id=?
+    ]]>
+
+	</entry>
+
+	<entry key="updatesignercount">
+    <![CDATA[
+      	UPDATE document
+		SET 
+		    scount=?
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<entry key="getemailalert">
+    <![CDATA[
+        SELECT
+		  mailalert
+		FROM document
+		WHERE id = ?
+    ]]>
+
+	</entry>
+
+	<entry key="getsignerdocuments">
+    <![CDATA[
+       SELECT  d.id as id,d.envelopeid as envelopeId, d.user_id as uid, d.name as docname,
+   CONVERT(VARCHAR(10), isnull(d.upload_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(d.upload_date,''), 22), 11)) as uploaddate,
+      CONVERT(VARCHAR(10), d.complete_date, 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), d.complete_date, 22), 11)) as completeddate,
+   d.doc_status as status, d.subject as subject,
+    isnull(u.firstname,'')+ ' '+isnull(u.lastname,'') as requestedBy
+  from document as d INNER JOIN signer as  s on d.id=s.doc_id 
+  INNER JOIN users u on u.id = d.user_id  where  s.email=? and (d.doc_status=102 or d.doc_status= 103) 
+    ]]>
+
+	</entry>
+
+	<entry key="insertlimitdata">
+    <![CDATA[
+        INSERT INTO users_limit (User_Id,limit,limit_value,updateTime)
+  VALUES (?,?,?,?)
+    ]]>
+
+	</entry>
+
+	<entry key="updateSubscription">
+    <![CDATA[
+		update sb_subscription set credited_documents = ? where user_id = ?
+    ]]>
+
+	</entry>
+
+
+<!-- 
+************************************************
+This query will break the system if there are thousands of users in the system at a time.
+************************************************
+-->
+
+	<entry key="adminSelectQuery">
+    <![CDATA[
+
+	SELECT 
+    sb.user_id, u.id,sb.plan_id, u.firstname,u.lastname,u.created_on,u.role,u.email,sb.credited_documents,used_documents,p.name from users u 
+    LEFT JOIN sb_subscription sb ON (u.id=sb.user_id) 
+   	LEFT JOIN sb_plans p ON sb.plan_id=p.id WHERE sb.status=1 ; 
+
+    ]]>
+
+	</entry>
+
+	<entry key="adminSelectQueryXXX">
+    <![CDATA[
+
+	select id,firstname,lastname,password,email from users;
+
+    ]]>
+
+	</entry>
+
+	<entry key="getUsers">
+    <![CDATA[
+	SELECT 
+	sb.id, u.id,sb.plan_id, u.firstname,u.lastname,u.created_on,u.role,u.email,sb.credited_documents,used_documents,p.name from users u 
+    LEFT JOIN sb_subscription as sb ON u.id = sb.user_id
+    LEFT JOIN sb_plans p ON sb.plan_id=p.id  WHERE u.role=? ANd sb.status=1 
+	;
+    ]]>
+
+	</entry>
+
+	<entry key="getRegistrationYear">
+    <![CDATA[
+     select distinct year(created_on) from users;
+    ]]>
+
+	</entry>
+	<entry key="updatemailalert">
+    <![CDATA[
+ update document set mailalert = ? where id =?
+    ]]>
+
+	</entry>
+
+	<entry key="saveUserAgreementDoc">
+    <![CDATA[
+     insert into tbmst_user_tpc_document(doc_id, user_id, tpc_date, email, accept, actionn) values(?,?,?,?,?,?);
+    ]]>
+	</entry>
+
+	<entry key="signerdetails">
+    <![CDATA[
+     select id from users where email=?;
+    ]]>
+	</entry>
+
+	<!-- Entry key mapped with DocumentDaoImpl.java -->
+	<entry key="newCompletedDocumentsFirstSecondValue">
+    <![CDATA[
+		SELECT	
+		doc.id AS docId,
+		doc.envelopeid AS envelopeId,
+		doc.sign_type AS signType,
+		doc.name AS documentName,
+		CASE 
+		WHEN doc.subject is null or doc.subject = '' 
+        THEN doc.name 
+		ELSE doc.subject 
+    	END AS subject,
+		isnull(doc.message,'') AS message,
+		cl.email AS signerEmail,
+		isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) AS completedDate,
+		'Completed Document' AS status,
+		s.email AS signerEmailId,
+		s.status AS signerStatus,
+		s.name AS signerName,
+		priority=(Select top 1 f.priority from document_sign_field AS f(nolock) Where s.id =f.signer_id Order by f.priority asc)
+		FROM document AS doc(nolock)
+		INNER JOIN users AS cl(nolock)
+		ON cl.id = doc.user_id
+		LEFT OUTER JOIN signer AS s(nolock) ON s.doc_id=doc.id and s.status=1
+		WHERE doc.status = 1
+		AND doc.doc_status='103'
+		AND cl.id = ?
+		ORDER BY doc.id DESC
+	    
+	]]>
+	</entry>
+	<!-- <entry key="completedDocumentsFirstSecondValue">
+    <![CDATA[
+	    SELECT 
+		  doc.id AS docId,
+		  doc.envelopeid AS envelopeId,
+		  doc.sign_type AS signType,
+		  doc.name AS documentName,
+		   CASE 
+			 WHEN doc.subject is null or doc.subject = '' 
+             THEN doc.name 
+			ELSE doc.subject 
+          END AS subject,
+		  isnull(doc.message,'') AS message,
+		  cl.email AS signerEmail,
+		  isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		   CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) AS completedDate,
+		  'Completed Document' AS status
+		FROM document AS doc
+		INNER JOIN users AS cl
+		  ON cl.id = doc.user_id
+		WHERE doc.status = 1
+		AND doc.doc_status='103'
+		AND cl.id = ?
+		ORDER BY doc.id DESC
+	]]>
+
+	</entry> -->
+
+	<entry key="newBunchOfRecords">
+    <![CDATA[
+	    SELECT TOP 20
+		  doc.id AS docId,
+		  doc.envelopeid AS envelopeId,
+		  doc.sign_type AS signType,
+		  doc.name AS documentName,
+		   CASE 
+			 WHEN doc.subject is null or doc.subject = '' 
+             THEN doc.name 
+			ELSE doc.subject 
+          END AS subject,
+		  isnull(doc.message,'') AS message,
+		  cl.email AS signerEmail,
+		  isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy,
+		   CONVERT(VARCHAR(10), isnull(doc.complete_date,''), 101) + ' ' + LTRIM(RIGHT(CONVERT(CHAR(20), isnull(doc.complete_date,''), 22), 11)) AS completedDate,
+		  'Completed Document' AS status
+		FROM document AS doc
+		INNER JOIN users AS cl
+		  ON cl.id = doc.user_id
+		WHERE doc.status = 1
+		AND doc.id < ?
+		AND doc.doc_status='103'
+		AND cl.id = ?
+		ORDER BY doc.id DESC
+	]]>
+
+	</entry>
+
+	<entry key="searchEmailsByText">
+    <![CDATA[
+select distinct to_email from dbo.email_notification where from_email=? and status='success' 
+and to_email like ?;
+ 
+    ]]>
+
+	</entry>
+
+	<entry key="isDocUploaded">
+    <![CDATA[
+select COUNT(status)
+		FROM document where user_id=?
+     ]]>
+
+	</entry>
+
+<entry key="refundSubsUpdated">
+    <![CDATA[
+update sb_purchase set
+	refund_transactionId =?,
+	refund_error_desc = ?,
+	refund_status = ?,
+	refund_date= ?,
+	refund_amount = ?
+	where subscription_id = ?
+     ]]>
+
+	</entry>
+
+
+	
+	
+<entry key="getRefundStatus">
+    <![CDATA[
+  select s.*,u.* from sb_purchase s inner join sb_subscription sbsubscr on
+s.subscription_id =sbsubscr.id  inner join users u on 
+sbsubscr.user_id = u.id where s.refund_transactionId <>'NULL' and s.refund_status = 'SUBMITTED'
+    ]]>
+	</entry>
+	
+	
+	<entry key="setRefundStatus">
+    <![CDATA[
+update sb_purchase set refund_status=?, refund_error_desc=? where refund_transactionId=?
+
+    ]]>
+	</entry>
+	
+	<entry key="updateSubsAfterRefund">
+    <![CDATA[
+     update sb_subscription set used_documents = ?, used_template=?, subscription_end_date=GETDATE() where id = ?
+    ]]>
+	</entry>
+	
+	<entry key="getPlanTokenById">
+    <![CDATA[
+  select token from sb_plans where id =?
+    ]]>
+	</entry>
+	
+	<!--  Below query select the active users whoes active subscripton is going to end today. 
+Currently below query will run in same schedular 3 times so we also not select users
+whoes subscription is already processed in same date.
+
+  -->
+<entry key="subscriptionEndUsersList">
+    <![CDATA[
+
+select u.planid,s.PLAN_PRICE,s.noofdays as NO_OF_DAYS, u.id as USER_ID, u.firstname, u.lastname, u.email as EMAIL, u.cardtoken,sbsubscr.PLAN_ID, sbsubscr.subscription_end_date as 'SUB_END_DATE' from sb_purchase s inner join sb_subscription sbsubscr on
+s.subscription_id =sbsubscr.id  inner join users u on 
+sbsubscr.user_id = u.id where u.status!=0 AND u.subscription_status!=0 AND
+( NOT (CAST(auto_renewal_date   as DATE)=cast (GETDATE() as DATE))  OR auto_renewal_date IS NULL)
+AND u.cardtoken!='' AND u.planid!='' AND u.paymentCycle>1 AND sbsubscr.status=1 and CAST(sbsubscr.subscription_end_date as DATE)=cast (GETDATE() as DATE) AND u.auto_renewal_exec_status IS NULL;
+
+    ]]>
+</entry>
+
+
+<entry key="inactivateUserSubscrition">
+    <![CDATA[
+update sb_subscription set status=0 , updated_date=GETDATE() where user_id=? AND status=1
+
+    ]]>
+</entry>
+	
+	<entry key="updateUserPaymentCycle">
+    <![CDATA[
+	update users set paymentCycle=?,notification_flag='Y' where id=?
+  ]]>
+</entry>
+
+<entry key="updateUserAutoRenewalStatus">
+    <![CDATA[
+update users set auto_renewal_exec_status=?, auto_renewal_date=GETDATE() where id=?
+
+    ]]>
+</entry>
+
+<entry key="updateUserAutoRenewalFailedStatus">
+    <![CDATA[
+update users set auto_renewal_exec_status=?, auto_renewal_date=GETDATE(), subscription_status=0 where id=?
+
+    ]]>
+</entry>
+
+<entry key="cancelSubscription">
+    <![CDATA[
+update users set subscription_status=0 where id=?
+    ]]>
+</entry>
+
+		<entry key="updateSubsAfterCancelSubs">
+    <![CDATA[
+     update sb_subscription set used_documents = ?, used_template=?,subscription_end_date=GETDATE() where id = ?
+    ]]>
+	</entry>
+	
+	
+	<entry key="getSubscriptionStatus">
+    <![CDATA[
+     select subscription_status from users(nolock)  where id = ?
+    ]]>
+	</entry>
+	
+	
+	
+	<entry key="tempRegisterUser">
+    <![CDATA[
+insert into temp_user(firstname,lastname,company_name,phone,email,password,email_verification_token,role,user_type,status,created_on,updated_on,planToken,countryCode,mfaOtpMailFlag,mfaSecureCodeFlag)
+values(?,?,?,?,?,?,?,?,?,?,GETDATE(),GETDATE(),?,?,?,?)
+    ]]>
+
+	</entry>
+	
+		<entry key="getTempUserDetailsById">
+    <![CDATA[
+select * FROM temp_user
+		WHERE id = ? 
+    ]]>
+    </entry>
+    
+    		<entry key="getTempUserDetailsByEmail">
+    <![CDATA[
+select * FROM temp_user
+		WHERE email = ? 
+    ]]>
+    </entry>
+    
+    <entry key="tempDeleteUser">
+    <![CDATA[
+delete from temp_user where email =?
+    ]]>
+     
+	</entry>
+	
+	
+<entry key="isPreviousPending">
+    <![CDATA[
+	select COUNT(Distinct s.id )
+		from signer s INNER JOIN document_sign_field f
+		ON s.id=f.signer_id
+		where s.doc_id =? and f.priority=? and s.status=0
+    ]]>
+     
+</entry>
+
+<entry key="limitDataId">
+    <![CDATA[
+	select id from users where email = ?
+    ]]>
+     
+</entry>
+
+<entry key="limitCreditedDoc">
+    <![CDATA[
+	select credited_documents from sb_subscription where user_id =?
+    ]]>
+     
+</entry>
+
+<entry key="userLimit">
+    <![CDATA[
+	SELECT top 1  * FROM users_limit where USER_ID = ? order by ID_Autonumber desc
+    ]]>
+     
+</entry>
+<entry key="updateReason">
+    <![CDATA[
+	update users set user_delete_reason=? where email=?
+    ]]>
+     
+</entry>
+
+<entry key="checkDeleteUser">
+    <![CDATA[
+	select user_id from deleteAccountHistory where email=? and user_id=?
+    ]]>
+     
+</entry>
+
+<entry key="updateFreeTrialCount">
+    <![CDATA[
+		update users set free_trail_count=? where id=? and email=?
+	]]>
+</entry>
+
+<!-- 12Feb2020 vvv -->
+<entry key="outForSignatureTotalCount">
+<!--    <![CDATA[
+    
+select count(doc.id) 
+FROM document AS doc
+INNER JOIN users AS cl ON cl.id = doc.user_id
+WHERE doc.status = 0 
+AND doc.doc_status=102
+AND cl.id = ?
+	 ]]> -->
+
+
+<![CDATA[ 
+
+declare @userid int = ?
+
+declare @docNameFilter varchar(255) =?
+declare @subjectFilter varchar(255) =?
+declare @assignedDateFilter Varchar(30)=?
+
+declare @SearchText varchar(100)=?
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)=?
+
+;WITh CTE_Docs
+AS
+(
+    Select
+        doc.id AS Id,
+        doc.envelopeid AS envelopeId,
+        doc.name AS Name,
+        doc.sign_type AS sign_type,
+        doc.subject AS subject,
+              
+        doc.user_id,
+        doc.upload_date,
+        doc.status,
+        doc.doc_status,
+        doc.digital,
+        cl.id AS userid,
+        cl.email AS requestedEmail,
+        ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+        MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) AS Assigned_date
+    FROM document AS doc(NOLOCK)
+    INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+    LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+    Where doc.status = 0 
+    AND doc.doc_status=102
+    AND doc.subject IS NOT NULL 
+    AND doc.message IS NOT NULL 
+    AND doc.digital IS NULL
+    AND cl.id = @userid
+  
+    AND (@docNameFilter='' or doc.name like  '%'+@docNameFilter + '%')
+    AND (@subjectFilter='' or doc.subject like  '%'+@subjectFilter + '%')
+
+    Group BY doc.id,
+            doc.envelopeid,
+            doc.name,
+            doc.sign_type,
+            doc.subject,
+              
+            doc.user_id,
+            doc.upload_date,
+            doc.status,
+            doc.doc_status,
+            doc.digital,
+            cl.id,
+            cl.email,
+            ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'')
+    Having ((ISNULL(@assignedDateFilter,'') ='' OR Format(MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END),'MM/dd/yyyy hh:mm:ss tt') Like '%'+@assignedDateFilter+'%')
+			AND  
+			(	(@SearchText='' OR Format(MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END),'MM/dd/yyyy hh:mm:ss tt') Like '%'+@SearchText+'%')		
+				OR (@SearchText='' or doc.name like  '%'+@SearchText + '%')
+				OR (@SearchText='' or doc.subject like  '%'+@SearchText + '%')
+			)	
+			)
+
+)
+
+select count (distinct docId) 
+		FROM 
+		(SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+				doc.id AS docId,
+				doc.envelopeid AS envelopeId,
+				doc.name AS documentName,
+				doc.sign_type AS signType,
+				doc.subject AS subject,
+				d.message AS message,
+                           
+				doc.requestedEmail,
+				doc.requestedBy,
+				CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+							WHEN h.created_date>doc.upload_date THEN h.created_date
+							WHEN h.created_date IS NULL THEN doc.upload_date
+							WHEN doc.upload_date IS NULL THEN h.created_date 
+				END AS Assigned_date, 
+				'Out For Signature' AS status,
+				s.email AS signerEmailId,
+				s.id As signerId,
+				s.status AS signerStatus,
+				s.name AS signerName,
+				priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+		FROM CTE_Docs AS doc
+		INNER JOIN document AS d(NOLOCK) ON doc.Id=d.id
+     
+		LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+		WHERE doc.status = 0 
+		AND doc.doc_status=102
+		AND doc.subject IS NOT NULL 
+		AND d.message IS NOT NULL 
+		AND doc.digital IS NULL
+        
+		AND doc.userid=@userid     
+		) A WHERE rnk =1 
+	 
+]]> 
+
+
+</entry>
+
+<entry key="outForSignatureNewQuery">
+
+<!-- OLD Query fetching all documents -->
+<!-- <![CDATA[
+SELECT  docId, 
+              envelopeId, 
+              documentName, 
+              signType, 
+              subject, 
+              message, 
+              requestedEmail, 
+              requestedBy,
+              FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+              status,
+              signerEmailId,
+              signerId,
+              signerStatus,
+              signerName,
+              priority,
+              ROW_NUMBER() OVER(ORDER BY Assigned_date desc , priority asc) AS RNO 
+              FROM 
+              (SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+                     doc.id AS docId,
+                     doc.envelopeid AS envelopeId,
+                     doc.name AS documentName,
+                     doc.sign_type AS signType,
+                     doc.subject AS subject,
+                     doc.message AS message,
+                     cl.email AS requestedEmail,
+                     ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+                     CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                           WHEN h.created_date>doc.upload_date THEN h.created_date
+                           WHEN h.created_date IS NULL THEN doc.upload_date
+                           WHEN doc.upload_date IS NULL THEN h.created_date 
+                     END AS Assigned_date, 
+                     'Out For Signature' AS status,
+                     s.email AS signerEmailId,
+                     s.id As signerId,
+                     s.status AS signerStatus,
+                     s.name AS signerName,
+                     priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+              FROM document AS doc(NOLOCK)
+              INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id         
+              LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+              LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+              WHERE doc.status = 0 
+              AND doc.doc_status=102
+              AND doc.subject IS NOT NULL 
+              AND doc.message IS NOT NULL 
+              AND doc.digital IS NULL
+              AND cl.id = ?
+              ) A WHERE rnk =1
+              ORDER BY RNO
+			  OFFSET ? Rows  
+			  Fetch NEXT ? ROWS ONLY 
+
+]]> -->
+
+
+<!-- RANJEET Query below fetching limited documents WITH ORDER OF ASSIGNED DATE DESC-->
+
+<!-- <![CDATA[
+declare @userid int = ?
+declare @startRange int = ?
+declare @endRange int = ?
+	;WITh CTE_Docs
+	AS
+	(
+		Select
+			doc.id AS Id,
+			doc.envelopeid AS envelopeId,
+			doc.name AS Name,
+			doc.sign_type AS sign_type,
+			doc.subject AS subject,
+		
+			doc.user_id,
+			doc.upload_date,
+			doc.status,
+			doc.doc_status,
+			doc.digital,
+			cl.id AS userid,
+			cl.email AS requestedEmail,
+			ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+			MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+						WHEN h.created_date>doc.upload_date THEN h.created_date
+						WHEN h.created_date IS NULL THEN doc.upload_date
+						WHEN doc.upload_date IS NULL THEN h.created_date 
+					END) AS Assigned_date
+		FROM document AS doc(NOLOCK)
+		INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+		Where doc.status = 0 
+		AND doc.doc_status=102
+		AND doc.subject IS NOT NULL 
+		AND doc.message IS NOT NULL 
+		AND doc.digital IS NULL
+		AND cl.id = @userid
+		Group BY doc.id,
+			doc.envelopeid,
+			doc.name,
+			doc.sign_type,
+			doc.subject,
+		
+			doc.user_id,
+			doc.upload_date,
+			doc.status,
+			doc.doc_status,
+			doc.digital,
+			cl.id,
+			cl.email,
+			ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'')
+		Order by Assigned_date Desc
+	
+		OFFSET @startRange Rows  
+		Fetch NEXT @endRange ROWS ONLY 
+	)
+
+	SELECT docId, 
+			envelopeId, 
+			documentName, 
+			signType, 
+			subject, 
+			message,
+			requestedEmail, 
+			requestedBy,
+			FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+			status,
+			signerEmailId,
+			signerId,
+			signerStatus,
+			signerName,
+			priority,
+			ROW_NUMBER() OVER(ORDER BY Assigned_date desc , priority asc) AS RNO 
+			FROM 
+			(SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+					doc.id AS docId,
+					doc.envelopeid AS envelopeId,
+					doc.name AS documentName,
+					doc.sign_type AS signType,
+					doc.subject AS subject,
+					d.message AS message,
+				
+					doc.requestedEmail,
+					doc.requestedBy,
+					CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+						WHEN h.created_date>doc.upload_date THEN h.created_date
+						WHEN h.created_date IS NULL THEN doc.upload_date
+						WHEN doc.upload_date IS NULL THEN h.created_date 
+					END AS Assigned_date, 
+					'Out For Signature' AS status,
+					s.email AS signerEmailId,
+					s.id As signerId,
+					s.status AS signerStatus,
+					s.name AS signerName,
+					priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+	FROM CTE_Docs AS doc
+	INNER JOIN document AS d(NOLOCK) ON doc.Id=d.id
+      
+	LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+	LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+	WHERE doc.status = 0 
+	AND doc.doc_status=102
+	AND doc.subject IS NOT NULL 
+	AND d.message IS NOT NULL 
+	AND doc.digital IS NULL
+
+	AND doc.userid=@userid
+	) A WHERE rnk =1
+	ORDER BY RNO 
+]]> -->
+
+
+<!-- declare @assignedDateFilter varchar(30)='' mm/dd/yyyy hh:mm:ss tt
+declare @SearchText varchar(100)='' Keep Blank('') when there is no filter text
+declare @SortByColumn varchar(100)=''  subject, documentName, Assigned_date
+declare @SortDir varchar(20)= '' ASC/DESC -->
+
+<![CDATA[	
+declare @userid int = ?
+declare @startRange int = ?
+declare @endRange int = ?
+
+declare @docNameFilter varchar(255) =?
+declare @subjectFilter varchar(255) =?
+declare @assignedDateFilter varchar(30)=?
+
+declare @SearchText varchar(100)=?
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)= ? 
+
+
+;WITh CTE_Docs
+AS
+(
+    Select
+        doc.id AS Id,
+        doc.envelopeid AS envelopeId,
+        doc.name AS Name,
+        doc.sign_type AS sign_type,
+        doc.subject AS subject,
+              
+        doc.user_id,
+        doc.upload_date,
+        doc.status,
+        doc.doc_status,
+        doc.digital,
+        cl.id AS userid,
+        cl.email AS requestedEmail,
+        ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+        MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) AS Assigned_date
+    FROM document AS doc(NOLOCK)
+    INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+    LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+    Where doc.status = 0 
+    AND doc.doc_status=102
+    AND doc.subject IS NOT NULL 
+    AND doc.message IS NOT NULL 
+    AND doc.digital IS NULL
+    AND cl.id = @userid
+  
+    AND (@docNameFilter='' or doc.name like  '%'+@docNameFilter + '%')
+    AND (@subjectFilter='' or doc.subject like  '%'+@subjectFilter + '%')
+
+    Group BY doc.id,
+            doc.envelopeid,
+            doc.name,
+            doc.sign_type,
+            doc.subject,
+              
+            doc.user_id,
+            doc.upload_date,
+            doc.status,
+            doc.doc_status,
+            doc.digital,
+            cl.id,
+            cl.email,
+            ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'')
+    Having ((ISNULL(@assignedDateFilter,'') ='' OR Format(MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END),'MM/dd/yyyy hh:mm:ss tt') Like '%'+@assignedDateFilter+'%')
+			AND  
+			(	(@SearchText='' OR Format(MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END),'MM/dd/yyyy hh:mm:ss tt') Like '%'+@SearchText+'%')		
+				OR (@SearchText='' or doc.name like  '%'+@SearchText + '%')
+				OR (@SearchText='' or doc.subject like  '%'+@SearchText + '%')
+			)	
+			)
+    
+    
+    
+	ORDER BY case When @SortByColumn='subject' AND @SortDir = 'ASC' Then [Subject] End ASC,
+		case When @SortByColumn='subject' AND @SortDir = 'DESC' Then [Subject] End DESC,
+		case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then  [Name] End ASC,
+		case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then [Name] End DESC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then  MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) End ASC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then  MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) End DESC,
+			case When @SortByColumn='' Then MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) END DESC
+    
+       
+    OFFSET @startRange Rows  
+    Fetch NEXT @endRange ROWS ONLY 
+)
+
+SELECT docId, 
+		envelopeId, 
+		documentName, 
+		signType, 
+		subject, 
+        message,             
+		requestedEmail, 
+		requestedBy,
+		FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+		status,
+		signerEmailId,
+		signerId,
+		signerStatus,
+		signerName,
+		priority,
+		authSignEmudhra,
+		ROW_NUMBER() OVER(ORDER BY Assigned_date desc , priority asc) AS RNO 
+		FROM 
+		(SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+				doc.id AS docId,
+				doc.envelopeid AS envelopeId,
+				doc.name AS documentName,
+				doc.sign_type AS signType,
+				doc.subject AS subject,
+				d.message AS message,
+                           
+				doc.requestedEmail,
+				doc.requestedBy,
+				CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+							WHEN h.created_date>doc.upload_date THEN h.created_date
+							WHEN h.created_date IS NULL THEN doc.upload_date
+							WHEN doc.upload_date IS NULL THEN h.created_date 
+				END AS Assigned_date, 
+				'Out For Signature' AS status,
+				s.email AS signerEmailId,
+				s.id As signerId,
+				s.status AS signerStatus,
+				s.name AS signerName,
+				s.authorised_signer AS authSignEmudhra, 
+				priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+		FROM CTE_Docs AS doc
+		INNER JOIN document AS d(NOLOCK) ON doc.Id=d.id
+     
+		LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+		WHERE doc.status = 0 
+		AND doc.doc_status=102
+		AND doc.subject IS NOT NULL 
+		AND d.message IS NOT NULL 
+		AND doc.digital IS NULL
+        
+		AND doc.userid=@userid     
+		) A WHERE rnk =1 
+       
+ORDER BY case When @SortByColumn='subject' AND @SortDir = 'ASC' Then [Subject] End ASC,
+		case When @SortByColumn='subject' AND @SortDir = 'DESC' Then [Subject] End DESC,
+		case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then [documentName] End ASC,
+		case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then [documentName] End DESC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then [Assigned_date] End ASC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then [Assigned_date] End DESC,
+		case When @SortByColumn='' Then [Assigned_date] END DESC,
+		case When @SortByColumn='' Then [priority] END ASC
+	 
+]]>
+
+	 
+</entry>
+
+
+<!--vvv <entry key="outForSignatureNewQueryFilteredColumns">
+
+<![CDATA[
+declare @userid int = ?
+declare @startRange int =?
+declare @endRange int = ?
+declare @docIdFilter int =?
+declare @docNameFilter varchar(255) =?
+declare @subjectFilter varchar(255) =?
+declare @assignedDateFilter varchar(10)=? 
+
+;WITh CTE_Docs
+AS
+(
+    Select
+        doc.id AS Id,
+        doc.envelopeid AS envelopeId,
+        doc.name AS Name,
+        doc.sign_type AS sign_type,
+        doc.subject AS subject,
+              
+        doc.user_id,
+        doc.upload_date,
+        doc.status,
+        doc.doc_status,
+        doc.digital,
+        cl.id AS userid,
+        cl.email AS requestedEmail,
+        ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'') AS requestedBy,
+        MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                            WHEN h.created_date>doc.upload_date THEN h.created_date
+                            WHEN h.created_date IS NULL THEN doc.upload_date
+                            WHEN doc.upload_date IS NULL THEN h.created_date 
+                    END) AS Assigned_date
+    FROM document AS doc(NOLOCK)
+    INNER JOIN users AS cl(NOLOCK) ON cl.id = doc.user_id
+    LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+    Where doc.status = 0 
+    AND doc.doc_status=102
+    AND doc.subject IS NOT NULL 
+    AND doc.message IS NOT NULL 
+    AND doc.digital IS NULL
+    AND cl.id = @userid
+     AND (@docIdFilter=0 or doc.Id like cast(@docIdFilter as varchar(255)) + '%') 
+    AND (@docNameFilter='' or doc.name like  '%'+@docNameFilter + '%')
+    AND (@subjectFilter='' or doc.subject like  '%'+@subjectFilter + '%')
+
+    Group BY doc.id,
+            doc.envelopeid,
+            doc.name,
+            doc.sign_type,
+            doc.subject,
+              
+            doc.user_id,
+            doc.upload_date,
+            doc.status,
+            doc.doc_status,
+            doc.digital,
+            cl.id,
+            cl.email,
+            ISNULL(cl.firstname,'')+ ' '+ISNULL(cl.lastname,'')
+    Having (ISNULL(@assignedDateFilter,'') ='' OR Convert(Varchar(10),MAX(CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END),101) Like '%'+@assignedDateFilter+'%')
+    Order by Assigned_date Desc
+       
+    OFFSET @startRange Rows  
+    Fetch NEXT @endRange ROWS ONLY 
+)
+
+SELECT docId, 
+              envelopeId, 
+              documentName, 
+              signType, 
+              subject, 
+              message,       
+              requestedEmail, 
+              requestedBy,
+              FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+              status,
+              signerEmailId,
+              signerId,
+              signerStatus,
+              signerName,
+              priority,
+              ROW_NUMBER() OVER(ORDER BY Assigned_date desc , priority asc) AS RNO 
+              FROM 
+              (SELECT  RANK() OVER(PARTITION BY doc.Id,s.id ORDER BY h.created_date DESC) AS rnk,
+                                  doc.id AS docId,
+                                  doc.envelopeid AS envelopeId,
+                                  doc.name AS documentName,
+                                  doc.sign_type AS signType,
+                                  doc.subject AS subject,
+                                  d.message AS message,
+                           
+                                  doc.requestedEmail,
+                                  doc.requestedBy,
+                                  CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                                                WHEN h.created_date>doc.upload_date THEN h.created_date
+                                                WHEN h.created_date IS NULL THEN doc.upload_date
+                                                WHEN doc.upload_date IS NULL THEN h.created_date 
+                                  END AS Assigned_date, 
+                                  'Out For Signature' AS status,
+                                  s.email AS signerEmailId,
+                                  s.id As signerId,
+                                  s.status AS signerStatus,
+                                  s.name AS signerName,
+                                  priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+FROM CTE_Docs AS doc
+INNER JOIN document AS d(NOLOCK) ON doc.Id=d.id
+     
+LEFT OUTER JOIN signer AS s(NOLOCK) ON doc.id=s.doc_id
+LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+WHERE doc.status = 0 
+AND doc.doc_status=102
+AND doc.subject IS NOT NULL 
+AND d.message IS NOT NULL 
+AND doc.digital IS NULL
+        
+AND doc.userid=@userid     
+) A WHERE rnk =1 
+       
+ORDER BY RNO 
+
+]]>
+
+</entry>
+
+<entry key="outForSignatureTotalCountFiltered">
+ <![CDATA[	 
+	 
+declare @userid int = ?
+declare @docIdFilter int =?
+declare @docNameFilter varchar(255) =?
+declare @subjectFilter varchar(255) =?
+declare @assignedDateFilter varchar(10)=?
+
+       
+select count(Distinct doc.id) 
+FROM document AS doc
+INNER JOIN users AS cl ON cl.id = doc.user_id
+LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = doc.id
+WHERE doc.status = 0 
+AND doc.doc_status=102
+AND cl.id =@userid 
+ AND (@docIdFilter=0 or doc.Id like cast(@docIdFilter as varchar(255)) + '%') 
+AND doc.name like  '%'+@docNameFilter + '%'
+AND doc.subject like '%'+ @subjectFilter + '%' 
+AND (ISNULL(@assignedDateFilter,'') ='' OR Convert(Varchar(10),CASE WHEN doc.upload_date>h.created_date THEN doc.upload_date
+                        WHEN h.created_date>doc.upload_date THEN h.created_date
+                        WHEN h.created_date IS NULL THEN doc.upload_date
+                        WHEN doc.upload_date IS NULL THEN h.created_date 
+                END,101) Like '%'+@assignedDateFilter+'%')
+
+]]>   
+
+</entry> -->
+
+<entry key="getTotalSignedDocCount">
+   <![CDATA[
+declare @EmailId varchar(250)=?
+	
+	declare @subjectFilter varchar(255) =?
+	declare @docNameFilter varchar(255) =?
+	declare @assignedDateFilter Varchar(30)=?
+	declare @SignedDateFilter Varchar(30)=?
+	declare @requestedBy Varchar(100)=?
+	
+	declare @SearchText varchar(100)=?
+	declare @SortByColumn varchar(100)=?
+	declare @SortDir varchar(20)= ?
+;WITh CTE_SignedDocs
+	AS
+	(
+		Select d.id as DocId, MAX(tpc.tpc_date) AS SignedDate 
+		FROM signer s(NOLOCK)  
+		INNER JOIN document d(NOLOCK) ON  s.doc_id=d.id
+		INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id 
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		Where s.email=@EmailId
+		AND s.status=1
+		AND d.doc_status IN (102, 103,108)
+		AND d.file_type <> 'R'
+		AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+		AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+		AND (@SignedDateFilter='' or FORMAT(tpc.tpc_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SignedDateFilter+'%')
+		AND (@requestedBy='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@requestedBy+'%')
+		AND (@assignedDateFilter='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%')
+		AND (
+				(@SearchText='' or d.name like  '%'+@SearchText + '%')
+				or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+				or (@SearchText='' or FORMAT(tpc.tpc_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+				or (@SearchText='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@SearchText+'%')
+				or (@SearchText='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+						 WHEN d.upload_date IS NULL THEN h.created_date 
+						 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+		   )
+		Group By d.id
+		
+	)
+	select COUNT(distinct docId)
+	FROM CTE_SignedDocs
+]]>
+
+</entry>
+
+<!-- 26Feb2020 Bhopi -->
+	<entry key="completedDocumentsTotalCount">
+	   <![CDATA[
+	    
+			select count(doc.id) 
+			FROM document AS doc
+			INNER JOIN users AS cl ON cl.id = doc.user_id
+			WHERE  doc.doc_status='103'
+			AND cl.id = ?
+		 ]]>
+	</entry>
+	
+	<entry key="completedDocumentsTotalCountWithFilter">
+	   <![CDATA[	    
+				declare @userid INT=?
+
+				declare @subjectFilter varchar(255) =?
+				declare @signTypeFilter varchar(255) =?
+				declare @completedDateFilter Varchar(30)=?
+			
+				declare @SearchText varchar(100)=?
+				declare @SortByColumn varchar(100)=?
+				declare @SortDir varchar(20)= ?
+			
+				;WITh CTE_Docs 
+				AS
+				(
+					Select	doc.id, 
+							cl.email, 
+							isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy
+					FROM document(nolock) AS doc
+					INNER JOIN users(nolock) AS cl ON cl.id = doc.user_id
+					WHERE doc.status = 1
+					AND doc.doc_status='103'
+					AND cl.id = @userid
+					AND (@subjectFilter='' or doc.subject like  '%'+@subjectFilter + '%')
+					AND (@signTypeFilter='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@signTypeFilter + '%')
+					AND (@completedDateFilter='' or FORMAT(doc.complete_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@completedDateFilter + '%')
+					AND ((@SearchText='' or doc.subject like  '%'+@SearchText + '%')
+						  OR (@SearchText='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@SearchText + '%')
+						  OR (@SearchText='' or FORMAT(doc.complete_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@SearchText + '%')
+					)
+				
+				)
+				SELECT count (distinct doc.id)
+				FROM document(nolock) AS doc
+			
+				INNER JOIN CTE_Docs ON doc.id=CTE_Docs.id
+				LEFT OUTER JOIN signer(nolock) AS s on doc.id=s.doc_id and s.status=1
+
+		 ]]>
+	</entry>
+	
+	<entry key="completedDocumentsWithFilter">
+	   <![CDATA[
+				declare @userid INT=?
+			declare @startRange INT=?
+			declare @endRange INT = ?
+		
+			declare @subjectFilter varchar(255) =?
+			declare @signTypeFilter varchar(255) =?
+			declare @completedDateFilter Varchar(30)=? 
+		
+			declare @SearchText varchar(100)=?
+			declare @SortByColumn varchar(100)=?  
+			declare @SortDir varchar(20)= ? 
+		
+		
+		
+			;WITh CTE_Docs 
+				AS
+				(
+					Select	doc.id, 
+							cl.email, 
+							isnull(cl.firstname,'')+ ' '+isnull(cl.lastname,'') AS requestedBy
+					FROM document(nolock) AS doc
+					INNER JOIN users(nolock) AS cl ON cl.id = doc.user_id
+					WHERE doc.status = 1
+					AND doc.doc_status='103'
+					AND cl.id = @userid
+					AND (@subjectFilter='' or doc.subject like  '%'+@subjectFilter + '%')
+					AND (@signTypeFilter='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@signTypeFilter + '%')
+					AND (@completedDateFilter='' or FORMAT(doc.complete_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@completedDateFilter + '%')
+					AND ((@SearchText='' or doc.subject like  '%'+@SearchText + '%')
+						  OR (@SearchText='' or (case doc.sign_type when 'S' then 'Self Sign' When 'G' then 'Group Sign' End) like  '%'+@SearchText + '%')
+						  OR (@SearchText='' or FORMAT(doc.complete_date,'MM/dd/yyyy hh:mm:ss tt') like  '%'+@SearchText + '%')
+					)
+					
+					ORDER BY 
+						case When @SortByColumn='subject' AND @SortDir = 'ASC' Then CASE WHEN doc.subject is null or doc.subject = ''
+							 THEN doc.name ELSE doc.subject END End ASC,
+						case When @SortByColumn='subject' AND @SortDir = 'DESC' Then CASE WHEN doc.subject is null or doc.subject = ''
+							 THEN doc.name ELSE doc.subject END End DESC,
+						case When @SortByColumn='sign_Type' AND @SortDir = 'ASC' Then [sign_type] End ASC,
+						case When @SortByColumn='sign_Type' AND @SortDir = 'DESC' Then [sign_Type] End DESC,
+						case When @SortByColumn='completed_date' AND @SortDir = 'ASC' Then [complete_date] End ASC,
+						case When @SortByColumn='completed_date' AND @SortDir = 'DESC' Then [complete_date] End DESC,
+						case When @SortByColumn='' Then [complete_date] END DESC -- default sorting on completed date
+					OFFSET @startRange Rows  
+					Fetch NEXT @endRange ROWS ONLY 
+				)
+			
+				SELECT doc.id AS docId,
+					doc.envelopeid AS envelopeId,
+					doc.sign_type AS signType,
+					doc.emudhra_status As emudhraStatus,
+					doc.name AS documentName,
+					CASE 
+					WHEN doc.subject is null or doc.subject = '' 
+					THEN doc.name 
+					ELSE doc.subject 
+					END AS subject,
+					isnull(doc.message,'') AS message,
+					CTE_Docs.email,
+					CTE_Docs.requestedBy,
+					FORMAT(doc.complete_date,'MM/dd/yyyy hh:mm:ss tt') completedDate,
+					'Completed Document' AS status,
+					s.email AS signerEmailId,
+					s.status AS signerStatus,
+					s.name AS signerName,
+					priority=(Select top 1 f.priority from document_sign_field(nolock) AS f Where s.id =f.signer_id Order by f.priority asc)
+				FROM document(nolock) AS doc
+				--INNER JOIN users(nolock) AS cl ON cl.id = doc.user_id
+				INNER JOIN CTE_Docs ON doc.id=CTE_Docs.id
+				LEFT OUTER JOIN signer(nolock) AS s on doc.id=s.doc_id and s.status=1
+				ORDER BY 
+					case When @SortByColumn='subject' AND @SortDir = 'ASC' Then CASE WHEN doc.subject is null or doc.subject = ''
+						 THEN doc.name ELSE doc.subject END End ASC,
+					case When @SortByColumn='subject' AND @SortDir = 'DESC' Then CASE WHEN doc.subject is null or doc.subject = ''
+						 THEN doc.name ELSE doc.subject END End DESC,
+					case When @SortByColumn='sign_Type' AND @SortDir = 'ASC' Then [sign_type] End ASC,
+					case When @SortByColumn='sign_Type' AND @SortDir = 'DESC' Then [sign_Type] End DESC,
+					case When @SortByColumn='completed_date' AND @SortDir = 'ASC' Then [complete_date] End ASC,
+					case When @SortByColumn='completed_date' AND @SortDir = 'DESC' Then [complete_date] End DESC,
+					case When @SortByColumn='' Then [complete_date] END DESC -- default sorting on completed date
+				
+				
+
+			]]>
+	</entry>
+	
+	<entry key="pendingTotalCountWithFilter">
+	   <![CDATA[	    
+				declare @email varchar(500)=?
+				
+				declare @subjectFilter varchar(255) =?
+				declare @docNameFilter varchar(255) =?
+				
+				declare @assignedDateFilter Varchar(30)=?
+				declare @requestedBy Varchar(100)=?
+				
+				declare @SearchText varchar(100)=?
+				declare @SortByColumn varchar(100)=?
+				declare @SortDir varchar(20)= ?
+				        
+				SELECT COUNT(distinct doc_id)
+				FROM (SELECT  ROW_NUMBER() OVER(PARTITION BY d.Id ORDER BY h.created_date DESC) AS rnk,
+                        d.subject AS subject,
+                        d.name AS documentName, 
+                        d.Id AS doc_id, 
+                        dsf.priority AS signer_priority,
+                        s.id AS signer_id, 
+                        CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+                                                        WHEN h.created_date>d.upload_date THEN h.created_date
+                                        WHEN h.created_date is NULL THEN d.upload_date
+                                        WHEN d.upload_date is NULL THEN h.created_date 
+                        END AS Assigned_date,
+                        ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy, 
+                        s.sign_url AS sign_Url,
+                        (    SELECT TOP 1 s2.id FROM signer s2(NOLOCK) 
+                                        INNER JOIN document_sign_field dsf2(NOLOCK) ON dsf2.document_id = s2.doc_id AND dsf2.signer_id=s2.id
+                                        WHERE s2.doc_id=d.id AND s2.status=0
+                                        ORDER BY dsf2.priority ASC 
+                        ) AS Min_Signer_by_Priority
+						FROM signer s(NOLOCK)  
+						INNER JOIN document d(NOLOCK) ON s.doc_id=d.id 
+						INNER JOIN users u(NOLOCK) ON d.user_id=u.id 
+						INNER JOIN document_sign_field dsf(NOLOCK) ON dsf.document_id = d.id AND dsf.signer_id=s.id
+						LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = d.id AND h.signer_id=s.id 
+						WHERE s.email=@email
+						AND s.status=0  AND d.doc_status IN (102)
+						AND d.file_type <> 'R' 
+						AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+						AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+						AND (@requestedBy='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@requestedBy+'%')
+						AND (@assignedDateFilter='' or Format(CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+														WHEN h.created_date>d.upload_date THEN h.created_date
+														WHEN h.created_date is NULL THEN d.upload_date
+                        WHEN d.upload_date is NULL THEN h.created_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%'
+		 )
+					AND (
+                        (@SearchText='' or d.name like  '%'+@SearchText + '%')
+                        or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+                        or (@SearchText='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@SearchText+'%')
+                        or (@SearchText='' or Format(CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+                                                        WHEN h.created_date>d.upload_date THEN h.created_date
+                                                        WHEN h.created_date is NULL THEN d.upload_date
+                                                                                                        WHEN d.upload_date is NULL THEN h.created_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%'
+                                                                                        )
+                                           )
+        ) A WHERE rnk=1 and (signer_priority IN (0,1) OR Min_Signer_by_Priority = signer_id)
+
+
+		 ]]>
+	</entry>
+	
+	<entry key="pendingDocumentsWithFilter">
+	   <![CDATA[
+				declare @email varchar(500)=?
+				declare @startRange INT=?
+				declare @endRange INT=?
+			
+				declare @subjectFilter varchar(255) =?
+				declare @docNameFilter varchar(255) =?
+				
+				declare @assignedDateFilter Varchar(30)=?
+				declare @requestedBy Varchar(100)=?
+				
+				declare @SearchText varchar(100)=?
+				declare @SortByColumn varchar(100)=?
+				declare @SortDir varchar(20)= ?
+				 
+				SELECT  signer_id,
+						doc_id,
+						signer_priority,  
+						subject,
+						documentName, 
+						requestedBy, 
+						sign_Url, 
+						FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+						ROW_NUMBER () OVER(ORDER BY Assigned_date) AS RNO         
+						FROM (SELECT  ROW_NUMBER() OVER(PARTITION BY d.Id ORDER BY h.created_date DESC) AS rnk,
+								d.subject AS subject,
+								d.name AS documentName, 
+								d.Id AS doc_id, 
+								dsf.priority AS signer_priority,
+								s.id AS signer_id, 
+								CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+										WHEN h.created_date>d.upload_date THEN h.created_date
+									WHEN h.created_date is NULL THEN d.upload_date
+									WHEN d.upload_date is NULL THEN h.created_date 
+								END AS Assigned_date,
+								ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy, 
+								s.sign_url AS sign_Url,
+								(    SELECT TOP 1 s2.id FROM signer s2(NOLOCK) 
+									INNER JOIN document_sign_field dsf2(NOLOCK) ON dsf2.document_id = s2.doc_id AND dsf2.signer_id=s2.id
+									WHERE s2.doc_id=d.id AND s2.status=0
+									ORDER BY dsf2.priority ASC 
+								) AS Min_Signer_by_Priority
+						FROM signer s(NOLOCK)  
+						INNER JOIN document d(NOLOCK) ON s.doc_id=d.id 
+						INNER JOIN users u(NOLOCK) ON d.user_id=u.id 
+						INNER JOIN document_sign_field dsf(NOLOCK) ON dsf.document_id = d.id AND dsf.signer_id=s.id
+						LEFT OUTER JOIN tbtrn_action_history h(NOLOCK) ON h.document_id = d.id AND h.signer_id=s.id 
+						WHERE s.email=@email
+						AND s.status=0  AND d.doc_status IN (102)
+						AND d.file_type <> 'R' 
+						AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+						AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+						AND (@requestedBy='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@requestedBy+'%')
+						AND (@assignedDateFilter='' or Format(CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+								WHEN h.created_date>d.upload_date THEN h.created_date
+								WHEN h.created_date is NULL THEN d.upload_date
+								WHEN d.upload_date is NULL THEN h.created_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%'
+							)
+						AND (
+								(@SearchText='' or d.name like  '%'+@SearchText + '%')
+								or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+								or (@SearchText='' or (ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'')) like '%'+@SearchText+'%')
+								or (@SearchText='' or Format(CASE WHEN d.upload_date>h.created_date THEN d.upload_date 
+										WHEN h.created_date>d.upload_date THEN h.created_date
+										WHEN h.created_date is NULL THEN d.upload_date
+										WHEN d.upload_date is NULL THEN h.created_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%'
+									)
+						   )
+				) A WHERE rnk=1 and (signer_priority IN (0,1) OR Min_Signer_by_Priority = signer_id)
+				--ORDER BY RNO DESC
+				ORDER BY case When @SortByColumn='subject' AND @SortDir = 'ASC' Then [Subject] End ASC,
+				case When @SortByColumn='subject' AND @SortDir = 'DESC' Then [Subject] End DESC,
+				case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then [documentName] End ASC,
+				case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then [documentName] End DESC,
+				case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then [Assigned_date] End ASC,
+				case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then [Assigned_date] End DESC,
+				case When @SortByColumn='requestedBy' AND @SortDir = 'ASC' Then [requestedBy] End ASC,
+				case When @SortByColumn='requestedBy' AND @SortDir = 'DESC' Then [requestedBy] End DESC,
+				case When @SortByColumn='' Then Assigned_date END DESC
+			
+				OFFSET @startRange Rows  
+				Fetch NEXT @endRange ROWS ONLY 
+
+				
+
+			]]>
+	</entry>
+	
+	<entry key="updateSignerStatusrejected">
+    <![CDATA[
+		update signer set signer_doc_id=?,status=?, rejected_envelopeid=?, rejection_comment=? where id=?
+    ]]>
+	</entry>
+	
+	<entry key="updateFieldValue">
+    <![CDATA[
+		update [document_sign_field] set field_value=NULL where id=?
+    ]]>
+	</entry>
+	
+	
+	<entry key="updateRemainingSignerStatusreject">
+    <![CDATA[
+	update signer set status = 3, rejection_comment=? where doc_id=? and status = 0
+	 ]]>
+	</entry>
+	
+	<entry key="updateRemainingSignerStatusreject1">
+    <![CDATA[
+	update signer set rejection_comment=? where doc_id=? and status = 1
+	 ]]>
+	</entry>
+	
+	<entry key="escapeRemainingPriorityUser">
+    <![CDATA[
+			select 
+			Distinct s.id As 'signerId',
+			f.priority As 'priority',
+			s.name As 'signerName',
+			s.email As 'signerEmail',
+			s.status As 'signerStatus',
+			s.sign_url As 'signUrl',
+			s.authorised_signer As 'authorisedSigner'
+		from signer s INNER JOIN document_sign_field f
+		ON s.id=f.signer_id
+		where s.doc_id =? and f.priority <=? order by f.priority asc
+    ]]>
+	</entry>
+	
+	<entry key="updateSubscriptionStatusForFreeTrial">
+    <![CDATA[
+      	 update users set subscription_status=1 where id=?
+    ]]>
+
+	</entry>
+	
+	<entry key="getRejectedDocList">
+    <![CDATA[
+    declare @EmailId varchar(250)=?
+	declare @startRange INT=?
+	declare @endRange INT = ?
+
+	declare @docNameFilter varchar(255) =?
+	declare @subjectFilter varchar(255) =?
+	declare @assignedDateFilter Varchar(30)=?
+	declare @RejectedDateFilter Varchar(30)=?
+	declare @RejectedBy Varchar(100)=?
+	
+	declare @SearchText varchar(100)=?
+	declare @SortByColumn varchar(100)=?
+	declare @SortDir varchar(20)=?
+
+	;WITh CTE_SignedDocs
+	AS
+	(
+		Select  d.id as DocId, 
+				d.subject,
+				d.name,
+				--ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy,
+				MAX(s.name) AS RejectedBy,
+				d.complete_date AS RejectedDate,
+				MAX(s.rejection_comment) AS Rejection_comment
+		FROM signer s(NOLOCK)  
+		INNER JOIN document d(NOLOCK) ON  s.doc_id=d.id
+		INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id 
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		Where ((s.email=@EmailId and s.status=2) OR (u.email=@EmailId AND d.status=2 and d.doc_status=108))
+		AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+		AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+		AND (@RejectedDateFilter='' or FORMAT(d.complete_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@RejectedDateFilter+'%')
+		AND (@RejectedBy='' or (isnull(s.name,'')) like '%'+@RejectedBy+'%')
+		AND (@assignedDateFilter='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%')
+		AND (
+				(@SearchText='' or d.name like  '%'+@SearchText + '%')
+				or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+				or (@SearchText='' or FORMAT(d.complete_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+				or (@SearchText='' or (isnull(s.name,'')) like '%'+@SearchText+'%')
+				or (@SearchText='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+						 WHEN d.upload_date IS NULL THEN h.created_date 
+						 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+		   )
+		Group By d.id, 
+				d.subject,
+				d.name,
+		--		ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,''),
+				d.complete_date
+		--Order by d.complete_date Desc
+		ORDER BY 
+			case When @SortByColumn='subject' AND @SortDir = 'ASC' Then d.subject End ASC,
+			case When @SortByColumn='subject' AND @SortDir = 'DESC' Then d.subject End DESC,
+			case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then d.name End ASC,
+			case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then d.Name End DESC,
+			case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then MAX(CASE WHEN h.created_date IS NULL THEN d.upload_date
+					 WHEN d.upload_date IS NULL THEN h.created_date 
+					 ELSE d.upload_date END) End ASC,
+			case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then MAX(CASE WHEN h.created_date IS NULL THEN d.upload_date
+					 WHEN d.upload_date IS NULL THEN h.created_date 
+					 ELSE d.upload_date END) End DESC,
+			case When @SortByColumn='RejectedDate' AND @SortDir = 'ASC' Then d.complete_date End ASC,
+			case When @SortByColumn='RejectedDate' AND @SortDir = 'DESC' Then d.complete_date End DESC,
+			case When @SortByColumn='RejectedBy' AND @SortDir = 'ASC' Then MAX(s.name) End ASC,
+			case When @SortByColumn='RejectedBy' AND @SortDir = 'DESC' Then MAX(s.name) End DESC,
+			case When @SortByColumn='' Then d.complete_date END DESC
+
+		OFFSET @startRange Rows  
+		Fetch NEXT @endRange ROWS ONLY 
+	)
+
+	SELECT     
+	subject,
+	documentName, 
+	docId,
+	envelopeId, 
+	signType,
+	message, 
+	rejectedBy,
+	status,
+	FORMAT(RejectedDate,'MM/dd/yyyy hh:mm:ss tt') AS RejectedDate,
+	FORMAT(Assigned_date,'MM/dd/yyyy hh:mm:ss tt') AS Assigned_date,
+	signerEmailId,
+	signerId,
+	signerStatus,
+	signerName,
+	priority,
+	rejection_comment,
+	ROW_NUMBER() OVER(ORDER BY RejectedDate desc, priority asc) AS RNO 
+	FROM (
+		 SELECT  ROW_Number() OVER(PARTITION BY d.Id, s.id ORDER BY d.complete_date DESC) AS rnk,
+				 d.subject AS subject,
+				 d.name AS documentName,
+				 CASE 
+				 WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date
+				 END AS Assigned_date, 
+				 d.id AS docId,
+				 d.envelopeid AS envelopeId,
+				 d.sign_type AS signType,
+				 d.message AS message,
+				 s.status AS status,
+				 d.complete_date AS RejectedDate,
+				 --ISNULL(u.firstname,'')+ ' '+ISNULL(u.lastname,'') AS requestedBy,
+				 s.name AS RejectedBy,
+				 s.email AS signerEmailId,
+				 s.id As signerId,
+				 s.status AS signerStatus,
+				 s.name AS signerName,
+				 s.rejection_comment,
+		 priority=(SELECT TOP 1 f.priority FROM document_sign_field AS f(NOLOCK) WHERE s.id =f.signer_id ORDER BY f.priority ASC)
+		 FROM signer s(NOLOCK)  
+		 INNER JOIN  document d(NOLOCK) ON  s.doc_id=d.id
+		 INNER JOIN CTE_SignedDocs c ON c.DocId=d.id
+		 INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		 LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		 LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id --AND s.email=tpc.email 
+	) A WHERE rnk =1
+	--ORDER BY RNO
+	ORDER BY case When @SortByColumn='subject' AND @SortDir = 'ASC' Then [Subject] End ASC,
+		case When @SortByColumn='subject' AND @SortDir = 'DESC' Then [Subject] End DESC,
+		case When @SortByColumn='documentName' AND @SortDir = 'ASC' Then [documentName] End ASC,
+		case When @SortByColumn='documentName' AND @SortDir = 'DESC' Then [documentName] End DESC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'ASC' Then [Assigned_date] End ASC,
+		case When @SortByColumn='Assigned_date' AND @SortDir = 'DESC' Then [Assigned_date] End DESC,
+		case When @SortByColumn='RejectedDate' AND @SortDir = 'ASC' Then [RejectedDate] End ASC,
+		case When @SortByColumn='RejectedDate' AND @SortDir = 'DESC' Then [RejectedDate] End DESC,
+		case When @SortByColumn='RejectedBy' AND @SortDir = 'ASC' Then [RejectedBy] End ASC,
+		case When @SortByColumn='RejectedBy' AND @SortDir = 'DESC' Then [RejectedBy] End DESC,
+		case When @SortByColumn='' Then [RejectedDate] END DESC
+    ]]>
+
+	</entry>
+	
+	<entry key="totalRejectedCountData">
+	   <![CDATA[	
+	declare @EmailId varchar(250)=?
+	
+	declare @docNameFilter varchar(255) = ?
+	declare @subjectFilter varchar(255) =?
+	declare @assignedDateFilter Varchar(30)=?
+	declare @RejectedDateFilter Varchar(30)=?
+	declare @RejectedBy Varchar(100)=?
+	
+	declare @SearchText varchar(100)=?
+	declare @SortByColumn varchar(100)=?
+	declare @SortDir varchar(20)= ?
+
+	;WITh CTE_SignedDocs
+	AS
+	(
+		Select  d.id as DocId, 
+				d.subject,
+				d.name,
+				
+				MAX(s.name) AS RejectedBy,
+				d.complete_date AS RejectedDate,
+				MAX(s.rejection_comment) AS Rejection_comment
+		FROM signer s(NOLOCK)  
+		INNER JOIN document d(NOLOCK) ON  s.doc_id=d.id
+		INNER JOIN users u(NOLOCK) ON d.user_id=u.id
+		LEFT OUTER JOIN tbmst_user_tpc_document tpc(NOLOCK) ON tpc.doc_id=d.id 
+		LEFT OUTER JOIN tbtrn_action_history h(NOLOCK)  ON h.document_id = d.id
+		Where ((s.email=@EmailId and s.status=2) OR (u.email=@EmailId AND d.status=2 and d.doc_status=108))
+		AND (@docNameFilter='' or d.name like  '%'+@docNameFilter + '%')
+		AND (@subjectFilter='' or d.subject like  '%'+@subjectFilter + '%')
+		AND (@RejectedDateFilter='' or FORMAT(d.complete_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@RejectedDateFilter+'%')
+		AND (@RejectedBy='' or (isnull(s.name,'')) like '%'+@RejectedBy+'%')
+		AND (@assignedDateFilter='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+				 WHEN d.upload_date IS NULL THEN h.created_date 
+				 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@assignedDateFilter+'%')
+		AND (
+				(@SearchText='' or d.name like  '%'+@SearchText + '%')
+				or (@SearchText='' or d.subject like  '%'+@SearchText + '%')
+				or (@SearchText='' or FORMAT(d.complete_date,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+				or (@SearchText='' or (isnull(s.name,'')) like '%'+@SearchText+'%')
+				or (@SearchText='' or Format(CASE WHEN h.created_date IS NULL THEN d.upload_date
+						 WHEN d.upload_date IS NULL THEN h.created_date 
+						 ELSE d.upload_date END,'MM/dd/yyyy hh:mm:ss tt') like '%'+@SearchText+'%')
+		   )
+		Group By d.id, 
+				d.subject,
+				d.name,
+		
+				d.complete_date
+		
+	)
+
+	SELECT     
+	Count (distinct docId)
+	FROM CTE_SignedDocs
+	]]>
+
+	</entry>
+
+	
+	<!-- vvv currently not in use Entry key mapped with RegistrationDaoImpl.java for checking email id of non-corporate users in both users and temp_usertables for exelaAuth-->
+	<entry key="checkEmailIDCount">
+    <![CDATA[
+     	
+		SELECT COUNT(temp.email) as count 
+		FROM (
+		  SELECT email FROM users  where email = ?
+		  UNION ALL
+		  SELECT email FROM temp_User where email = ?
+		) AS temp
+
+    ]]>
+
+	</entry>
+	
+	<entry key="checkActiveSubscriptionExists">
+    <![CDATA[
+     	
+		SELECT COUNT(temp.email) as count
+		FROM (SELECT u.email from sb_subscription s
+		JOIN users u
+		  ON s.user_id = u.id where u.email = ?) AS temp
+
+    ]]>
+
+	</entry>
+	
+	<entry key="getSignerListFromTempSignerTable">
+    <![CDATA[
+	select name, email, priority from tempSigner where doc_id=? order by priority asc
+	]]>
+	</entry>
+	
+<!-- updateNewTokenForUserWithoutPurchasePlan- to udpdate email_verif.._token and updated_on date whenever new verification link is to be resent for inactive user without purchase plan -->
+	<entry key="updateNewTokenForUserWithoutPurchasePlan">
+    <![CDATA[
+       UPDATE users
+		SET email_verification_token = ?,
+		updated_on= GETDATE()
+		WHERE email = ?
+    ]]>
+
+	</entry>
+	
+<!-- updateNewTokenForUserWithPurchasePlan- to update email_verif.._token, planToken and updated_on date whenever new verification link is to be resent for inactive user without purchase plan -->
+	<entry key="updateNewTokenForUserWithPurchasePlan">
+    <![CDATA[
+       	UPDATE temp_user
+			SET email_verification_token = ?,
+			updated_on= GETDATE()
+			WHERE email = ?
+    ]]>
+
+	</entry>
+	
+<!-- getTempUserDetailsByEmail- to get all details whenever new verification link is to be resent for inactive user with purchase plan -->	
+	<entry key="getTempInactiveUserDetailsByEmail">
+    <![CDATA[
+		select * FROM temp_user
+		WHERE email = ? 
+    ]]>
+    </entry>
+    
+    <entry key="getStatusSigner">
+    <![CDATA[
+    select status FROM signer where doc_id=? and id=?
+    ]]>
+    </entry>
+    
+    <entry key="getupgradablePlans">
+	    <![CDATA[
+	 	select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.planicon planicon, p.price price, cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		, p.template from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.status = 1 and c.status = 1 and p.status = 1 and cur.status = 1 and dur.status = 1
+		and u.email = ? and u.password = ? and p.id >?
+	    ]]>
+	</entry>
+	
+	<entry key="getCurrentActivePlanName">
+	   <!--  <![CDATA[
+	 		select p.name from sb_plans p  join sb_subscription s ON p.id = s.plan_id where s.status = 1 and s.user_id = ?
+	    ]]> -->
+	    
+	    <![CDATA[
+	 		select p.name plan_name, dur.name durationname, dur.time durationtime, dur.unit durationunit 
+	 		from sb_plans p  
+			join sb_subscription s ON p.id = s.plan_id 
+			join sb_duration dur ON p.duration_id = dur.duration_id
+			where s.status = 1 and s.user_id = ?
+	    ]]>
+	</entry>		
+	
+	
+	<entry key="selectFromDrySignAnalyticsData">
+    <![CDATA[   	
+       	select source_name,source_count  
+       	from drysign_analytics
+       	where source_name=?
+    ]]>
+
+	</entry>
+	
+	<!-- Entry key mapped with ApplicatonDaoImpl.java -->
+	<entry key="insertToDrySignAnalyticsData">
+    <![CDATA[
+        INSERT INTO drysign_analytics (source_name, source_value, created_date, update_date, source_count,email,cookieCreationDate)
+  		VALUES (?, ?, ?, ?, ?, ?, ?)
+    ]]>
+    
+</entry>
+<entry key="updateToDrySignAnalyticsTable">
+    <![CDATA[
+        update drysign_analytics set source_value=?,source_count=?, update_date=? 
+        where source_name=?
+    ]]>
+</entry>
+
+<entry key="updateClientAdminDocumentCount">
+    <![CDATA[
+        update sb_subscription set used_documents = ? , used_template = ? where user_id = ? and status = 1
+    ]]>
+</entry>
+<entry key="updateSubscriptionStatusForClient">
+    <![CDATA[
+        update sb_subscription set status = 1 where user_id = ?
+    ]]>
+</entry>
+
+<entry key="getCustomizedSubscriptionPlans">
+    <![CDATA[
+		select * from sb_plans where status = ?
+    ]]>
+</entry>
+
+<entry key="getCustomizedSubscriptionPlanById">
+    <![CDATA[
+   	  	select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, 
+  		p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.planicon planicon, p.price price, 
+  		cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit, p.template 
+  		from sb_plans p
+		JOIN sb_category c ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE p.id =?
+  		
+    ]]>
+    
+</entry>
+		
+
+<entry key="getAllCountryList">
+    <![CDATA[
+		select CountryId, Country_Abbreviation, CountryName, phonecode
+ 		FROM TBMSTCOUNTRIES
+		WHERE active = 'Y'
+		Order by CountryName
+    ]]>
+</entry>
+
+<entry key="getAllStateListByCountryId">
+    <![CDATA[
+		select StateId, StateName
+ 		FROM TBMSTSTATES
+		WHERE active = 'Y' and country_Id = ?
+		Order by StateName
+    ]]>
+</entry>
+
+
+
+<entry key="getAllCityListByStateId">
+    <![CDATA[
+		select CityId, CityName
+ 		FROM TBMSTCITIES
+		WHERE active = 'Y' and state_Id = ?
+		Order by CityName
+    ]]>
+</entry>
+
+<entry key="getMaxClientCode">
+    <![CDATA[	
+		select top 1 clientCode from Client_Details 
+		order by clientDetailsId desc
+    ]]>
+</entry>
+
+<entry key="addClientDetails">
+    <![CDATA[
+   		        
+		INSERT into Client_Details (clientName, clientCode, sbPlansId, address, countryCode, contactNumber, zipCode, 
+		        	  		countryId,stateId,cityId, createdBy, createdOn) 
+  		VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)
+  		
+    ]]>
+    
+</entry>
+
+<entry key="fetchClientDetailsWithAdmin">
+<![CDATA[
+	
+SELECT cd.clientDetailsId, cd.clientName, cd.clientCode, cd.sbplansId, cd.address,
+		cd.countryId, cd.stateId, cd.cityId, cd.countryCode, cd.contactNumber, cd.zipCode, 
+		u.firstname, u.lastname, u.email
+from Client_Details cd
+inner join users u on cd.clientDetailsId = u.clientDetailsId
+where cd.clientDetailsId = ? and u.email = ?
+
+]]>
+</entry>
+
+	<entry key="updateClientDetails">
+    <![CDATA[
+ 		UPDATE Client_Details 
+		set 
+			clientName=?,
+			sbPlansId=?,
+			address=?,
+			countryId=?,
+			stateId=?,
+			cityId=?,
+			countryCode=?,
+			zipCode=?,
+			contactNumber=?,
+			updatedBy=?,
+			updatedOn=getDate()
+		where clientDetailsId=? 
+    ]]>
+
+	</entry>
+	
+	<entry key="getClientDetails">
+    <![CDATA[     
+         
+    select
+	clientName, clientCode, cd.[Address] address, ts.StateName state, tc.CityName city, con.CountryName country, zipCode, contactNumber,
+	sp.Name planType,u.firstname firstName,u.lastname lastName,u.email email,cd.countryCode countryCode
+	from Client_Details cd
+	inner join Sb_plans sp on sp.id = cd.sbPlansId
+	inner join TBMSTCOUNTRIES con on con.CountryId = cd.countryId  
+	inner join TBMSTSTATES ts on ts.StateId = cd.StateId
+	inner join TBMSTCITIES tc on tc.CityId = cd.CityId
+	inner join users u on u.clientDetailsId = cd.clientDetailsId
+	where u.Role='ROLE_CLIENT_ADMIN'
+  		
+    ]]>
+     
+    </entry>
+    
+    <entry key="getAllUsersList">
+    <![CDATA[ 		      
+    
+    select clientName,u.firstname firstName,u.lastname lastname,u.email email,u.phone phone,u.company_name companyName,s.credited_documents creditedDocuments,s.Credited_template creditedTemplate
+    FROM users u, Client_Details cd,sb_subscription s  where u.clientDetailsId=cd.clientDetailsId and
+    u.role='ROLE_USER' and u.status=1 and u.subscription_status=1 and s.user_id=u.id and cd.clientDetailsId = ?
+      
+    ]]>
+     
+    </entry>
+
+<entry key="sp_clientDetailsCount">
+	   <![CDATA[	    
+								        
+declare @clientCode varchar(10) =?
+declare @clientName varchar(100)=?
+declare @address varchar(100)=?
+declare @countryId varchar(100)=?
+declare @cityId varchar(100) = ?
+declare @SearchText varchar(100)=?
+
+
+select 
+count(cd.clientDetailsId)
+from Client_Details cd
+inner join Sb_plans sp on sp.id = cd.sbPlansId
+inner join TBMSTCOUNTRIES con on con.CountryId = cd.countryId  
+inner join [dbo].[TBMSTSTATES] ts on ts.StateId = cd.StateId
+left join [dbo].[TBMSTCITIES] tc on tc.CityId = cd.CityId
+inner join users u on u.clientDetailsId = cd.clientDetailsId
+where u.Role='ROLE_CLIENT_ADMIN'
+
+
+       AND ( cd.clientCode like '%'+@clientCode+'%' OR @clientCode = '')
+AND ( cd.clientName like '%'+@clientName+'%' OR @clientName ='' )
+AND ( cd.[address] like  '%'+@address+'%'  OR @address ='' )
+AND ( con.CountryName like '%'+@countryId+'%' OR @countryId ='') 
+AND ( tc.CityName like '%'+@cityId+'%' OR @cityId ='') 
+AND( ( cd.clientCode like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( cd.clientName like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( cd.[Address] like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( con.CountryName like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( tc.CityName like '%'+@SearchText+'%' OR @SearchText='' ))
+
+		 ]]>
+	</entry>
+	    
+    <entry key="sp_clientDetails">
+	   <![CDATA[	    
+								        
+				
+declare @startRange int = ?
+declare @endRange int = ?
+declare @clientCode varchar(10) =?
+declare @clientName varchar(100)=?
+declare @address varchar(100)=?
+declare @countryId varchar(100)=?
+declare @cityId varchar(100)=?
+declare @SearchText varchar(100)=?
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)=?
+
+
+
+
+select 
+cd.clientDetailsId, clientName, clientCode, cd.[Address], ts.StateName, tc.CityName, con.CountryName, zipCode, contactNumber,
+sp.Name,u.firstname,u.lastname,u.email,cd.countryCode
+from Client_Details cd
+inner join Sb_plans sp on sp.id = cd.sbPlansId
+inner join TBMSTCOUNTRIES con on con.CountryId = cd.countryId  
+inner join [dbo].[TBMSTSTATES] ts on ts.StateId = cd.StateId
+left join [dbo].[TBMSTCITIES] tc on tc.CityId = cd.CityId
+inner join users u on u.clientDetailsId = cd.clientDetailsId
+where u.Role='ROLE_CLIENT_ADMIN'
+
+
+       AND ( cd.clientCode like '%'+@clientCode+'%' OR @clientCode = '')
+AND ( cd.clientName like '%'+@clientName+'%' OR @clientName ='' )
+AND ( cd.[address] like  '%'+@address+'%'  OR @address ='' )
+AND ( con.CountryName like '%'+@countryId+'%' OR @countryId ='') 
+AND ( tc.CityName like '%'+@cityId+'%' OR @cityId ='') 
+AND( ( cd.clientCode like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( cd.clientName like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( cd.[Address] like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( con.CountryName like '%'+@SearchText+'%' OR @SearchText='' )
+OR ( tc.CityName like '%'+@SearchText+'%' OR @SearchText='' ))
+ORDER BY
+			case When @SortByColumn='clientCode' AND @SortDir = 'ASC' Then [clientCode] End ASC,
+			case When @SortByColumn='clientCode' AND @SortDir = 'DESC' Then [clientCode] End DESC,
+			case When @SortByColumn='clientName' AND @SortDir = 'ASC' Then [clientName] End ASC,
+			case When @SortByColumn='clientName' AND @SortDir = 'DESC' Then [clientName] End DESC,
+			case When @SortByColumn='address' AND @SortDir = 'ASC' Then cd.[Address] End ASC,
+			case When @SortByColumn='address' AND @SortDir = 'DESC' Then cd.[Address] End DESC,
+			case When @SortByColumn='country' AND @SortDir = 'ASC' Then con.CountryName End ASC,
+			case When @SortByColumn='country' AND @SortDir = 'DESC' Then con.CountryName End DESC,
+			case When @SortByColumn='city' AND @SortDir = 'ASC' Then tc.CityName End ASC,
+			case When @SortByColumn='city' AND @SortDir = 'DESC' Then tc.CityName End DESC,
+			case When @SortByColumn='' then cd.clientDetailsId END DESC
+
+OFFSET @startRange Rows  
+Fetch NEXT @endRange ROWS ONLY 
+
+		
+
+		 ]]>
+	</entry>
+	
+<entry key="SP_ClientUsersDetails">
+    <![CDATA[
+	
+declare @startRange int = ?
+declare @endRange int = ?
+declare @userId int = ?
+declare @firstname varchar(100)=?
+declare @lastname varchar(100)=?
+declare @email varchar(100)=?
+declare @clientName varchar(100)=?
+declare @credited_documents varchar(100)=?
+declare @SearchText varchar(100)=?
+declare @SortByColumn varchar(100)=?
+declare @SortDir varchar(20)=?
+	
+	select u.id, cd.clientName,cd.clientCode,u.firstname,u.lastname,u.email,u.phone,s.Credited_template,s.credited_documents
+		from Client_Details cd
+			inner join Sb_plans sp on sp.id = cd.sbPlansId			
+			inner join [users] u on u.clientDetailsId = cd.clientDetailsId
+			inner join [sb_subscription] s on  s.user_id=u.id
+			where u.[role] ='ROLE_USER'
+			AND u.[Status] = '1' 
+			AND u.[subscription_status] ='1' 
+			AND u.[clientDetailsId] = @userId
+	AND ( u.email like '%'+@email+'%' OR @email = '')
+	AND ( u.firstname like '%'+@firstname+'%' OR @firstname ='' )
+	AND ( u.lastname like  '%'+@lastname+'%'  OR @lastname ='' )
+	AND ( cd.clientName like '%'+@clientName+'%' OR @clientName ='') 
+	AND ( s.credited_documents like '%'+@credited_documents+'%' OR @credited_documents ='')
+	AND (( cd.clientName like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.firstname like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.lastname like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.email like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( s.credited_documents like '%'+@SearchText+'%' OR @SearchText='' ))
+	order by 
+			case When @SortByColumn='firstname' AND @SortDir = 'ASC' Then u.firstname End ASC,
+			case When @SortByColumn='firstname' AND @SortDir = 'DESC' Then u.firstname End DESC,
+			case When @SortByColumn='lastname' AND @SortDir = 'ASC' Then u.lastname End ASC,
+			case When @SortByColumn='lastname' AND @SortDir = 'DESC' Then u.lastname End DESC,
+			case When @SortByColumn='email' AND @SortDir = 'ASC' Then u.email End ASC,
+			case When @SortByColumn='email' AND @SortDir = 'DESC' Then u.email End DESC,
+			case When @SortByColumn='clientName' AND @SortDir = 'ASC' Then cd.clientName End ASC,
+			case When @SortByColumn='clientName' AND @SortDir = 'DESC' Then cd.clientName End DESC,
+			case When @SortByColumn='credited_documents' AND @SortDir = 'ASC' Then s.credited_documents End ASC,
+			case When @SortByColumn='credited_documents' AND @SortDir = 'DESC' Then s.credited_documents End DESC,
+			case when @SortByColumn='' then clientName END DESC
+	OFFSET @startRange Rows  
+	Fetch NEXT @endRange ROWS ONLY 
+
+    ]]>
+
+</entry>
+
+<entry key="SP_ClientUsersCount">
+    <![CDATA[
+	
+
+declare @userId int = ?
+declare @firstname varchar(100)=?
+declare @lastname varchar(100)=?
+declare @email varchar(100)=?
+declare @clientName varchar(100)=?
+declare @credited_documents varchar(100)=?
+declare @SearchText varchar(100)=?
+	
+	select count(u.id)
+		from Client_Details cd
+			inner join Sb_plans sp on sp.id = cd.sbPlansId			
+			inner join [users] u on u.clientDetailsId = cd.clientDetailsId
+			inner join [sb_subscription] s on  s.user_id=u.id
+			where u.[role] ='ROLE_USER'
+			AND u.[Status] = '1' 
+			AND u.[subscription_status] ='1' 
+			AND u.[clientDetailsId] = @userId
+	AND ( u.email like '%'+@email+'%' OR @email = '')
+	AND ( u.firstname like '%'+@firstname+'%' OR @firstname ='' )
+	AND ( u.lastname like  '%'+@lastname+'%'  OR @lastname ='' )
+	AND ( cd.clientName like '%'+@clientName+'%' OR @clientName ='') 
+	AND ( s.credited_documents like '%'+@credited_documents+'%' OR @credited_documents ='')
+	AND (( cd.clientName like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.firstname like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.lastname like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( u.email like '%'+@SearchText+'%' OR @SearchText='' )
+	OR ( s.credited_documents like '%'+@SearchText+'%' OR @SearchText='' ))	
+
+    ]]>
+
+</entry>
+    
+<entry key="getRecursivePaymentDate">
+    <![CDATA[
+    
+    select u.paymentCycle,u.firstname,u.lastname,u.email,sb.id,sb.user_id,sb.plan_id,sb.status,sb.subscription_start_date,sb.subscription_end_date
+ from sb_subscription sb, users u where  cast(subscription_end_date as date) =cast(DATEADD(DAY,3,GETDATE() ) as date) and u.id=sb.user_id and u.notification_flag='N' and u.cardtoken !='NULL' and u.cardtoken!=''
+ and u.paymentCycle>0
+]]>
+
+</entry>
+
+<entry key="insertSubscriptionHistory">
+    <![CDATA[
+Insert into sb_subscr_history 
+(userid,planid,used_doc,used_template,subscription_start_date,subscription_end_date,subscription_id)
+values(?,?,?,?,?,?,?)
+    ]]>
+
+</entry>	
+
+<entry key="updateFreeVersionSubscription">
+    <![CDATA[
+		update sb_subscription set plan_id = ?, credited_documents = ?, used_documents=? ,subscription_start_date = ? ,
+  subscription_end_date = ?, credited_template =?, used_template = ?
+  where user_id = ? and id= ? and status = 1
+    ]]>
+    </entry>
+
+
+<entry key="getPlanDetails">
+    <![CDATA[
+	SELECT subscription_end_date, name, price, duration_name FROM
+	sb_subscription sb, users u,sb_plans pl, sb_purchase p where
+	u.id=? AND sb.user_id=u.id AND sb.plan_id=pl.id and sb.status=1 AND sb.id = p.subscription_id
+	]]>
+
+</entry>
+
+<entry key="updatePlanId">
+    <![CDATA[
+    update users set planid=?,paymentCycle=? where email=?
+]]>
+
+</entry>
+
+<entry key="getMonthlySubscriptionPlans">
+    <![CDATA[
+ 		
+ 		select c.name category_name,p.id id,p.token plantoken,p.name plan_name,p.tagline tagline, p.description description, p.features features, p.noofusers noofusers, p.noofdocuments noofdocuments,p.planicon planicon, p.price price, cur.name currency,dur.name durationname, dur.time durationtime, dur.unit durationunit
+		, p.template from sb_users u 
+		JOIN sb_category c ON u.id = c.user_id
+		JOIN sb_plans p ON c.category_id = p.category_id
+		JOIN sb_currency cur ON p.currency_id = cur.currency_id
+		JOIN sb_duration dur ON p.duration_id = dur.duration_id
+		WHERE u.status = 1 and c.status = 1 and p.status = 1 and cur.status = 1 and dur.status = 1
+		and u.email = ? and u.password = ? and c.category_id = ? and c.name = ? and dur.time =30
+ 		or p.id = 48 order by cast(p.price as decimal) asc
+    ]]>
+
+	</entry>
+    
+<entry key="updateUserMfaFlag">
+    <![CDATA[
+ 		UPDATE users 
+		set mfaOtpMailFlag=? , mfaSecureCodeFlag=?
+		where email=? 
+    ]]>
+
+</entry>
+
+	<!-- Entry key mapped with RegistrationDaoImpl.java -->
+	<entry key="verifySecureCodeToken">
+    <![CDATA[
+        SELECT TOP 1
+		  id
+		FROM users
+		WHERE email = ?
+		AND secureCode_verification_token = ?
+    ]]>
+
+	</entry>
+
+<!-- updateNewTokenForUserResetSecureCode- to udpdate email_verif.._token and updated_on date whenever new verification link is to be resent for user to change secure code -->
+	<entry key="updateNewTokenForUserResetSecureCode">
+    <![CDATA[
+       UPDATE users
+		SET secureCode_verification_token = ?,
+		updated_on= GETDATE()
+		WHERE email = ?
+    ]]>
+
+	</entry>
+	    
+	    <entry key="updateNotificationFlag">
+    <![CDATA[
+	    update users set  notification_flag='Y' where id=?
+	    ]]>
+
+	</entry>
+	
+	<entry key="isValidPlanToken">
+	   <![CDATA[
+	    
+			SELECT  count(p.id)
+  			FROM sb_plans p 
+  			inner join sb_category c on p.category_id = c.category_id
+   			where p.category_id = (select category_id from sb_category  where name = ?)
+   			and p.token =?;
+		 ]]>
+	</entry>
+	    
+	    <entry key="feedbackUpdateQuery">
+    <![CDATA[
+	    INSERT INTO user_feedback (user_id, feedbackValue, feedbackMsg, feedbackDate)
+  		VALUES (?, ?, ?, ?)
+  		]]>
+	</entry>
+	<entry key="currentfeedbackRating">
+    <![CDATA[
+	      select TOP(1) feedbackValue from user_feedback where user_id = ? order by feedbackDate desc
+  		]]>
+	</entry>
+	
+	
+	<!-- vvv currently not in use Entry key mapped with RegistrationDaoImpl.java for checking email id of non-corporate users in both users and temp_usertables for exelaAuth-->
+	<!--  INDIA ROLLOUT -->
+	<entry key="checkPhoneNoCount">
+    <![CDATA[
+     	
+	declare @phone varchar(100) = ?
+	declare @code varchar(50) = 'IN'
+
+	SELECT COUNT(temp.phone) as count 
+		FROM (
+		  SELECT phone FROM users  where phone = @phone and countryCode = @code
+		  UNION ALL
+		  SELECT phone FROM temp_User where phone = @phone and countryCode = @code
+		) AS temp
+
+
+    ]]>
+
+	</entry>
+	<entry key="activateinactiveUser">
+    <![CDATA[
+		update sb_subscription set status= 1  where user_id=? AND status = 0
+    ]]>
+</entry>
+
+<entry key="sendSubscriptionmailToIndianFreeUser">
+    <![CDATA[
+		select firstName as FIRSTNAME, lastName as  LASTNAME, email as EMAIL, s.subscription_end_date, p.name as PLANNAME from users as u
+		inner join sb_subscription as s ON u.id = s.user_id 
+		inner join sb_plans as p ON s.plan_id = p.id where u.countryCode = 'IN' AND 
+		s.subscription_end_date > GETDATE() AND  s.subscription_end_date < GETDATE() + 1 AND name = 'Free Trial India' AND s.status = 1
+    ]]>
+</entry>
+
+<entry key="sendSubscriptionmailToIndianSubsUser">
+    <![CDATA[
+		select firstName as FIRSTNAME, lastName as  LASTNAME, email as EMAIL, s.subscription_end_date, p.name as PLANNAME from users as u 
+		inner join sb_subscription as s ON u.id = s.user_id 
+		inner join sb_plans as p ON s.plan_id = p.id where u.countryCode = 'IN' AND 
+		s.subscription_end_date > GETDATE() AND  s.subscription_end_date < GETDATE() + 3 AND name <> 'Free Trial India' AND name <> 'FREE VERSION'
+    ]]>
+</entry>
+
+<entry key="updateEmudhraStatus">
+    <![CDATA[
+        update document set emudhra_status=?
+WHERE id = ? and user_id= ?
+    ]]>
+    </entry>
+    
+    <entry key="getEmudhraStatus">
+    <![CDATA[
+       Select emudhra_status from document where id = ? and user_id= ?
+    ]]>
+    </entry>
+    
+    <entry key="signerDataBySignerId">
+    <![CDATA[
+		select 
+			DISTINCT s.id 'signerId',
+			d.id 'docId',
+			s.status 'status',
+			d.sign_type 'signType',
+			s.sign_url 'signurl',
+			d.user_id 'requestedBy',
+			s.email 'signerEmail',
+			f.priority 'priority',
+			isnull(u.firstname,'')+' '+isnull(u.lastname,'') 'requestName',
+			isnull(u.email,'') 'requestEmail',
+			u.project_name 'projectName',
+			s.name 'signerName',
+			d.doc_status 'docStatus'
+			from signer s 
+			INNER JOIN document_sign_field f on s.id=f.signer_id
+			INNER JOIN document d on f.document_id=d.id
+			INNER JOIN users u on u.id=d.user_id
+		where s.id=?
+    ]]>
+</entry>
+
+	<entry key="getDocumentFieldbyDocIdAndSignerId">
+
+<![CDATA[
+		select  id, page_number  , priority  ,position_left  ,position_top  ,height  ,width  ,field_value  ,field_name  ,field_type  ,created_date  ,fontSize from document_sign_field where signer_id=? and document_id=?
+    ]]>
+</entry>
+
+<entry key="updateEmudhraStatusGroupSign">
+    <![CDATA[
+        update document set emudhra_status=?
+WHERE id = ? 
+    ]]>
+    </entry>
+
+</properties>
